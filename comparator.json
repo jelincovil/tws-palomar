@@ -1,0 +1,16 @@
+{
+  "challenge_module": "Challenge",
+  "solution_module": "Solution",
+  "theorem_names": [
+    "Palomar.kernel1d_l1",
+    "Palomar.kernel1d_l1_real",
+    "Palomar.db2_level1_opnorm_d2",
+    "Palomar.db2_level1_opnorm_d2_num",
+    "Palomar.half_autocorr_l1",
+    "Palomar.l2_norm_rev_tri",
+    "Palomar.energy_stability"
+  ],
+  "definition_names": [],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
+  "enable_nanoda": true
+}

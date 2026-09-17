@@ -1,0 +1,179 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+# formalization.yaml v0.4
+version: "v0.4"
+
+project:
+  name: "Exact ℓ¹ norm of the undecimated db2 level-one kernel"
+  description: >-
+    Comparator surface for closed Lean 4 certificates accompanying the short
+    note on L²(U) stability of persistence landscapes after undecimated
+    Daubechies smoothing. The compared theorems are the exact ℓ¹ identity
+    9/8 for the seven-tap ½R_h kernel, its separable two-dimensional
+    row-sum (9/8)² = 81/64, the matching QMF half-autocorrelation identity,
+    the reverse triangle inequality for the L²(U) seminorm, and the
+    algebraic core of squared-norm stability. This repository does not
+    contain the LaTeX manuscript and does not claim a kernel-complete
+    proof of the paper's Theorem A (that theorem is a composition of
+    bottleneck stability, landscape non-expansiveness, and an L∞ operator
+    bound, of which only the last has a closed db2 certificate here).
+  authors:
+    - "Jaime Enrique Lincovil Curivil"
+    - "César Daniel Reinoso Reinoso"
+    - "Niels Pacheco-Barrios"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Jaime Enrique Lincovil Curivil"
+
+classification:
+  arxiv: ["math.AT", "math.FA"]
+  msc2020: ["55N31", "42C40", "68V20", "62R40"]
+
+sources:
+  - title: "Explicit L-infinity stability bounds for undecimated Daubechies smoothing and wavelet-filtered persistence landscapes"
+    authors:
+      - "Jaime Enrique Lincovil Curivil"
+      - "César Daniel Reinoso Reinoso"
+      - "Niels Pacheco-Barrios"
+    id: "arXiv:XXXX.XXXXX"
+    type: article
+    location: "tws-persistence-stability/paper/main.tex (not in this repository); arXiv identifier is a placeholder"
+    relationship: formalizes
+    note: >-
+      Compared Lean theorems correspond to prop:opnorm (ℓ¹ = 9/8 and
+      (9/8)²), the QMF derivation of that constant, lem:revtri, and the
+      algebraic identity used in cor:energy. Theorem A, lem:landscapeU,
+      lem:proj, prop:sharp, and cor:global are not compared.
+    license: unknown
+    author_endorsement: participated
+
+related_formalizations: []
+
+status:
+  scope: >-
+    Formalized and compared: exact ℓ¹ = 9/8 of the seven-tap kernel,
+    two-dimensional row-sum (9/8)², QMF half-autocorrelation ℓ¹, reverse
+    triangle for L2Norm on U, and |a²−b²| ≤ Γ(a+b). Not formalized as
+    closed Palomar theorems: paper Theorem A (Lean TWS.stability_Linf is
+    a composition under named hypotheses landscape_stability_hyp and
+    frame_proj_bound_hyp, not a proof of bottleneck stability),
+    lem:landscapeU, lem:proj as an abstract operator-norm fact,
+    prop:sharp, cor:global. TWS.stability_two_term is leftover from a
+    two-term bound removed from the note and is not submitted.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: ["propext", "Classical.choice", "Quot.sound"]
+  main_results:
+    - declaration: Palomar.kernel1d_l1
+      file: Challenge.lean
+      sorry_count: 0
+      axioms: ["propext", "Classical.choice", "Quot.sound"]
+      comparator_config: comparator.json
+      literature_dependencies: []
+    - declaration: Palomar.db2_level1_opnorm_d2
+      file: Challenge.lean
+      sorry_count: 0
+      axioms: ["propext", "Classical.choice", "Quot.sound"]
+      comparator_config: comparator.json
+      literature_dependencies: []
+
+automation:
+  methods:
+    - method: agent
+      models: ["Grok 4.6"]
+      framework: n/a
+      tool_setup: >-
+        Palomar packaging (Challenge/Solution/yaml/json) assembled by an
+        AI agent from existing human-written Lean in the companion
+        tws-repro formalization. The kernel and QMF proofs themselves
+        were written earlier as Lean tactics (simp, norm_num, ring), not
+        generated in this Palomar step.
+      cost:
+        wall_time: "under two hours for the Palomar surface"
+        spend_usd: not tracked
+        hardware: local machine
+      prompting_notes: >-
+        Instructions required mapping main.tex labels to closed Lean
+        declarations and forbade submitting Theorem A as a closed kernel
+        proof.
+    - method: manual
+      models: []
+      framework: n/a
+      tool_setup: "Human-authored TWS.DaubechiesOpNorm.lean and TWS.Skeleton.lean in the companion package"
+      cost:
+        wall_time: "prior development of the companion formalization"
+        spend_usd: not tracked
+        hardware: local machine
+      prompting_notes: n/a
+  spend_usd: not tracked
+  notes: >-
+    Mixed: human Lean proofs in tws-repro; this repository is an AI-assisted
+    Comparator wrapper that reuses those proofs without copying their source
+    files (Lake path dependency).
+
+fidelity:
+  divergences: >-
+    Palomar theorems are the exact kernel/QMF identities and two elementary
+    lemmas, not the full periodized operator-norm statement of prop:opnorm
+    for every N and j, and not Theorem A. l2_norm_rev_tri uses mathlib MemLp
+    on U.indicator, which is the paper's square-integrability hypothesis
+    plus measurability.
+
+review:
+  status: self-assessed
+  reviewers:
+    - none
+  notes: >-
+    Statement selection was checked against main.tex labels and against
+    #print axioms output {propext, Classical.choice, Quot.sound}. No
+    independent mathematical referee has reviewed this Palomar surface.
+
+alignment:
+  namespace: Palomar
+  statements:
+    - source: "Proposition prop:opnorm, eq:opnorm, j=0, ℓ¹(k₀)=9/8"
+      lean: Palomar.kernel1d_l1
+      module: Challenge
+      status: proved
+      note: "Rational seven-tap sum; companion TWS.Daubechies.kernel1d_l1"
+    - source: "Proposition prop:opnorm, real form"
+      lean: Palomar.kernel1d_l1_real
+      module: Challenge
+      status: proved
+      note: "TWS.Daubechies.kernel1d_l1_real"
+    - source: "Proposition prop:opnorm, d=2 row-sum (9/8)²"
+      lean: Palomar.db2_level1_opnorm_d2
+      module: Challenge
+      status: proved
+      note: "TWS.Daubechies.db2_level1_opnorm_d2"
+    - source: "eq:opnorm d=2 numerical identity 81/64"
+      lean: Palomar.db2_level1_opnorm_d2_num
+      module: Challenge
+      status: proved
+      note: "TWS.Daubechies.db2_level1_opnorm_d2_num"
+    - source: "Proposition prop:opnorm, QMF half-autocorrelation"
+      lean: Palomar.half_autocorr_l1
+      module: Challenge
+      status: proved
+      note: "TWS.Daubechies.half_autocorr_l1"
+    - source: "Lemma lem:revtri"
+      lean: Palomar.l2_norm_rev_tri
+      module: Challenge
+      status: adapted
+      note: "TWS.l2_norm_rev_tri; MemLp encoding"
+    - source: "Corollary cor:energy algebraic identity"
+      lean: Palomar.energy_stability
+      module: Challenge
+      status: adapted
+      note: "TWS.energy_stability; not the full landscape-squared statement"
+    - source: "Theorem thm:A"
+      lean: TWS.stability_Linf
+      module: TWS.Skeleton
+      status: partial
+      note: >-
+        Not in comparator.json. Lean statement assumes landscape_stability_hyp
+        and frame_proj_bound_hyp; it does not prove bottleneck stability.
+
+acknowledgements: >-
+  mathlib4 (rev db584cd6), Lean 4.33.0, Bubenik landscapes, Cohen–Steiner
+  bottleneck stability. Companion software in tws-repro is MIT; this Palomar
+  surface is Apache-2.0.
