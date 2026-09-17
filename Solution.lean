@@ -4,8 +4,14 @@ import TWS.Skeleton
 /-!
 # Solution — closed proofs from the companion `tws` package
 
-Each declaration matches `Challenge.lean` definitionally. Bodies are
-the existing theorems in `TWS.Daubechies` and `TWS` (no new `sorry`).
+Comparator compiles Challenge and Solution as *separate* environments
+and matches constants by name and type. This file therefore **does not**
+`import Challenge`: that would import the `sorry` theorems and make a
+second `theorem Palomar.kernel1d_l1` illegal. The declarations below
+repeat the Challenge signatures *exactly* (same names, same types, same
+implicits) and attach the closed TWS proofs.
+
+Names in `comparator.json` are these constants: `Palomar.kernel1d_l1`, …
 -/
 
 open Finset Real

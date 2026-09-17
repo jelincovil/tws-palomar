@@ -1,17 +1,3 @@
-# Palomar submission surface. Proofs live in the companion package `tws`
-# (tws-repro/formalization at commit 6f11e6e37039c40fd924146e2d5efdd531950179).
-#
-# There is no public GitHub URL for tws-repro yet, so this lakefile uses a
-# *path* require. After the companion is published, replace the path block by:
-#
-#   [[require]]
-#   name = "tws"
-#   git = "https://github.com/<owner>/tws-repro.git"
-#   rev = "6f11e6e37039c40fd924146e2d5efdd531950179"
-#   subDir = "formalization"
-#
-# Do not invent <owner>.
-
 name = "tws-palomar"
 version = "0.1.0"
 defaultTargets = ["Challenge", "Solution"]
@@ -27,7 +13,9 @@ rev = "db584cd6d46c92f209a44c0f1c829460d327499d"
 
 [[require]]
 name = "tws"
-path = "../tws-repro/formalization"
+git = "https://github.com/jelincovil/tws-repro.git"
+rev = "6f11e6e37039c40fd924146e2d5efdd531950179"
+subDir = "formalization"
 
 [[lean_lib]]
 name = "Challenge"

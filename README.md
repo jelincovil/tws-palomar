@@ -40,17 +40,12 @@ hypotheses*, not a kernel proof of bottleneck stability.
 Toolchain: `leanprover/lean4:v4.33.0`. mathlib: `db584cd6`. Companion pin:
 `tws-repro` commit `6f11e6e37039c40fd924146e2d5efdd531950179`.
 
-Until `tws-repro` has a public Git URL, `lakefile.toml` uses
+Companion package (public):
 
-```toml
-[[require]]
-name = "tws"
-path = "../tws-repro/formalization"
-```
+https://github.com/jelincovil/tws-repro  
+commit `6f11e6e37039c40fd924146e2d5efdd531950179`
 
-Palomar CI will **not** resolve that path. After you publish `tws-repro`,
-replace it by a `git` + `rev` + `subDir = "formalization"` require (do not
-invent the URL).
+`lakefile.toml` requires that revision with `subDir = "formalization"`.
 
 ```bash
 cd tws-palomar
