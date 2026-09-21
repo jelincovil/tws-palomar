@@ -1,0 +1,14 @@
+This repository contains code from two sources:
+
+1. tws-palomar (original work)
+   License: Apache-2.0
+   See LICENSE.
+
+2. TWS/ (vendored from jelincovil/tws-repro)
+   License: MIT
+   Copyright (c) 2026 Jaime Enrique Lincovil Curivil,
+                      César Daniel Reinoso Reinoso,
+                      Niels Pacheco-Barrios
+   Source: https://github.com/jelincovil/tws-repro
+   Commit: 6f11e6e37039c40fd924146e2d5efdd531950179
+   See TWS/LICENSE for the full MIT text.

@@ -16,8 +16,15 @@ run can find `TWS.olean`.
 
 ## Licence
 
-**Apache-2.0** for this Palomar surface (`LICENSE`). Vendored `TWS/`
-sources remain MIT (jelincovil/tws-repro). The manuscript is CC BY 4.0.
+- **`tws-palomar`** (original work: `Challenge.lean`, `Solution.lean`,
+  `comparator.json`, `formalization.yaml`, scripts, this README):
+  **Apache-2.0**. See `LICENSE`.
+- **`TWS/`** (vendored Lean sources from `jelincovil/tws-repro`):
+  **MIT**. See `TWS/LICENSE`.
+- **Manuscript** (`tws-persistence-stability/paper/main.tex`, not in this
+  repository): **CC BY 4.0**.
+
+See `NOTICE` for the full attribution of vendored sources.
 
 ## What Lean actually checks (and what it does not)
 
