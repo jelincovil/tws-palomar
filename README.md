@@ -51,6 +51,11 @@ energy algebra), with \(\ell^1\) stated in several equivalent forms.
 `Challenge.lean` imports `TWS.Skeleton` because Fact 1 lives there, not
 because the Challenge re-proves the skeleton.
 
+This repository is a Palomar **thin-wrapper**: proofs are pinned at
+https://github.com/jelincovil/tws-repro
+`6f11e6e37039c40fd924146e2d5efdd531950179` (`formalization.yaml`
+`repository.role: thin-wrapper`).
+
 ## Build
 
 Toolchain: `leanprover/lean4:v4.33.0`.  

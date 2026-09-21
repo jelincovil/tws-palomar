@@ -23,6 +23,12 @@ project:
   responsible_maintainers:
     - "Jaime Enrique Lincovil Curivil"
 
+repository:
+  role: thin-wrapper
+  substantive_formalization:
+    id: "https://github.com/jelincovil/tws-repro"
+    revision: "6f11e6e37039c40fd924146e2d5efdd531950179"
+
 classification:
   arxiv: ["math.AT", "math.FA"]
   msc2020: ["55N31", "42C40", "68V20", "62R40"]
@@ -149,11 +155,16 @@ automation:
 fidelity:
   divergences: >-
     Palomar.stability_Linf is the composition lemma of Theorem A, not a
-    proof of bottleneck or landscapes. Kernel theorems are ℓ¹ sums of
-    taps, not ‖P_{0,N}‖_{L∞→L∞}=(9/8)^d. l2_norm_rev_tri uses mathlib
-    MemLp and eLpNorm of U.indicator with Lebesgue volume on ℝ, matching
-    TWS.L2Norm. energy_stability is the algebraic identity |a²−b²|≤Γ(a+b),
-    not the full landscape-squared statement of cor:energy.
+    proof of bottleneck or landscapes. Lk is a free Lipschitz parameter;
+    the paper instantiates L_λ = 1 (Bubenik). Scale indices j, j0 are Int
+    in Lean (needed by projDgmK) rather than j ≥ 0 as in the paper.
+    TWS.LinfNorm is the pointwise supremum (iSup of ENNReal.ofReal |f x|
+    on D).toReal, not an essential supremum, matching the paper's
+    insistence that sublevel persistence is not null-set invariant.
+    Kernel theorems are ℓ¹ sums of taps, not ‖P_{0,N}‖_{L∞→L∞}=(9/8)^d.
+    l2_norm_rev_tri uses mathlib MemLp and eLpNorm of U.indicator with
+    Lebesgue volume on ℝ, matching TWS.L2Norm. energy_stability is
+    |a²−b²|≤Γ(a+b), not the full landscape-squared statement of cor:energy.
 
 review:
   status: self-assessed
