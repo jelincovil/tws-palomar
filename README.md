@@ -1,4 +1,4 @@
-# Palomar surface for the TWS db2 kernel certificate
+# Palomar surface for two Lean-checked facts of the TWS note
 
 Comparator wrapper for closed Lean 4 results accompanying
 
@@ -8,44 +8,55 @@ Comparator wrapper for closed Lean 4 results accompanying
 > **arXiv:XXXX.XXXXX** *(placeholder)*.
 
 This repository is **not** the paper and **not** the full reproducibility
-package. The manuscript lives in `tws-persistence-stability/paper/main.tex`.
-Python/CSV/medical artefacts live in the sibling companion `tws-repro/`.
-Proof bodies live in `tws-repro/formalization/` (Lake package `tws`).
+package. Manuscript: `tws-persistence-stability/paper/main.tex` (CC BY 4.0).
+Python/CSV live in https://github.com/jelincovil/tws-repro (MIT).
+Proof bodies live in that repo under `formalization/` (Lake package `tws`).
 
 ## Licence
 
-**Apache-2.0** (Palomar template SPDX). The companion `tws-repro` remains
-MIT; Apache-2.0 may depend on MIT. Relicensing applies only to this
-wrapper (`Challenge.lean`, `Solution.lean`, metadata), not to a copy of
-the TWS sources (those are not vendored).
+**Apache-2.0** for this wrapper (Palomar SPDX, matches `LICENSE`).
+Companion `tws-repro` remains MIT. The manuscript is CC BY 4.0.
 
-## What is compared
+## What Lean actually checks (and what it does not)
 
-| Paper label | Lean (Challenge / Solution) | Companion proof |
-|-------------|-----------------------------|-----------------|
-| `prop:opnorm` \(\ell^1=9/8\) | `Palomar.kernel1d_l1` | `TWS.Daubechies.kernel1d_l1` |
-| `prop:opnorm` over \(\mathbb{R}\) | `Palomar.kernel1d_l1_real` | `TWS.Daubechies.kernel1d_l1_real` |
-| `prop:opnorm` \(d=2\) | `Palomar.db2_level1_opnorm_d2` | `TWS.Daubechies.db2_level1_opnorm_d2` |
-| `eq:opnorm` \(81/64\) | `Palomar.db2_level1_opnorm_d2_num` | `TWS.Daubechies.db2_level1_opnorm_d2_num` |
-| `prop:opnorm` QMF | `Palomar.half_autocorr_l1` | `TWS.Daubechies.half_autocorr_l1` |
-| `lem:revtri` | `Palomar.l2_norm_rev_tri` | `TWS.l2_norm_rev_tri` |
-| `cor:energy` (algebra) | `Palomar.energy_stability` | `TWS.energy_stability` |
+Two facts, matching the paper's Results item on Lean (`sec:lean`):
 
-**Not compared:** `thm:A`, `lem:landscapeU`, `lem:proj`, `prop:sharp`,
-`cor:global`. Lean `TWS.stability_Linf` is a composition *under named
-hypotheses*, not a kernel proof of bottleneck stability.
+1. **Composition of the bound** (`Palomar.stability_Linf`). Given named
+   hypotheses for landscape \(L^\infty\)-Lipschitz behaviour and an
+   \(L^\infty\) operator bound, the \(L^2(U)\) inequality follows.
+   Bottleneck stability and landscapes are **not** proved.
+2. **Kernel \(\ell^1\)** (`Palomar.kernel1d_l1` and related). The
+   seven-tap \(k_0=\tfrac12 R_h\) has \(\ell^1\) norm \(9/8\); the
+   separable 2-D row-sum of \(|k_i k_j|\) is \((9/8)^2\).
+
+Lean does **not** prove
+\(\|P_{0,N}^\Psi\|_{L^\infty\to L^\infty}=\|k_0\|_{\ell^1}^d\). That step
+(no-cancellation under periodization, \(N\ge 7\)) is a paper argument.
+
+| Paper | Lean constant | What is proved |
+|-------|----------------|----------------|
+| `thm:A` composition | `Palomar.stability_Linf` | chaining under hypotheses |
+| `prop:opnorm` kernel | `Palomar.kernel1d_l1` | \(\sum\|k_i\|=9/8\) in \(\mathbb{Q}\) |
+| same, \(\mathbb{R}\) | `Palomar.kernel1d_l1_real` | same in \(\mathbb{R}\) |
+| 2-D row-sum | `Palomar.db2_level1_opnorm_d2` | \(\sum_{i,j}\|k_i k_j\|=(9/8)^2\) |
+| arithmetic | `Palomar.db2_level1_opnorm_d2_num` | \((9/8)^2=81/64\) |
+| QMF form | `Palomar.half_autocorr_l1` | same \(\ell^1\) via autocorrelation |
+| `lem:revtri` | `Palomar.l2_norm_rev_tri` | reverse triangle for `L2Norm` |
+| `cor:energy` algebra | `Palomar.energy_stability` | \(\|a^2-b^2\|\le\Gamma(a+b)\) |
+
+The eight Comparator names are eight Lean constants; they encode four
+mathematical claims (composition, kernel \(\ell^1\), reverse triangle,
+energy algebra), with \(\ell^1\) stated in several equivalent forms.
+
+`Challenge.lean` imports `TWS.Skeleton` because Fact 1 lives there, not
+because the Challenge re-proves the skeleton.
 
 ## Build
 
-Toolchain: `leanprover/lean4:v4.33.0`. mathlib: `db584cd6`. Companion pin:
-`tws-repro` commit `6f11e6e37039c40fd924146e2d5efdd531950179`.
-
-Companion package (public):
-
-https://github.com/jelincovil/tws-repro  
-commit `6f11e6e37039c40fd924146e2d5efdd531950179`
-
-`lakefile.toml` requires that revision with `subDir = "formalization"`.
+Toolchain: `leanprover/lean4:v4.33.0`.  
+mathlib: `db584cd6d46c92f209a44c0f1c829460d327499d`.  
+Companion: https://github.com/jelincovil/tws-repro  
+commit `6f11e6e37039c40fd924146e2d5efdd531950179` (`subDir = formalization`).
 
 ```bash
 cd tws-palomar
@@ -54,17 +65,23 @@ lake update
 lake build
 ```
 
-## Comparator (Linux; Landrun + NanoDa)
+## Comparator
 
-Not run in this packaging step unless the tools are on `PATH`. Upstream:
+Local verification **was run** on this machine (Darwin) with
+`./scripts/verify-comparator.sh`. Output:
 
-- https://github.com/leanprover/comparator
-- Palomar pins: see PalomarRegistry/PalomarTemplate `scripts/verify-comparator.sh`
-
-```bash
-# after installing comparator, lean4export, nanoda, landrun at Palomar revisions:
-comparator comparator.json
+```
+Nanoda kernel accepts the solution
+Lean default kernel accepts the solution
+Your solution is okay!
 ```
 
-`enable_nanoda` is `true` in `comparator.json`. A local `lake build` is
-**not** a NanoDa replay.
+Re-run after changing Challenge/Solution:
+
+```bash
+./scripts/verify-comparator.sh
+```
+
+Pins: Comparator `68a0641`, lean4export `15f6055` (v4.33.0), NanoDa
+`68d5ca9`, Landrun `811cfff`. A bare `lake build` is not a NanoDa replay.
+`enable_nanoda` is `true`.

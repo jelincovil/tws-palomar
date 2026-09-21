@@ -4,20 +4,34 @@ import TWS.Skeleton
 /-!
 # Solution — closed proofs from the companion `tws` package
 
-Comparator compiles Challenge and Solution as *separate* environments
-and matches constants by name and type. This file therefore **does not**
-`import Challenge`: that would import the `sorry` theorems and make a
-second `theorem Palomar.kernel1d_l1` illegal. The declarations below
-repeat the Challenge signatures *exactly* (same names, same types, same
-implicits) and attach the closed TWS proofs.
+Comparator compiles Challenge and Solution as *separate* environments.
+This file does **not** `import Challenge`. Signatures match Challenge
+exactly. Bodies are the existing TWS theorems.
 
-Names in `comparator.json` are these constants: `Palomar.kernel1d_l1`, …
+Compared constants (see `comparator.json`):
+`Palomar.stability_Linf`, `Palomar.kernel1d_l1`, `Palomar.kernel1d_l1_real`,
+`Palomar.db2_level1_opnorm_d2`, `Palomar.db2_level1_opnorm_d2_num`,
+`Palomar.half_autocorr_l1`, `Palomar.l2_norm_rev_tri`,
+`Palomar.energy_stability`.
 -/
 
 open Finset Real
 open scoped BigOperators
 
 namespace Palomar
+
+theorem stability_Linf {d : Nat} (Psi : TWS.WaveletFrame d)
+    (h_bounds : TWS.frame_bounds_pos Psi)
+    (Lk Cfp : ℝ)
+    (Z1 Z2 : (Fin d → ℝ) → ℝ) (j j0 : Int) (k n : Nat)
+    (U : Set ℝ) (D : Set (Fin d → ℝ))
+    (hU : Bornology.IsBounded U)
+    (h_landscape : TWS.landscape_stability_hyp Psi Lk Z1 Z2 j j0 k n U D)
+    (h_proj : TWS.frame_proj_bound_hyp Psi Cfp (Z1 - Z2) j j0 D) :
+    TWS.L2Norm (fun t => TWS.landscape n (TWS.projDgmK Psi j j0 Z1 k) t
+                    - TWS.landscape n (TWS.projDgmK Psi j j0 Z2 k) t) U
+      ≤ (Lk * Cfp) * TWS.LinfNorm (Z1 - Z2) D * Real.sqrt (Metric.diam U) :=
+  TWS.stability_Linf Psi h_bounds Lk Cfp Z1 Z2 j j0 k n U D hU h_landscape h_proj
 
 theorem kernel1d_l1 :
     ∑ i : Fin 7, |TWS.Daubechies.kernel1d i| = (9 : ℚ) / 8 :=
