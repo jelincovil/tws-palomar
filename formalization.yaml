@@ -15,6 +15,9 @@ project:
     that the finite-grid operator norm equals the kernel ℓ¹-norm; that
     identification (no-cancellation under periodization, N≥7) remains a
     paper argument. This repository does not contain the LaTeX manuscript.
+    The TWS/ sources are vendored from jelincovil/tws-repro (MIT) at
+    commit 6f11e6e37039c40fd924146e2d5efdd531950179 so Palomar's isolated
+    lean invocation can find TWS.olean.
   authors:
     - "Jaime Enrique Lincovil Curivil"
     - "César Daniel Reinoso Reinoso"
@@ -22,12 +25,6 @@ project:
   license: "Apache-2.0"
   responsible_maintainers:
     - "Jaime Enrique Lincovil Curivil"
-
-repository:
-  role: thin-wrapper
-  substantive_formalization:
-    id: "https://github.com/jelincovil/tws-repro"
-    revision: "6f11e6e37039c40fd924146e2d5efdd531950179"
 
 classification:
   arxiv: ["math.AT", "math.FA"]
@@ -147,9 +144,8 @@ automation:
       prompting_notes: n/a
   spend_usd: 0
   notes: >-
-    Mixed: human Lean proofs in tws-repro (MIT); this Apache-2.0 Comparator
-    wrapper reuses them via a Lake git dependency on
-    https://github.com/jelincovil/tws-repro at
+    Mixed: human Lean proofs authored in jelincovil/tws-repro (MIT) and
+    vendored into TWS/ of this Apache-2.0 Palomar surface at commit
     6f11e6e37039c40fd924146e2d5efdd531950179.
 
 fidelity:
@@ -224,5 +220,6 @@ alignment:
 acknowledgements: >-
   mathlib4 (rev db584cd6d46c92f209a44c0f1c829460d327499d), Lean 4.33.0,
   Bubenik landscapes, Cohen–Steiner bottleneck stability. Companion
-  tws-repro is MIT; this Palomar surface is Apache-2.0. The manuscript
-  is CC BY 4.0.
+  tws-repro (MIT) at 6f11e6e37039c40fd924146e2d5efdd531950179; TWS/
+  sources are vendored from that tree. This Palomar surface is
+  Apache-2.0. The manuscript is CC BY 4.0.

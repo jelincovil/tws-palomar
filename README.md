@@ -10,12 +10,14 @@ Comparator wrapper for closed Lean 4 results accompanying
 This repository is **not** the paper and **not** the full reproducibility
 package. Manuscript: `tws-persistence-stability/paper/main.tex` (CC BY 4.0).
 Python/CSV live in https://github.com/jelincovil/tws-repro (MIT).
-Proof bodies live in that repo under `formalization/` (Lake package `tws`).
+The Lean library `TWS/` is **vendored** from that companion at commit
+`6f11e6e37039c40fd924146e2d5efdd531950179` so Palomar's isolated `lean`
+run can find `TWS.olean`.
 
 ## Licence
 
-**Apache-2.0** for this wrapper (Palomar SPDX, matches `LICENSE`).
-Companion `tws-repro` remains MIT. The manuscript is CC BY 4.0.
+**Apache-2.0** for this Palomar surface (`LICENSE`). Vendored `TWS/`
+sources remain MIT (jelincovil/tws-repro). The manuscript is CC BY 4.0.
 
 ## What Lean actually checks (and what it does not)
 
@@ -51,17 +53,12 @@ energy algebra), with \(\ell^1\) stated in several equivalent forms.
 `Challenge.lean` imports `TWS.Skeleton` because Fact 1 lives there, not
 because the Challenge re-proves the skeleton.
 
-This repository is a Palomar **thin-wrapper**: proofs are pinned at
-https://github.com/jelincovil/tws-repro
-`6f11e6e37039c40fd924146e2d5efdd531950179` (`formalization.yaml`
-`repository.role: thin-wrapper`).
-
 ## Build
 
 Toolchain: `leanprover/lean4:v4.33.0`.  
 mathlib: `db584cd6d46c92f209a44c0f1c829460d327499d`.  
-Companion: https://github.com/jelincovil/tws-repro  
-commit `6f11e6e37039c40fd924146e2d5efdd531950179` (`subDir = formalization`).
+Vendored `TWS/` from https://github.com/jelincovil/tws-repro
+commit `6f11e6e37039c40fd924146e2d5efdd531950179`.
 
 ```bash
 cd tws-palomar
