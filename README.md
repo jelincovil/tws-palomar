@@ -1,4 +1,4 @@
-# Palomar surface for two Lean-checked facts of the TWS note
+# Palomar surface for the Lean-checked kernel identities and two auxiliary lemmas of the TWS note
 
 Comparator wrapper for closed Lean 4 results accompanying
 
@@ -21,15 +21,19 @@ sources remain MIT (jelincovil/tws-repro). The manuscript is CC BY 4.0.
 
 ## What Lean actually checks (and what it does not)
 
-Two facts, matching the paper's Results item on Lean (`sec:lean`):
+Seven declarations, matching the paper's Results item on Lean
+(`sec:lean`):
 
-1. **Composition of the bound** (`Palomar.stability_Linf`). Given named
-   hypotheses for landscape \(L^\infty\)-Lipschitz behaviour and an
-   \(L^\infty\) operator bound, the \(L^2(U)\) inequality follows.
-   Bottleneck stability and landscapes are **not** proved.
-2. **Kernel \(\ell^1\)** (`Palomar.kernel1d_l1` and related). The
+1. **Kernel \(\ell^1\)** (`Palomar.kernel1d_l1` and related). The
    seven-tap \(k_0=\tfrac12 R_h\) has \(\ell^1\) norm \(9/8\); the
    separable 2-D row-sum of \(|k_i k_j|\) is \((9/8)^2\).
+2. **Two auxiliary lemmas**: the reverse triangle inequality for the
+   \(L^2\) seminorm (`Palomar.l2_norm_rev_tri`) and the algebraic core
+   of the paper's energy corollary (`Palomar.energy_stability`).
+
+The paper's Theorem A composition (`TWS.stability_Linf`) is **not** part of
+this entry: it is a chained inequality under named hypotheses rather than a
+kernel-checked TDA theorem, so it is not registered.
 
 Lean does **not** prove
 \(\|P_{0,N}^\Psi\|_{L^\infty\to L^\infty}=\|k_0\|_{\ell^1}^d\). That step
@@ -37,7 +41,6 @@ Lean does **not** prove
 
 | Paper | Lean constant | What is proved |
 |-------|----------------|----------------|
-| `thm:A` composition | `Palomar.stability_Linf` | chaining under hypotheses |
 | `prop:opnorm` kernel | `Palomar.kernel1d_l1` | \(\sum\|k_i\|=9/8\) in \(\mathbb{Q}\) |
 | same, \(\mathbb{R}\) | `Palomar.kernel1d_l1_real` | same in \(\mathbb{R}\) |
 | 2-D row-sum | `Palomar.db2_level1_opnorm_d2` | \(\sum_{i,j}\|k_i k_j\|=(9/8)^2\) |
@@ -46,12 +49,14 @@ Lean does **not** prove
 | `lem:revtri` | `Palomar.l2_norm_rev_tri` | reverse triangle for `L2Norm` |
 | `cor:energy` algebra | `Palomar.energy_stability` | \(\|a^2-b^2\|\le\Gamma(a+b)\) |
 
-The eight Comparator names are eight Lean constants; they encode four
-mathematical claims (composition, kernel \(\ell^1\), reverse triangle,
-energy algebra), with \(\ell^1\) stated in several equivalent forms.
+The seven Comparator names are seven Lean constants; they encode three
+mathematical claims (kernel \(\ell^1\), reverse triangle, energy algebra),
+with \(\ell^1\) stated in several equivalent forms.
 
-`Challenge.lean` imports `TWS.Skeleton` because Fact 1 lives there, not
-because the Challenge re-proves the skeleton.
+`Challenge.lean` and `Solution.lean` are **Mathlib-only**: they inline the
+definitions they need, so the Challenge's transitive import closure contains
+no project-specific code. `TWS/` is kept as the provenance of those inlined
+definitions and proof tactics.
 
 ## Build
 

@@ -2,7 +2,6 @@
   "challenge_module": "Challenge",
   "solution_module": "Solution",
   "theorem_names": [
-    "Palomar.stability_Linf",
     "Palomar.kernel1d_l1",
     "Palomar.kernel1d_l1_real",
     "Palomar.db2_level1_opnorm_d2",

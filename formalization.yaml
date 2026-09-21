@@ -3,21 +3,23 @@
 version: "v0.4"
 
 project:
-  name: "Algebraic composition of a localized landscape bound, and exact ℓ¹ of the db2 seven-tap kernel"
+  name: "Exact ℓ¹ norm of the undecimated db2 seven-tap kernel, and two auxiliary algebraic lemmas"
   description: >-
-    Comparator surface for the two Lean-checked facts of the companion
-    short note. Fact 1: if a landscape L∞-Lipschitz hypothesis and an L∞
-    operator bound are supplied, the L²(U) composition inequality follows
-    (Palomar.stability_Linf / TWS.stability_Linf). Bottleneck stability
-    and landscape non-expansiveness are named hypotheses, not proofs.
-    Fact 2: the seven-tap kernel k₀ = ½R_h has ℓ¹ norm 9/8, and the
-    separable 2-D row-sum of |k_i k_j| is (9/8)². Lean does not prove
-    that the finite-grid operator norm equals the kernel ℓ¹-norm; that
+    Comparator surface for the Lean-checked facts of the companion short
+    note. The seven-tap kernel k₀ = ½R_h has ℓ¹ norm 9/8, and the separable
+    2-D row-sum of |k_i k_j| is (9/8)²; the same ℓ¹ identity is restated via
+    the QMF half-autocorrelation. Two auxiliary algebraic results are
+    included: the reverse triangle inequality for the L² seminorm on a set,
+    and the algebraic core of the paper's energy corollary. Lean does not
+    prove that the finite-grid operator norm equals the kernel ℓ¹-norm; that
     identification (no-cancellation under periodization, N≥7) remains a
     paper argument. This repository does not contain the LaTeX manuscript.
-    The TWS/ sources are vendored from jelincovil/tws-repro (MIT) at
-    commit 6f11e6e37039c40fd924146e2d5efdd531950179 so Palomar's isolated
-    lean invocation can find TWS.olean.
+    This entry does not cover the paper's Theorem A composition; that
+    theorem is a chained inequality under named hypotheses and is not
+    registered. The TWS/ sources are vendored from jelincovil/tws-repro (MIT)
+    at commit 6f11e6e37039c40fd924146e2d5efdd531950179 as the provenance of
+    the inlined definitions and proof tactics; Challenge.lean and
+    Solution.lean are Mathlib-only and import no project-specific module.
   authors:
     - "Jaime Enrique Lincovil Curivil"
     - "César Daniel Reinoso Reinoso"
@@ -41,11 +43,11 @@ sources:
     location: "tws-persistence-stability/paper/main.tex (not in this repository); arXiv identifier is a placeholder until deposit"
     relationship: formalizes
     note: >-
-      Compared theorems are the composition lemma of Theorem A under named
-      hypotheses, the kernel ℓ¹ identities used in prop:opnorm (not the
-      operator-norm identification), lem:revtri, and the algebraic core of
-      cor:energy. lem:landscapeU, lem:proj as a general operator-norm fact,
-      prop:sharp, and cor:global are not compared.
+      Compared theorems are the kernel ℓ¹ identities used in prop:opnorm (not
+      the operator-norm identification), lem:revtri, and the algebraic core of
+      cor:energy. Not compared: the Theorem A composition (thm:A), which is a
+      chained inequality under named hypotheses, together with lem:landscapeU,
+      lem:proj as a general operator-norm fact, prop:sharp, and cor:global.
     license: CC-BY-4.0
     author_endorsement: participated
 
@@ -53,26 +55,19 @@ related_formalizations: []
 
 status:
   scope: >-
-    Compared: (1) TWS.stability_Linf, the algebraic composition of
-    Theorem A under landscape_stability_hyp and frame_proj_bound_hyp;
-    (2) ℓ¹(k₀)=9/8 in ℚ and ℝ, 2-D row-sum (9/8)², the arithmetic
-    identity 81/64, and the QMF half-autocorrelation form of the same
-    ℓ¹ identity; (3) reverse triangle for L2Norm on U; (4) |a²−b²|≤Γ(a+b).
-    Not compared: bottleneck stability, landscape construction, the
-    paper's claim ‖P_{0,N}‖_{L∞→L∞}=(9/8)^d (which needs no-cancellation
-    under periodization), lem:landscapeU, lem:proj in full, prop:sharp,
-    cor:global. TWS.stability_two_term is leftover from a bound removed
-    from the note and is not submitted.
+    Compared: (1) ℓ¹(k₀)=9/8 in ℚ and ℝ, the 2-D row-sum (9/8)², the
+    arithmetic identity 81/64, and the QMF half-autocorrelation form of the
+    same ℓ¹ identity; (2) reverse triangle for L2Norm on U;
+    (3) |a²−b²|≤Γ(a+b). Not compared: the Theorem A composition, bottleneck
+    stability, landscape construction, the paper's claim
+    ‖P_{0,N}‖_{L∞→L∞}=(9/8)^d (which needs no-cancellation under
+    periodization), lem:landscapeU, lem:proj in full, prop:sharp, cor:global.
+    TWS.stability_two_term is leftover from a bound removed from the note and
+    is not submitted.
   sorry_count: 0
   sorry_in_definitions: 0
   axioms: ["propext", "Classical.choice", "Quot.sound"]
   main_results:
-    - declaration: Palomar.stability_Linf
-      file: Challenge.lean
-      sorry_count: 0
-      axioms: ["propext", "Classical.choice", "Quot.sound"]
-      comparator_config: comparator.json
-      literature_dependencies: []
     - declaration: Palomar.kernel1d_l1
       file: Challenge.lean
       sorry_count: 0
@@ -150,17 +145,13 @@ automation:
 
 fidelity:
   divergences: >-
-    Palomar.stability_Linf is the composition lemma of Theorem A, not a
-    proof of bottleneck or landscapes. Lk is a free Lipschitz parameter;
-    the paper instantiates L_λ = 1 (Bubenik). Scale indices j, j0 are Int
-    in Lean (needed by projDgmK) rather than j ≥ 0 as in the paper.
-    TWS.LinfNorm is the pointwise supremum (iSup of ENNReal.ofReal |f x|
-    on D).toReal, not an essential supremum, matching the paper's
-    insistence that sublevel persistence is not null-set invariant.
     Kernel theorems are ℓ¹ sums of taps, not ‖P_{0,N}‖_{L∞→L∞}=(9/8)^d.
     l2_norm_rev_tri uses mathlib MemLp and eLpNorm of U.indicator with
-    Lebesgue volume on ℝ, matching TWS.L2Norm. energy_stability is
-    |a²−b²|≤Γ(a+b), not the full landscape-squared statement of cor:energy.
+    Lebesgue volume on ℝ. energy_stability is |a²−b²|≤Γ(a+b), not the full
+    landscape-squared statement of cor:energy. Challenge.lean and
+    Solution.lean are Mathlib-only: they inline the definitions they need
+    rather than importing the vendored TWS/ modules, so the Challenge's
+    transitive import closure contains no project-specific code.
 
 review:
   status: self-assessed
@@ -174,13 +165,6 @@ review:
 alignment:
   namespace: Palomar
   statements:
-    - source: "Theorem thm:A, algebraic composition only"
-      lean: Palomar.stability_Linf
-      module: Challenge
-      status: adapted
-      note: >-
-        TWS.stability_Linf. Named hypotheses landscape_stability_hyp and
-        frame_proj_bound_hyp. Does not prove bottleneck stability.
     - source: "Proposition prop:opnorm, kernel ℓ¹(k₀)=9/8 in ℚ, not operator norm"
       lean: Palomar.kernel1d_l1
       module: Challenge
