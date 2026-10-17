@@ -1,6 +1,6 @@
 name = "tws-palomar"
-version = "0.1.0"
-defaultTargets = ["TWS", "Challenge", "Solution"]
+version = "0.2.0"
+defaultTargets = ["Challenge", "Solution"]
 
 [leanOptions]
 autoImplicit = false
@@ -9,11 +9,7 @@ relaxedAutoImplicit = false
 [[require]]
 name = "mathlib"
 git = "https://github.com/leanprover-community/mathlib4.git"
-rev = "db584cd6d46c92f209a44c0f1c829460d327499d"
-
-[[lean_lib]]
-name = "TWS"
-roots = ["TWS"]
+rev = "065356127b1dc0016f66b7283ce0ce2c4055aa55"
 
 [[lean_lib]]
 name = "Challenge"
@@ -22,3 +18,7 @@ roots = ["Challenge"]
 [[lean_lib]]
 name = "Solution"
 roots = ["Solution"]
+
+[[lean_lib]]
+name = "AxiomAudit"
+roots = ["AxiomAudit"]

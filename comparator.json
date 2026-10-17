@@ -2,15 +2,25 @@
   "challenge_module": "Challenge",
   "solution_module": "Solution",
   "theorem_names": [
-    "Palomar.kernel1d_l1",
-    "Palomar.kernel1d_l1_real",
-    "Palomar.db2_level1_opnorm_d2",
-    "Palomar.db2_level1_opnorm_d2_num",
-    "Palomar.half_autocorr_l1",
-    "Palomar.l2_norm_rev_tri",
-    "Palomar.energy_stability"
+    "TWSPeriodic.convolution_opNorm",
+    "TWSPeriodic.periodization_norm",
+    "TWSPeriodic.tensor_convolution_opNorm",
+    "TWSPeriodic.db2_filter_identification",
+    "TWSPeriodic.db2_opNorm",
+    "TWSPeriodic.db2_attains",
+    "TWSPeriodic.db2_lipschitz",
+    "TWSPeriodic.summary_bound_propagation",
+    "TWSPeriodic.db2_summary_stability",
+    "TWSPeriodic.db2_opNorm_least",
+    "TWSPeriodic.db2_squared_summary_stability",
+    "TWSPeriodic.cascade_level1_opNorm",
+    "TWSPeriodic.cascade_level2_opNorm",
+    "TWSPeriodic.cascade_level3_opNorm"
   ],
   "definition_names": [],
-  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
-  "enable_nanoda": true
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ]
 }

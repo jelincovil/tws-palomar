@@ -1,209 +1,265 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
-# formalization.yaml v0.4
-version: "v0.4"
-
+# Ordinary substantive development: see docs/PROVENANCE.md for the architectural change.
+version: v0.4
 project:
-  name: "Exact ℓ¹ norm of the undecimated db2 seven-tap kernel, and two auxiliary algebraic lemmas"
-  description: >-
-    Comparator surface for the Lean-checked facts of the companion short
-    note. The seven-tap kernel k₀ = ½R_h has ℓ¹ norm 9/8, and the separable
-    2-D row-sum of |k_i k_j| is (9/8)²; the same ℓ¹ identity is restated via
-    the QMF half-autocorrelation. Two auxiliary algebraic results are
-    included: the reverse triangle inequality for the L² seminorm on a set,
-    and the algebraic core of the paper's energy corollary. Lean does not
-    prove that the finite-grid operator norm equals the kernel ℓ¹-norm; that
-    identification (no-cancellation under periodization, N≥7) remains a
-    paper argument. This repository does not contain the LaTeX manuscript.
-    This entry does not cover the paper's Theorem A composition; that
-    theorem is a chained inequality under named hypotheses and is not
-    registered. The TWS/ sources are vendored from jelincovil/tws-repro (MIT)
-    at commit 6f11e6e37039c40fd924146e2d5efdd531950179 as the provenance of
-    the inlined definitions and proof tactics; Challenge.lean and
-    Solution.lean are Mathlib-only and import no project-specific module.
+  name: Exact sup-operator norms for periodic db2 smoothing
+  description: 'A proposed source-based formalization of finite-grid db2 operator
+    norms. The explicit real convolution is a Mathlib continuous linear map on finite Pi spaces
+    with their sup norm. Proof scripts establish the general convolution norm formula, a periodization
+    bound with injective-offset equality, separable tensorization, and the level-one db2 value (9/8)^d
+    on every periodic grid of side N >= 7. The same theorem gives the exact undecimated cascade norms
+    (299/256)^d for N >= 19, (9663/8192)^d for N >= 43 and (309991/262144)^d for N >= 91.
+    These three values are finite kernel evaluations, not a closed form for every level.
+    A unit sign signal attains the level-one smoothing norm.
+    The orthonormal db2 filter and its half-autocorrelation are explicitly connected. A conditional
+    propagation then carries a supplied summary Lipschitz bound and a supplied seminorm comparison
+    through the level-one operator, giving the factor L*(9/8)^d*sqrt(mu). The db2 norm is proved to be the
+    least such operator constant, and the squared-summary difference obeys the corresponding
+    product bound. Bottleneck stability, persistence diagrams and landscape non-expansiveness are
+    hypotheses, not theorems. All fourteen selected statements elaborate under Lean v4.35.0-rc2.
+    A local Comparator replay on Darwin, without bubblewrap, accepted the extended list on
+    2026-10-17. Palomar registration has not been performed.'
   authors:
-    - "Jaime Enrique Lincovil Curivil"
-    - "César Daniel Reinoso Reinoso"
-    - "Niels Pacheco-Barrios"
-  license: "Apache-2.0"
+  - Jaime Enrique Lincovil Curivil
+  - César Daniel Reinoso Reinoso
+  - Niels Pacheco-Barrios
+  license: Apache-2.0
   responsible_maintainers:
-    - "Jaime Enrique Lincovil Curivil"
-
+  - Jaime Enrique Lincovil Curivil
 classification:
-  arxiv: ["math.AT", "math.FA"]
-  msc2020: ["55N31", "42C40", "68V20", "62R40"]
-
+  arxiv:
+  - math.FA
+  - math.NA
+  msc2020:
+  - 42C40
+  - 47A30
+  - 68V20
 sources:
-  - title: "Explicit L-infinity stability bounds for undecimated Daubechies smoothing and wavelet-filtered persistence landscapes"
-    authors:
-      - "Jaime Enrique Lincovil Curivil"
-      - "César Daniel Reinoso Reinoso"
-      - "Niels Pacheco-Barrios"
-    id: "arXiv:XXXX.XXXXX"
-    type: article
-    location: "tws-persistence-stability/paper/main.tex (not in this repository); arXiv identifier is a placeholder until deposit"
-    relationship: formalizes
-    note: >-
-      Compared theorems are the kernel ℓ¹ identities used in prop:opnorm (not
-      the operator-norm identification), lem:revtri, and the algebraic core of
-      cor:energy. Not compared: the Theorem A composition (thm:A), which is a
-      chained inequality under named hypotheses, together with lem:landscapeU,
-      lem:proj as a general operator-norm fact, prop:sharp, and cor:global.
-    license: CC-BY-4.0
-    author_endorsement: participated
-
-related_formalizations: []
-
+- title: Explicit L-infinity stability bounds for undecimated Daubechies smoothing and wavelet-filtered
+    persistence landscapes
+  authors:
+  - Jaime Enrique Lincovil Curivil
+  - César Daniel Reinoso Reinoso
+  - Niels Pacheco-Barrios
+  type: paper
+  location: docs/manuscript-source.pdf, Proposition 3.4 (level-one part)
+  relationship: formalizes
+  note: Unpublished user-supplied manuscript snapshot, retained unchanged. This candidate
+    formalizes the level-one periodic operator-norm claim, the exact free-kernel norms at
+    undecimated cascade levels 1, 2 and 3, and the conditional propagation of a supplied
+    summary bound. It does not formalize bottleneck stability, persistence diagrams,
+    landscape non-expansiveness, cascade levels j > 3, or a closed form for every level.
+    There is no assigned arXiv identifier in this package. The manuscript describes an
+    earlier, weaker Lean development.
+- title: TWS predecessor formalization in tws-repro
+  id: https://github.com/jelincovil/tws-repro/tree/6f11e6e37039c40fd924146e2d5efdd531950179
+  authors:
+  - Jaime Enrique Lincovil Curivil
+  - César Daniel Reinoso Reinoso
+  - Niels Pacheco-Barrios
+  type: other
+  relationship: adapts
+  license: MIT
+  note: Predecessor of the filter and autocorrelation algebra. Inspected through the vendored
+    sources in the previous tws-palomar revision. No import of the predecessor Skeleton is
+    used. The new substantive operator-norm proof scripts are supplied in this repository.
+- title: Previous tws-palomar Comparator wrapper
+  id: https://github.com/jelincovil/tws-palomar/tree/f15103f97a300cfa243991956fa2d89e9c9ab6a7
+  type: other
+  relationship: adapts
+  note: 'The previous version was a wrapper around tws-repro and omitted its required structured
+    wrapper relationship. This replacement changes the architecture: the new proof development
+    is contained here. See docs/PROVENANCE.md.'
+related_formalizations:
+- id: https://github.com/jelincovil/tws-repro/tree/6f11e6e37039c40fd924146e2d5efdd531950179
+  relationship: builds-on
+  note: Historical source of db2 filter algebra; not the location of the new operator-norm
+    proofs.
+- id: https://github.com/jelincovil/tws-palomar/tree/f15103f97a300cfa243991956fa2d89e9c9ab6a7
+  relationship: supersedes
+  note: Replacement of the old coefficient-only wrapper. The Lean kernel check and an
+    unsandboxed Darwin Comparator replay succeeded locally. The bubblewrap run is still pending.
 status:
-  scope: >-
-    Compared: (1) ℓ¹(k₀)=9/8 in ℚ and ℝ, the 2-D row-sum (9/8)², the
-    arithmetic identity 81/64, and the QMF half-autocorrelation form of the
-    same ℓ¹ identity; (2) reverse triangle for L2Norm on U;
-    (3) |a²−b²|≤Γ(a+b). Not compared: the Theorem A composition, bottleneck
-    stability, landscape construction, the paper's claim
-    ‖P_{0,N}‖_{L∞→L∞}=(9/8)^d (which needs no-cancellation under
-    periodization), lem:landscapeU, lem:proj in full, prop:sharp, cor:global.
-    TWS.stability_two_term is leftover from a bound removed from the note and
-    is not submitted.
+  scope: Complete candidate proof scripts for a finite real convolution operator, its exact
+    sup norm, folding of signed stencils, separable products, level-one db2 on N >= 7, and
+    the exact undecimated cascade norms at levels 1, 2 and 3 for periods at least 19, 43 and 91.
+    No custom axioms or proof holes occur in Solution.lean. The fourteen selected theorems
+    elaborate under Lean v4.35.0-rc2; their observed axiom dependencies are propext, Classical.choice
+    and Quot.sound. Four of them propagate a supplied summary bound through the level-one
+    operator. A Darwin Comparator replay without bubblewrap accepted all fourteen. Only the
+    compared statements in Challenge.lean contain deliberate sorry holes. Supplied Lipschitz
+    hypotheses are not proofs of bottleneck stability or of landscape non-expansiveness.
+    Levels j > 3 and a general cascade closed form are not proved. Standard facts are not
+    claimed as new mathematics.
   sorry_count: 0
   sorry_in_definitions: 0
-  axioms: ["propext", "Classical.choice", "Quot.sound"]
-  main_results:
-    - declaration: Palomar.kernel1d_l1
-      file: Challenge.lean
-      sorry_count: 0
-      axioms: ["propext", "Classical.choice", "Quot.sound"]
-      comparator_config: comparator.json
-      literature_dependencies: []
-    - declaration: Palomar.kernel1d_l1_real
-      file: Challenge.lean
-      sorry_count: 0
-      axioms: ["propext", "Classical.choice", "Quot.sound"]
-      comparator_config: comparator.json
-      literature_dependencies: []
-    - declaration: Palomar.db2_level1_opnorm_d2
-      file: Challenge.lean
-      sorry_count: 0
-      axioms: ["propext", "Classical.choice", "Quot.sound"]
-      comparator_config: comparator.json
-      literature_dependencies: []
-    - declaration: Palomar.db2_level1_opnorm_d2_num
-      file: Challenge.lean
-      sorry_count: 0
-      axioms: ["propext", "Classical.choice", "Quot.sound"]
-      comparator_config: comparator.json
-      literature_dependencies: []
-    - declaration: Palomar.half_autocorr_l1
-      file: Challenge.lean
-      sorry_count: 0
-      axioms: ["propext", "Classical.choice", "Quot.sound"]
-      comparator_config: comparator.json
-      literature_dependencies: []
-    - declaration: Palomar.l2_norm_rev_tri
-      file: Challenge.lean
-      sorry_count: 0
-      axioms: ["propext", "Classical.choice", "Quot.sound"]
-      comparator_config: comparator.json
-      literature_dependencies: []
-    - declaration: Palomar.energy_stability
-      file: Challenge.lean
-      sorry_count: 0
-      axioms: ["propext", "Classical.choice", "Quot.sound"]
-      comparator_config: comparator.json
-      literature_dependencies: []
-
+  axioms:
+  - propext
+  - Classical.choice
+  - Quot.sound
 automation:
   methods:
-    - method: agent
-      models: ["Grok 4"]
-      framework: n/a
-      tool_setup: >-
-        Palomar packaging assembled by an xAI Grok 4 agent from
-        human-written Lean in tws-repro. Kernel and QMF proofs were
-        written earlier as Lean tactics (simp, norm_num, ring).
-      cost:
-        wall_time: "under two hours for the Palomar surface"
-        spend_usd: 0
-        hardware: local machine
-      prompting_notes: >-
-        Map main.tex labels only to closed Lean declarations. Do not
-        submit bottleneck stability as a kernel proof. Kernel ℓ¹ is not
-        the finite-grid operator norm.
-    - method: manual
-      models: []
-      framework: n/a
-      tool_setup: "Human-authored TWS.DaubechiesOpNorm.lean and TWS.Skeleton.lean"
-      cost:
-        wall_time: "weeks (companion development; not tracked)"
-        spend_usd: 0
-        hardware: local machine
-      prompting_notes: n/a
-  spend_usd: 0
-  notes: >-
-    Mixed: human Lean proofs authored in jelincovil/tws-repro (MIT) and
-    vendored into TWS/ of this Apache-2.0 Palomar surface at commit
-    6f11e6e37039c40fd924146e2d5efdd531950179.
-
+  - method: agent
+    models:
+    - GPT-6 Astra
+    framework: ChatGPT Work
+    tool_setup: AI-assisted source inspection, proof-script drafting, metadata preparation
+      and exact finite-instance checks. The preparation container could not start Lean.
+      A later local session on Darwin elaborated the corrected scripts with Lean v4.35.0-rc2,
+      fixed two Mathlib API mismatches in Solution.lean, and recorded the axiom audit.
+      The preparation session did not run Comparator. A later Darwin session ran
+      `lake comparator --inadvisably-no-sandbox`; see review.notes.
+    cost:
+      wall_time: one preparation session; not metered
+      spend_usd: subscription-based
+      hardware: Linux container
+    prompting_notes: User requested a complete replacement proposal and will independently
+      audit and improve it. Supply explicit operator definitions and proofs; do not use the
+      legacy empty-diagram skeleton or claim successful verification without evidence.
+  spend_usd: subscription-based
+  notes: Existing project author names are retained for maintainer review. The new candidate
+    has not been reviewed by those authors as a group. Prior filter algebra is attributed
+    to its predecessor; this candidate does not independently verify historical authorship/automation
+    claims.
 fidelity:
-  divergences: >-
-    Kernel theorems are ℓ¹ sums of taps, not ‖P_{0,N}‖_{L∞→L∞}=(9/8)^d.
-    l2_norm_rev_tri uses mathlib MemLp and eLpNorm of U.indicator with
-    Lebesgue volume on ℝ. energy_stability is |a²−b²|≤Γ(a+b), not the full
-    landscape-squared statement of cor:energy. Challenge.lean and
-    Solution.lean are Mathlib-only: they inline the definitions they need
-    rather than importing the vendored TWS/ modules, so the Challenge's
-    transitive import closure contains no project-specific code.
-
+  divergences: The source manuscript includes bottleneck stability, persistence diagrams, landscape
+    non-expansiveness, numerical kernels beyond cascade level three, and application experiments.
+    Those ingredients are not proved. Cascade levels 1, 2 and 3 are formalized as exact rational
+    operator norms of the free integer kernels, for periods at least 19, 43 and 91. What is
+    formalized beyond those operator norms is the algebraic propagation of a supplied Lipschitz
+    hypothesis and a supplied seminorm comparison, together with sharpness of the level-one
+    smoothing constant and the squared-summary product bound. The development uses Mathlib
+    finite Pi norms and ContinuousLinearMap operator norms, supports arbitrary dimension d including
+    zero, assumes a nonzero period, and does not certify any external implementation.
+    Operator-norm attainment does not imply attainment of a composed landscape bound. The general
+    norm and tensor identities are standard. No closed form for every cascade level is claimed.
 review:
-  status: self-assessed
+  status: Lean kernel check and unsandboxed Darwin Comparator passed on 2026-10-17; registration not done
   reviewers: []
-  notes: >-
-    Statement selection checked against main.tex and against #print axioms
-    {propext, Classical.choice, Quot.sound}. Local Comparator (Lean kernel
-    and NanoDa) accepted the solution. No independent mathematical referee
-    has reviewed this Palomar surface.
-
+  notes: Static checks, exact finite-instance checks, `lake build`, `#print axioms` and the
+    Darwin Comparator replay are recorded in docs/VERIFICATION.md. Each of the fourteen selected
+    theorems depends only on propext, Classical.choice and Quot.sound. The replay included the
+    three cascade-level norms and used `--inadvisably-no-sandbox` because bubblewrap is absent.
+    GitHub Actions, human mathematical review and Palomar registration were not run.
 alignment:
-  namespace: Palomar
+  namespace: TWSPeriodic
   statements:
-    - source: "Proposition prop:opnorm, kernel ℓ¹(k₀)=9/8 in ℚ, not operator norm"
-      lean: Palomar.kernel1d_l1
-      module: Challenge
-      status: proved
-      note: "TWS.Daubechies.kernel1d_l1"
-    - source: "Proposition prop:opnorm, kernel ℓ¹ in ℝ"
-      lean: Palomar.kernel1d_l1_real
-      module: Challenge
-      status: proved
-      note: "TWS.Daubechies.kernel1d_l1_real"
-    - source: "Proposition prop:opnorm, 2-D kernel row-sum (9/8)², not ‖P‖"
-      lean: Palomar.db2_level1_opnorm_d2
-      module: Challenge
-      status: proved
-      note: "TWS.Daubechies.db2_level1_opnorm_d2"
-    - source: "eq:opnorm arithmetic (9/8)²=81/64"
-      lean: Palomar.db2_level1_opnorm_d2_num
-      module: Challenge
-      status: proved
-      note: "TWS.Daubechies.db2_level1_opnorm_d2_num"
-    - source: "Proposition prop:opnorm, QMF form of the same kernel ℓ¹"
-      lean: Palomar.half_autocorr_l1
-      module: Challenge
-      status: proved
-      note: "TWS.Daubechies.half_autocorr_l1"
-    - source: "Lemma lem:revtri"
-      lean: Palomar.l2_norm_rev_tri
-      module: Challenge
-      status: adapted
-      note: "TWS.l2_norm_rev_tri; volume on U.indicator"
-    - source: "Corollary cor:energy algebraic identity"
-      lean: Palomar.energy_stability
-      module: Challenge
-      status: adapted
-      note: "TWS.energy_stability"
-
-acknowledgements: >-
-  mathlib4 (rev db584cd6d46c92f209a44c0f1c829460d327499d), Lean 4.33.0,
-  Bubenik landscapes, Cohen–Steiner bottleneck stability. Companion
-  tws-repro (MIT) at 6f11e6e37039c40fd924146e2d5efdd531950179; TWS/
-  sources are vendored from that tree. This Palomar surface is
-  Apache-2.0. The manuscript is CC BY 4.0.
+  - source: General finite convolution norm identity used in Proposition 3.4
+    lean: TWSPeriodic.convolution_opNorm
+    module: Challenge
+    status: partial
+    note: Elaborated by Lean v4.35.0-rc2 on 2026-10-17. The local axiom audit reports only
+      propext, Classical.choice and Quot.sound. A later Darwin replay without bubblewrap accepted
+      this statement together with the propagation theorems. Partial means the Linux sandbox
+      run is still outstanding, not that a proof step was omitted.
+  - source: Periodization bound and sufficient no-collision condition in Proposition 3.4
+    lean: TWSPeriodic.periodization_norm
+    module: Challenge
+    status: partial
+    note: Elaborated by Lean v4.35.0-rc2 on 2026-10-17. The local axiom audit reports only
+      propext, Classical.choice and Quot.sound. A later Darwin replay without bubblewrap accepted
+      this statement together with the propagation theorems. Partial means the Linux sandbox
+      run is still outstanding, not that a proof step was omitted.
+  - source: Separable dimension factor in Proposition 3.4
+    lean: TWSPeriodic.tensor_convolution_opNorm
+    module: Challenge
+    status: partial
+    note: Elaborated by Lean v4.35.0-rc2 on 2026-10-17. The local axiom audit reports only
+      propext, Classical.choice and Quot.sound. A later Darwin replay without bubblewrap accepted
+      this statement together with the propagation theorems. Partial means the Linux sandbox
+      run is still outstanding, not that a proof step was omitted.
+  - source: Level-one db2 half-autocorrelation computation in Proposition 3.4
+    lean: TWSPeriodic.db2_filter_identification
+    module: Challenge
+    status: partial
+    note: Elaborated by Lean v4.35.0-rc2 on 2026-10-17. The local axiom audit reports only
+      propext, Classical.choice and Quot.sound. A later Darwin replay without bubblewrap accepted
+      this statement together with the propagation theorems. Partial means the Linux sandbox
+      run is still outstanding, not that a proof step was omitted.
+  - source: Proposition 3.4, exact level-one periodic norm
+    lean: TWSPeriodic.db2_opNorm
+    module: Challenge
+    status: partial
+    note: Elaborated by Lean v4.35.0-rc2 on 2026-10-17. The local axiom audit reports only
+      propext, Classical.choice and Quot.sound. A later Darwin replay without bubblewrap accepted
+      this statement together with the propagation theorems. Partial means the Linux sandbox
+      run is still outstanding, not that a proof step was omitted.
+  - source: Attainment of the smoothing operator norm (not the TDA composition)
+    lean: TWSPeriodic.db2_attains
+    module: Challenge
+    status: partial
+    note: Elaborated by Lean v4.35.0-rc2 on 2026-10-17. The local axiom audit reports only
+      propext, Classical.choice and Quot.sound. A later Darwin replay without bubblewrap accepted
+      this statement together with the propagation theorems. Partial means the Linux sandbox
+      run is still outstanding, not that a proof step was omitted.
+  - source: Perturbation consequence of the exact smoothing norm
+    lean: TWSPeriodic.db2_lipschitz
+    module: Challenge
+    status: partial
+    note: Elaborated by Lean v4.35.0-rc2 on 2026-10-17. The local axiom audit reports only
+      propext, Classical.choice and Quot.sound. A later Darwin replay without bubblewrap accepted
+      this statement together with the propagation theorems. Partial means the Linux sandbox
+      run is still outstanding, not that a proof step was omitted.
+  - source: Theorem A, conditional propagation of a supplied summary bound
+    lean: TWSPeriodic.summary_bound_propagation
+    module: Challenge
+    status: partial
+    note: Elaborated by Lean v4.35.0-rc2. Axioms are propext, Classical.choice and Quot.sound.
+      Included in the Darwin Comparator replay. Algebraic composition only. The landscape
+      Lipschitz bound and the seminorm comparison are hypotheses. Bottleneck stability and
+      landscape non-expansiveness are not proved.
+  - source: Theorem A specialized to the exact level-one db2 norm
+    lean: TWSPeriodic.db2_summary_stability
+    module: Challenge
+    status: partial
+    note: Elaborated by Lean v4.35.0-rc2 and included in the Darwin Comparator replay.
+      Replaces the supplied operator norm by (9/8)^d for N >= 7. The summary hypotheses
+      remain assumptions.
+  - source: Lemma 3.2, least certified smoothing constant
+    lean: TWSPeriodic.db2_opNorm_least
+    module: Challenge
+    status: partial
+    note: Elaborated by Lean v4.35.0-rc2 and included in the Darwin Comparator replay.
+      Any constant that bounds the db2 operator is at least (9/8)^d. This is sharpness of
+      the smoothing factor, not of a persistence summary.
+  - source: Corollary 4.2, squared-summary difference
+    lean: TWSPeriodic.db2_squared_summary_stability
+    module: Challenge
+    status: partial
+    note: Elaborated by Lean v4.35.0-rc2 and included in the Darwin Comparator replay.
+      Product bound for the difference of squared summary norms, under a supplied Lipschitz
+      hypothesis that already includes L * sqrt(mu).
+  - source: Exact undecimated db2 cascade norm at level one, for N >= 19
+    lean: TWSPeriodic.cascade_level1_opNorm
+    module: Challenge
+    status: partial
+    note: Elaborated by Lean v4.35.0-rc2 on 2026-10-17. Axioms are propext, Classical.choice
+      and Quot.sound. Included in the unsandboxed Darwin Comparator replay. Finite evaluation
+      of the nineteen-tap kernel. The integer five-tap recurrence gives l1 mass 299/256.
+      For N >= 19 the centered offsets are injective, so the periodic operator norm is
+      (299/256)^d in every dimension, including d = 0. The two-dimensional square is
+      89401/65536. This replaces the rounded second entry of manuscript equation (10).
+      It is not a closed form for every level. Partial means the Linux sandbox run is
+      still outstanding.
+  - source: Exact undecimated db2 cascade norm at level two, for N >= 43
+    lean: TWSPeriodic.cascade_level2_opNorm
+    module: Challenge
+    status: partial
+    note: Elaborated by Lean v4.35.0-rc2 on 2026-10-17 and included in the unsandboxed
+      Darwin Comparator replay. Finite evaluation of the forty-three-tap kernel. The l1
+      mass is 9663/8192, so the periodic operator norm is (9663/8192)^d for N >= 43.
+      The two-dimensional square is 93373569/67108864. Partial means the Linux sandbox
+      run is still outstanding.
+  - source: Exact undecimated db2 cascade norm at level three, for N >= 91
+    lean: TWSPeriodic.cascade_level3_opNorm
+    module: Challenge
+    status: partial
+    note: Elaborated by Lean v4.35.0-rc2 on 2026-10-17 and included in the unsandboxed
+      Darwin Comparator replay. Finite evaluation of the ninety-one-tap kernel. The l1
+      mass is 309991/262144, so the periodic operator norm is (309991/262144)^d for
+      N >= 91. The two-dimensional square is 96094420081/68719476736. Partial means the
+      Linux sandbox run is still outstanding. Levels j > 3 and a general closed form
+      are not proved.
+acknowledgements: Lean and Mathlib; the source manuscript authors; the MIT-licensed tws-repro
+  predecessor; PalomarTemplate at 2891de4c48955af824969a263d31b25e7a9a1406. The new operator
+  development is located in this submitted project, not supplied by a thin-wrapper import.

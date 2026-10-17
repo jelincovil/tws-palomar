@@ -1,0 +1,10 @@
+PASS: exact db2 half-autocorrelation, independently in Q(sqrt(3)).
+period 4: exact one-dimensional matrix norm = 1
+period 5: exact one-dimensional matrix norm = 9/8
+period 6: exact one-dimensional matrix norm = 9/8
+period 7: exact one-dimensional matrix norm = 9/8
+period 16: exact one-dimensional matrix norm = 9/8
+PASS: alias cancellation at N=4; equality may also hold for N=5,6.
+PASS: explicit tensor matrices and attaining signals in dimension two.
+PASS: 80 seeded signed-stencil cases, including empty stencils and collisions.
+These finite checks do not establish the universally quantified Lean theorems.

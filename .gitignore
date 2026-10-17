@@ -1,5 +1,6 @@
 .lake/
-lake-packages/
 .cache/
-*.olean
+verification-logs/
+__pycache__/
+*.pyc
 .DS_Store

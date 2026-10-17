@@ -1,14 +1,25 @@
-This repository contains code from two sources:
+TWS periodic db2 operator-norm formalization -- audit candidate
 
-1. tws-palomar (original work)
-   License: Apache-2.0
-   See LICENSE.
+New files and new proof development: Apache License 2.0, see LICENSE.
+Prepared with OpenAI GPT-6 Astra at the request of Jaime Enrique Lincovil Curivil.
+No independent human review is asserted. A local Lean kernel check of this
+tree succeeded on 2026-10-17; Comparator and Palomar registration have not
+been run. See docs/VERIFICATION.md.
 
-2. TWS/ (vendored from jelincovil/tws-repro)
-   License: MIT
-   Copyright (c) 2026 Jaime Enrique Lincovil Curivil,
-                      César Daniel Reinoso Reinoso,
-                      Niels Pacheco-Barrios
-   Source: https://github.com/jelincovil/tws-repro
-   Commit: 6f11e6e37039c40fd924146e2d5efdd531950179
-   See TWS/LICENSE for the full MIT text.
+The db2 coefficient and autocorrelation algebra is adapted from:
+https://github.com/jelincovil/tws-palomar/tree/f15103f97a300cfa243991956fa2d89e9c9ab6a7
+which attributes its TWS sources to:
+https://github.com/jelincovil/tws-repro/tree/6f11e6e37039c40fd924146e2d5efdd531950179
+Copyright (c) 2026 Jaime Enrique Lincovil Curivil,
+César Daniel Reinoso Reinoso, Niels Pacheco-Barrios.
+MIT terms are retained in third_party/tws-repro-MIT.txt.
+
+The verifier script and dependency lock are adapted from PalomarTemplate,
+commit 2891de4c48955af824969a263d31b25e7a9a1406, Apache-2.0.
+
+Mathlib and Lean retain their respective copyright and licence terms.
+They are dependencies, not included as vendored source in this archive.
+
+The unchanged docs/manuscript-source.pdf is the user-supplied manuscript.
+The predecessor identifies its licence as CC-BY-4.0. The root Apache licence
+does not relicense that document. Its authors retain attribution.
