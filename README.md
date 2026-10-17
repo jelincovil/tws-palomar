@@ -4,9 +4,12 @@
 `Solution.lean` elaborate with Lean `v4.35.0-rc2` and the pinned Mathlib.
 A local `lake build`, `#print axioms` and an unsandboxed Darwin Comparator
 replay succeeded on 2026-10-17; see
-[verification status](docs/VERIFICATION.md). `scripts/verify-comparator.sh`
-itself did not run: it requires bubblewrap, which is absent on this Darwin
-machine. See the [Spanish replacement guide](AUDITORIA_ES.md).
+[verification status](docs/VERIFICATION.md). That Darwin command was not
+`scripts/verify-comparator.sh`, because bubblewrap is absent on that machine.
+The sandboxed script later succeeded on GitHub Actions run 39040759159, and
+Palomar verification run 39042287485 accepted commit
+`e6698f352a4362e01ed84e4e6ece13d0cf431d6d`. Registration was not offered.
+See the [Spanish replacement guide](AUDITORIA_ES.md).
 
 ## Mathematical result
 

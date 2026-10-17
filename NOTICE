@@ -2,9 +2,15 @@ TWS periodic db2 operator-norm formalization -- audit candidate
 
 New files and new proof development: Apache License 2.0, see LICENSE.
 Prepared with OpenAI GPT-6 Astra at the request of Jaime Enrique Lincovil Curivil.
-No independent human review is asserted. A local Lean kernel check of this
-tree succeeded on 2026-10-17; Comparator and Palomar registration have not
-been run. See docs/VERIFICATION.md.
+The human authors of this formalization are Jaime Enrique Lincovil Curivil,
+César Daniel Reinoso Reinoso and Niels Pacheco-Barrios.
+A local Lean kernel check succeeded on 2026-10-17. On that machine,
+`lake comparator --inadvisably-no-sandbox` also accepted the selected
+statements; that replay disabled the sandbox. The sandboxed script
+`scripts/verify-comparator.sh` later succeeded on GitHub Actions run
+39040759159 for commit e6698f352a4362e01ed84e4e6ece13d0cf431d6d.
+Palomar verification run 39042287485 accepted that same commit.
+Registration was not offered. See docs/VERIFICATION.md.
 
 The db2 coefficient and autocorrelation algebra is adapted from:
 https://github.com/jelincovil/tws-palomar/tree/f15103f97a300cfa243991956fa2d89e9c9ab6a7

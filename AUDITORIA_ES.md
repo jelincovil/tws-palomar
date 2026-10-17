@@ -5,8 +5,11 @@ Esta carpeta es la versión corregida. El 2026-10-17, `lake build` y
 enunciados no cambiaron. En `Solution.lean` se corrigieron dos desajustes de
 API: `unit_le_opNorm` recibe la señal testigo, y la inyectividad de los
 desplazamientos usa `sub_add_cancel` porque esta revisión de Mathlib no tiene
-`sub_right_cancel`. Comparator no se ejecutó: el script oficial exige
-bubblewrap. No debe presentarse como un registro de Palomar. Las pruebas de
+`sub_right_cancel`. En Darwin, Comparator se repitió sin sandbox. El script
+oficial exige bubblewrap y no fue ese comando local. En GitHub Actions run
+39040759159 el script con sandbox terminó bien para el commit
+e6698f352a4362e01ed84e4e6ece13d0cf431d6d. La verificación de Palomar
+39042287485 aceptó las pruebas. El registro no fue ofrecido. Las pruebas de
 Solution siguen sin `sorry`.
 
 ## Qué cambia
@@ -83,10 +86,10 @@ El SHA antiguo no contiene el desarrollo nuevo y no sirve para representarlo.
 ## Riesgos concretos aún pendientes
 
 - La elaboración local ya cerró los dos errores de API encontrados. Eso no
-  sustituye Comparator ni una revisión humana del interés matemático.
-- El script de Comparator procede de la plantilla oficial actual, pero aquí
-  no pudo ejecutarse de extremo a extremo. El workflow requiere revisión y
-  una ejecución real en GitHub Actions o Linux compatible.
+  sustituye el criterio editorial de Palomar.
+- El script oficial con bubblewrap se ejecutó en GitHub Actions run
+  39040759159, y la verificación mecánica de Palomar 39042287485 aceptó el
+  commit e6698f352a4362e01ed84e4e6ece13d0cf431d6d. El registro no fue ofrecido.
 - Palomar puede seguir considerando rutinario el resultado especializado,
   incluso si las pruebas son correctas. Ningún cambio de redacción garantiza
   superar el umbral editorial.

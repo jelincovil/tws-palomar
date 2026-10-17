@@ -18,7 +18,9 @@ project:
     product bound. Bottleneck stability, persistence diagrams and landscape non-expansiveness are
     hypotheses, not theorems. All fourteen selected statements elaborate under Lean v4.35.0-rc2.
     A local Comparator replay on Darwin, without bubblewrap, accepted the extended list on
-    2026-10-17. Palomar registration has not been performed.'
+    2026-10-17. GitHub Actions run 39040759159 later ran the sandboxed Comparator script
+    on commit e6698f352a4362e01ed84e4e6ece13d0cf431d6d, and Palomar verification run
+    39042287485 accepted that commit. Registration was not offered.'
   authors:
   - Jaime Enrique Lincovil Curivil
   - César Daniel Reinoso Reinoso
@@ -78,7 +80,9 @@ related_formalizations:
 - id: https://github.com/jelincovil/tws-palomar/tree/f15103f97a300cfa243991956fa2d89e9c9ab6a7
   relationship: supersedes
   note: Replacement of the old coefficient-only wrapper. The Lean kernel check and an
-    unsandboxed Darwin Comparator replay succeeded locally. The bubblewrap run is still pending.
+    unsandboxed Darwin Comparator replay succeeded locally. The sandboxed script later
+    succeeded on GitHub Actions run 39040759159, and Palomar verification run
+    39042287485 accepted commit e6698f352a4362e01ed84e4e6ece13d0cf431d6d.
 status:
   scope: Complete candidate proof scripts for a finite real convolution operator, its exact
     sup norm, folding of signed stencils, separable products, level-one db2 on N >= 7, and
@@ -86,7 +90,10 @@ status:
     No custom axioms or proof holes occur in Solution.lean. The fourteen selected theorems
     elaborate under Lean v4.35.0-rc2; their observed axiom dependencies are propext, Classical.choice
     and Quot.sound. Four of them propagate a supplied summary bound through the level-one
-    operator. A Darwin Comparator replay without bubblewrap accepted all fourteen. Only the
+    operator. A Darwin Comparator replay without bubblewrap accepted all fourteen.
+    GitHub Actions run 39040759159 then ran the sandboxed script successfully, and
+    Palomar verification run 39042287485 accepted commit
+    e6698f352a4362e01ed84e4e6ece13d0cf431d6d. Registration was not offered. Only the
     compared statements in Challenge.lean contain deliberate sorry holes. Supplied Lipschitz
     hypotheses are not proofs of bottleneck stability or of landscape non-expansiveness.
     Levels j > 3 and a general cascade closed form are not proved. Standard facts are not
@@ -117,10 +124,12 @@ automation:
       audit and improve it. Supply explicit operator definitions and proofs; do not use the
       legacy empty-diagram skeleton or claim successful verification without evidence.
   spend_usd: subscription-based
-  notes: Existing project author names are retained for maintainer review. The new candidate
-    has not been reviewed by those authors as a group. Prior filter algebra is attributed
-    to its predecessor; this candidate does not independently verify historical authorship/automation
-    claims.
+  notes: The human authors of this formalization are the three manuscript authors
+    named in project.authors. Manuscript authorship and predecessor authorship stay
+    in the source records. New scripts and prose were prepared with the model recorded
+    above, at Jaime Enrique Lincovil Curivil's request. Prior filter algebra is attributed
+    to its predecessor; this candidate does not independently verify historical authorship
+    or automation claims of that predecessor.
 fidelity:
   divergences: The source manuscript includes bottleneck stability, persistence diagrams, landscape
     non-expansiveness, numerical kernels beyond cascade level three, and application experiments.
@@ -134,13 +143,16 @@ fidelity:
     Operator-norm attainment does not imply attainment of a composed landscape bound. The general
     norm and tensor identities are standard. No closed form for every cascade level is claimed.
 review:
-  status: Lean kernel check and unsandboxed Darwin Comparator passed on 2026-10-17; registration not done
+  status: Mechanical verification passed on 2026-10-17; registration was not offered
   reviewers: []
   notes: Static checks, exact finite-instance checks, `lake build`, `#print axioms` and the
     Darwin Comparator replay are recorded in docs/VERIFICATION.md. Each of the fourteen selected
-    theorems depends only on propext, Classical.choice and Quot.sound. The replay included the
-    three cascade-level norms and used `--inadvisably-no-sandbox` because bubblewrap is absent.
-    GitHub Actions, human mathematical review and Palomar registration were not run.
+    theorems depends only on propext, Classical.choice and Quot.sound. The Darwin replay included
+    the three cascade-level norms and used `--inadvisably-no-sandbox` because bubblewrap is absent
+    on that machine. GitHub Actions run 39040759159 then ran the sandboxed script on commit
+    e6698f352a4362e01ed84e4e6ece13d0cf431d6d and succeeded. Palomar verification run 39042287485
+    accepted that commit. The automated editorial review identified problems and did not offer
+    registration.
 alignment:
   namespace: TWSPeriodic
   statements:

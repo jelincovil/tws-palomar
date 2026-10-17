@@ -79,9 +79,11 @@ full SHA of that public commit, with `comparator.json` at the root.
 
 ## Attribution and review
 
-The three pre-existing project author names are retained from the source
-metadata. New scripts and prose were prepared with OpenAI GPT-6 Astra under
-Jaime Enrique Lincovil Curivil's request. No independent human review of this
-candidate is asserted. The maintainer should confirm authorship and the final
-contribution record before public submission. Earlier automation claims are
-historical self-reports of the predecessor, not independently authenticated.
+The human authors of this formalization are Jaime Enrique Lincovil Curivil,
+César Daniel Reinoso Reinoso and Niels Pacheco-Barrios, the authors of the
+source manuscript. Those three names also remain on the manuscript source
+record and on the predecessor source record. New scripts and prose were
+prepared with OpenAI GPT-6 Astra under Jaime Enrique Lincovil Curivil's
+request; that model credit stays in the automation record of
+`formalization.yaml`. Earlier automation claims of the predecessor are
+historical self-reports, not independently authenticated here.
