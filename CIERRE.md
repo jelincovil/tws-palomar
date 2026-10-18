@@ -17,7 +17,7 @@ modificó: los 30 archivos del commit de partida conservan su SHA256
 | G1 Entorno | **PASS** | Lean/Lake/Mathlib reales y coherentes con el pin; sin revisión accidental de dependencias (`verification/entorno.txt`). |
 | G2 Integración | **PASS** | `cd extension && lake build` → `Build completed successfully (8938 jobs)`, `EXIT=0`; 5 módulos como roots (`verification/build-2.log`). |
 | G3 Matemática | **PASS** | `cascadeTap_sum_one`, `directOp_const`, `directOp_one_eq_id` demostrados en `ThresholdExtension/ConstantPreservation.lean`; más `cascadeInt_sum` como identidad entera de base. `exact_checks.py` → `PASS: 20 rational direct/padded cases; signed masses j=0..4` (no sustituye a Lean). |
-| G4 Auditoría | **PASS** | `lake env lean AxiomCheck.lean` → `EXIT=0`, 92 nombres auditados, 0 errores, 0 `sorryAx`; conjuntos: 82 × `[propext, Classical.choice, Quot.sound]`, 9 × `[propext, Quot.sound]`, 1 × `[propext]` (`verification/axioms-1.log`). |
+| G4 Auditoría | **PASS** | `lake env lean AxiomCheck.lean` → `EXIT=0`, 92 nombres auditados, 0 errores, 0 `sorryAx`; conjuntos: 82 × `[propext, Classical.choice, Quot.sound]`, 9 × `[propext, Quot.sound]`, 1 × `[propext]` (`verification/axioms-1.log`; repetición tras la corrección de cabecera en `verification/axioms-2.log`). |
 | G5 Reproducción | **PASS** | Copia temporal limpia: `lake build Solution` → `SOLUTION_EXIT=0`; `extension && lake build` → `EXT_EXIT=0`; `lake env lean AxiomCheck.lean` → `AXIOM_EXIT=0`. Reutilizado: solo `.lake/packages` (oleans de Mathlib). Recompilado: `Solution.lean` y los 5 módulos desde fuente (`verification/clean-build.log`). |
 | G6 Correspondencia | **PASS** | Tablas de `NONPERIODIC_SPEC.md` y `THRESHOLD_CERTIFICATE_SPEC.md` actualizadas con las declaraciones nuevas; `NOTA_TOOLCHAIN.md` corrige la afirmación de `v4.28.0` sin reescribir los logs históricos; los 4 módulos entregados son byte-idénticos al paquete (SHA256 comparado). |
 | G7 Entrega | **PASS** | Fuentes, configuración, informe, inventario (`verification/inventario.txt`), diff de la rama y pasos de reproducción. |
@@ -64,6 +64,11 @@ Recompilación limpia (directorio temporal, `$TMP`): `lake build Solution` →
    igual que el toolchain de Mathlib en el pin. Se corrige la interpretación en
    `NOTA_TOOLCHAIN.md`; los logs históricos no se reescriben.
 5. Los cuatro módulos Lean entregados **no se modificaron** (byte-idénticos, SHA256 verificado).
+6. **Cabecera de módulo (detectada por CI).** El primer run de GitHub Actions falló en
+   `scripts/preflight.py` porque `extension/AxiomCheck.lean` no empezaba con `module`. El
+   script escanea todos los `.lean` del repositorio, no solo los de la base. Se añadió la
+   cabecera; `python3 scripts/preflight.py` pasa en local (`PASS: static packaging checks;
+   22 selected statements`).
 
 ## Integridad de la base antes/después
 

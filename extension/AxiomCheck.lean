@@ -1,3 +1,5 @@
+module
+
 import ThresholdExtension.ThresholdCertificate
 import ThresholdExtension.Db2ThresholdCertificate
 import ThresholdExtension.EndpointReplication
