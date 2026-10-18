@@ -1,19 +1,27 @@
 # Cierre de fase formal
 
-Estado: **CERRADA_LOCAL**
+Estado: **CERRADA_LOCAL** — fase formal local completada.
 
 - Base matemática aprobada: `1121b6d5d00ab04be218fea36a4eb36d5990f287`.
 - Commit del que parte la integración: `44f4bb79abddf1a4d0a8a3da9a07068c633ed2ab`, un commit
   documental posterior a la aprobación que **no contiene** `extension/`.
-- Última revisión remota: `f7ead245505027db76eb432e3da3ab32eab4696d`, rama
-  `extension/db2-threshold`.
-- Cambios de este encargo (reproducibilidad y automatización): **locales, sin publicar**.
+- Revisión de la extensión verificada por CI: `ea50a104a1870a08828bdf104ec8022f934b12c8`.
+- Ejecución de CI de esa revisión: run `39176786511`, workflow `extension-ci.yml`, **PASS**.
+- Publicación: la extensión, sus scripts y su workflow están publicados en la rama
+  `extension/db2-threshold`. Los commits posteriores a `ea50a10` solo modifican documentación
+  (este expediente, el inventario y el diff); no se les atribuye una compilación nueva.
 - Versiones reales y pin: Lean `4.35.0-rc2` (arm64-apple-darwin24.6.0, commit `11acb17`),
   Lake `5.0.0-src+11acb17`, Mathlib `065356127b1dc0016f66b7283ce0ce2c4055aa55`,
   macOS 15.7.9 (24G830). Registro: `extension/verification/entorno.txt`.
 - Archivos: `extension/` completo, `.github/workflows/extension-ci.yml` (nuevo; `ci.yml` intacto)
   y este `CIERRE.md`. La base versionada no se modificó: los 30 archivos del commit de partida
   conservan su SHA256 (`extension/verification/integrity-before.json`).
+
+| Ámbito | Estado |
+|---|---|
+| Fase formal local (extensión) | **Completada** |
+| CI de extensión | **PASS** en `ea50a104a1870a08828bdf104ec8022f934b12c8`, run [39176786511](https://github.com/jelincovil/tws-palomar/actions/runs/39176786511) |
+| Palomar extensión | `NO_SOMETIDA` |
 
 | Puerta | PASS/FAIL | Evidencia y ruta |
 |---|---|---|
@@ -74,8 +82,9 @@ históricos de compilación no se reescriben; esta nota queda como aclaración f
 6. **Cabecera de módulo (detectada por CI).** El primer run falló en `scripts/preflight.py`
    porque `extension/AxiomCheck.lean` no empezaba con `module`; corregido.
 7. **Instrucciones de reproducción.** Hacían `checkout` de `44f4bb7`, que no contiene
-   `extension/`. Ahora se exige un parámetro `REVISION` con un SHA que contenga la extensión y
-   una comprobación explícita de `extension/lakefile.toml` (ver más abajo).
+   `extension/`. Ahora fijan una revisión explícita (ejemplo: `ea50a10…`, la verificada por CI)
+   y comprueban `extension/lakefile.toml` y `extension/scripts/verify_extension.sh` antes de
+   continuar (ver más abajo).
 8. **Comando de integridad.** Ruta duplicada corregida; comprobado que el manifiesto histórico
    no se regenera y que los 30 archivos protegidos siguen intactos.
 9. **Workflow de extensión.** El expediente anterior decía que se entregaba «como propuesta
@@ -98,8 +107,9 @@ de la base y **no se regenera**: es el snapshot histórico tomado antes de integ
 - Después: `integrity.py check` → `PASS 30 files`, ejecutado desde `extension/`
   (`verification/repro/06-integrity.log`) y desde la raíz, y también en la copia temporal
   completa (`verification/repro-clean/06-integrity.log`).
-- `git status` solo muestra contenido nuevo (`extension/`, el workflow); ningún archivo
-  versionado de la base aparece modificado.
+- `git status` no muestra modificaciones en archivos versionados de la base: el contenido
+  nuevo está en `extension/` y en `.github/workflows/extension-ci.yml`, y las ediciones de este
+  expediente son documentales.
 
 ## Estado de verificación
 
@@ -111,10 +121,10 @@ de la base y **no se regenera**: es el snapshot histórico tomado antes de integ
 | Palomar extensión | **NO_SOMETIDA** | No se sometió la extensión a revisión Palomar. |
 
 El `PASS` remoto de la extensión corresponde al run `39176786511` sobre `ea50a10`, la revisión
-que contiene el código y el workflow. El commit posterior a este expediente solo actualiza
-documentación y vuelve a disparar el mismo workflow; no cambia el código verificado ni el
-resultado anterior. La verificación local (`verification/repro/`, `verification/repro-clean/`)
-se conserva como evidencia independiente del runner.
+que contiene el código, el comprobador y el workflow. Los commits posteriores solo modifican
+documentación y no se presentan como una compilación nueva. La verificación local
+(`verification/repro/`, `verification/repro-clean/`) se conserva como evidencia independiente
+del runner.
 
 ## Estado Palomar extensión
 
@@ -139,45 +149,35 @@ Ninguno. No se requirió `sorry`, `admit`, axiomas nuevos ni debilitar metas.
 
 ## Cómo reproducir desde una copia de fuentes
 
-Requisitos: `git`, Python 3 (solo biblioteca estándar para los scripts), `elan` (resuelve el
-`lean-toolchain` del repositorio) y red para `lake exe cache get`.
+Requisitos: Git, Python 3 (solo biblioteca estándar para los scripts), `elan` (resuelve el
+`lean-toolchain` del repositorio) y acceso a las dependencias fijadas para `lake exe cache get`.
 
-**A. Revisión concreta (reproducible).** `REVISION` es obligatorio y debe ser un SHA de una
-revisión que contenga `extension/`. No se usa una rama: una rama se mueve y deja de identificar
-la ejecución.
+Ejemplo ejecutable sobre la revisión verificada por CI:
 
 ```bash
-REVISION=<SHA-40>          # obligatorio; debe contener extension/
+set -euo pipefail
+
+REVISION=ea50a104a1870a08828bdf104ec8022f934b12c8
 git clone https://github.com/jelincovil/tws-palomar.git
 cd tws-palomar
 git checkout --detach "$REVISION"
-test -f extension/lakefile.toml || { echo "FAIL: $REVISION no contiene extension/"; exit 1; }
 
-lake exe cache get         # dependencias fijadas (Mathlib 0653561…)
-lake build Solution        # base, desde fuente
+test -f extension/lakefile.toml
+test -f extension/scripts/verify_extension.sh
 
-cd extension
-lake build                 # los cinco módulos
-lake env lean AxiomCheck.lean > ../extension-axioms.log
-python3 scripts/axiom_check.py ../extension-axioms.log
-python3 scripts/exact_checks.py
-python3 scripts/integrity.py check .. verification/integrity-before.json
+lake exe cache get                    # dependencias fijadas (Mathlib 0653561…)
+bash extension/scripts/verify_extension.sh
 ```
 
-Desde `extension/`, `bash scripts/verify_extension.sh` ejecuta esos seis pasos con los mismos
-comandos y guarda los registros en `verification-logs/extension/` (o en `OUT_DIR`).
+El script compila `Solution` desde la raíz, compila los cinco módulos de `extension/`, ejecuta
+`AxiomCheck.lean` con su comprobador, corre los casos racionales y comprueba la integridad de la
+base. Deja los registros en `verification-logs/extension/` y devuelve un código de salida
+distinto de cero ante cualquier fallo.
 
-**B. Seguimiento de la rama (no identificable por sí solo).**
-`git clone --branch extension/db2-threshold …` sigue el extremo de la rama y sirve para
-trabajar, pero el SHA cambia con cada push; para verificar una ejecución hay que fijar
-`REVISION`.
-
-**Sobre la revisión remota actual.** `f7ead245505027db76eb432e3da3ab32eab4696d` contiene
-`extension/` pero todavía no `extension/scripts/axiom_check.py`. Para esa revisión, el paso del
-comprobador se sustituye por el criterio manual: cada nombre de `AxiomCheck.lean` debe aparecer
-una vez, con axiomas contenidos en `{propext, Classical.choice, Quot.sound}`, sin `sorryAx` ni
-líneas de error de Lean. El comprobador automático y el workflow forman parte de los cambios
-locales de este encargo, aún sin publicar.
+**Reproducir una revisión frente a seguir la rama.** Una rama se mueve:
+`git clone --branch extension/db2-threshold …` sirve para trabajar, pero no identifica por sí
+solo una ejecución. Para reproducir un resultado hay que fijar `REVISION` al SHA deseado, como
+en el ejemplo; el valor mostrado corresponde a la revisión que verificó el CI.
 
 El paquete `extension/` es autocontenido: `packagesDir = "../.lake/packages"` reutiliza el
 checkout de Mathlib del paquete padre y `tws-palomar` entra como dependencia de ruta, por lo que

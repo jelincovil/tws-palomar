@@ -1,8 +1,8 @@
-# Diff de la rama extension/db2-threshold sobre 44f4bb7 — 2026-10-18T20:34:31-03:00
+# Diff de la rama extension/db2-threshold sobre 44f4bb7 — 2026-10-18T20:56:32-03:00
 # Generado desde el índice; no incluye este archivo ni inventario.txt.
 
- CIERRE.md | 14 +++++++++-----
- 1 file changed, 9 insertions(+), 5 deletions(-)
+ CIERRE.md | 80 +++++++++++++++++++++++++++++++--------------------------------
+ 1 file changed, 40 insertions(+), 40 deletions(-)
 
 ## name-status
 M	CIERRE.md
