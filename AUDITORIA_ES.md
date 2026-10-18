@@ -1,16 +1,30 @@
 # Propuesta de sustitución y auditoría
 
-Esta carpeta es la versión corregida. El 2026-10-17, `lake build` y
-`#print axioms` sí se ejecutaron con Lean `v4.35.0-rc2` en Darwin. Los siete
-enunciados no cambiaron. En `Solution.lean` se corrigieron dos desajustes de
-API: `unit_le_opNorm` recibe la señal testigo, y la inyectividad de los
-desplazamientos usa `sub_add_cancel` porque esta revisión de Mathlib no tiene
-`sub_right_cancel`. En Darwin, Comparator se repitió sin sandbox. El script
-oficial exige bubblewrap y no fue ese comando local. En GitHub Actions run
-39040759159 el script con sandbox terminó bien para el commit
-e6698f352a4362e01ed84e4e6ece13d0cf431d6d. La verificación de Palomar
-39042287485 aceptó las pruebas. El registro no fue ofrecido. Las pruebas de
-Solution siguen sin `sorry`.
+Esta carpeta es el candidato actual. El resultado principal es la fórmula
+exacta de la cascada db2 en todos los niveles y la menor constante uniforme
+de sus operadores periódicos. La exposición está en
+`docs/CASCADE_THEOREM.md`. La comparación bibliográfica, que no resuelve la
+originalidad, está en `docs/RELATED_WORK.md`.
+
+El 2026-10-17, `lake build` y `#print axioms` se ejecutaron con Lean
+`v4.35.0-rc2` en Darwin. En ese momento había siete enunciados, y esos siete
+no cambiaron al corregir dos desajustes de API: `unit_le_opNorm` recibe la
+señal testigo, y la inyectividad de los desplazamientos usa `sub_add_cancel`
+porque esta revisión de Mathlib no tiene `sub_right_cancel`. Después se
+añadieron los niveles finitos y, más tarde, la forma cerrada. Hoy hay
+veintidós enunciados seleccionados. Son partes de un mismo desarrollo, no
+veintidós contribuciones.
+
+En Darwin, Comparator se repitió sin sandbox. El script oficial exige
+bubblewrap y no fue ese comando local. En GitHub Actions run 39040759159 el
+script con sandbox terminó bien para el commit
+e6698f352a4362e01ed84e4e6ece13d0cf431d6d, que tiene catorce enunciados. La
+verificación mecánica de Palomar 39042287485 aceptó ese commit. El registro
+no fue ofrecido. Esa revisión no vio la forma cerrada. El commit de las
+pruebas de la forma cerrada es
+7295c00346b8295d4857a3b2f24a6ad0c037d256, y Actions run 39093434816 lo
+aceptó en sandbox. Esa aceptación mecánica tampoco es un registro. Las
+pruebas de Solution siguen sin `sorry`.
 
 ## Qué cambia
 
@@ -92,11 +106,20 @@ El SHA antiguo no contiene el desarrollo nuevo y no sirve para representarlo.
 
 - La elaboración local ya cerró los dos errores de API encontrados. Eso no
   sustituye el criterio editorial de Palomar.
-- El script oficial con bubblewrap se ejecutó en GitHub Actions run
-  39040759159, y la verificación mecánica de Palomar 39042287485 aceptó el
-  commit e6698f352a4362e01ed84e4e6ece13d0cf431d6d. El registro no fue ofrecido.
-- Palomar puede seguir considerando rutinario el resultado especializado,
-  incluso si las pruebas son correctas. Ningún cambio de redacción garantiza
+- La revisión de comentarios se recompiló en Darwin el 2026-10-18, sin
+  sandbox, y Comparator aceptó la solución. Esa corrida no es Linux y no
+  tiene identificador de Actions. El sandbox de Linux del commit nuevo queda
+  pendiente de un push. Esta copia no hace push ni remite a Palomar.
+- El script oficial con bubblewrap se ejecutó para el commit de catorce
+  enunciados e6698f352a4362e01ed84e4e6ece13d0cf431d6d (Actions 39040759159)
+  y para el commit de la forma cerrada
+  7295c00346b8295d4857a3b2f24a6ad0c037d256 (Actions 39093434816). La
+  verificación mecánica de Palomar 39042287485 cubre solo el primero. El
+  registro no fue ofrecido. Una corrida nueva, si cambia el Lean, no hereda
+  esos identificadores.
+- Palomar puede seguir considerando insuficiente el interés del resultado,
+  incluso si las pruebas son correctas. La originalidad de la fórmula sigue
+  abierta en `docs/RELATED_WORK.md`. Ningún cambio de redacción garantiza
   superar el umbral editorial.
 - La fuente PDF se incluye sin modificaciones. Su sección de formalización
   y disponibilidad debe actualizarse posteriormente para describir la versión

@@ -3232,7 +3232,7 @@ theorem cascade_opNorm_uniform (j N d : ℕ) [NeZero N] :
 /-- For each fixed dimension, `L^d` with `L = 1651/1395` is a lower bound on
 every common upper bound of the cascade operators. The period `N` may grow
 with the level. This does not say that one fixed `N` attains `L^d`. At `d = 0`
-both sides are `1`. -/
+the conclusion is `1 ≤ B`. It does not force `B = 1`. -/
 theorem cascade_uniform_constant_least (d : ℕ) {B : ℝ}
     (hB : ∀ j N : ℕ, (hN : NeZero N) → ‖cascadeOperator j N d‖ ≤ B) :
     ((1651 : ℝ) / 1395) ^ d ≤ B := by

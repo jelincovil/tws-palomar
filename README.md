@@ -1,17 +1,96 @@
-# Exact sup norms for periodic db2 smoothing
+# Exact db2 cascade norms and an optimal uniform constant
 
-**Corrected candidate, not a Palomar registration.** The proofs in
-`Solution.lean` elaborate with Lean `v4.35.0-rc2` and the pinned Mathlib.
-A local `lake build`, `#print axioms` and an unsandboxed Darwin Comparator
-replay succeeded on 2026-10-17; see
-[verification status](docs/VERIFICATION.md). That Darwin command was not
-`scripts/verify-comparator.sh`, because bubblewrap is absent on that machine.
-The sandboxed script later succeeded on GitHub Actions run 39040759159, and
-Palomar verification run 39042287485 accepted commit
-`e6698f352a4362e01ed84e4e6ece13d0cf431d6d`. Registration was not offered.
-See the [Spanish replacement guide](AUDITORIA_ES.md).
+**Candidate for audit, not a Palomar registration.** The main statement is an
+exact formula for every scale of the undecimated db2 cascade, and the least
+constant that bounds the associated periodic operators uniformly. The argument
+is written out in [the cascade note](docs/CASCADE_THEOREM.md). Priority
+relative to the literature is unresolved;
+see [related work](docs/RELATED_WORK.md). The historical manuscript is
+[docs/manuscript-source.pdf](docs/manuscript-source.pdf).
 
-## Mathematical result
+The proofs in `Solution.lean` use Lean `v4.35.0-rc2` and the pinned Mathlib.
+What each check covers, and which commit it covers, is in
+[verification status](docs/VERIFICATION.md). A sandboxed run on an earlier
+commit is not a check of a later tree, and a successful run is not a
+registration. See the [Spanish audit guide](AUDITORIA_ES.md).
+
+## The problem
+
+An undecimated db2 smoother on a periodic grid is convolution by a kernel
+built from the orthonormal four-tap low-pass filter. One stage is the
+half-autocorrelation
+
+```
+k_0 = [-1, 0, 9, 16, 9, 0, -1] / 32.
+```
+
+Further stages convolve with dyadically upsampled copies of the same mask.
+The indexed level `j = 0` is already this first stage. On a grid of side `N`
+and dimension `d`, the quantity of interest is the supremum operator norm of
+that convolution. When the period is shorter than the support, taps collide
+and the norm can drop. A bound obtained by multiplying one stage by the next
+grows like `(9/8)^{(j+1)d}` and becomes useless as a uniform estimate.
+
+## The theorem
+
+Write `L = 1651/1395` and
+
+```
+c_j = L - (4/63) 4^{-j} + (1/180) 16^{-j} - (1/1736) 32^{-j}.
+```
+
+The free ℓ¹ mass of level `j` is `c_j`. It does not depend on `N`. If
+`N` is at least the support `S_j = 6 * 2^{j+1} - 5`, folding does not cancel
+and the periodic operator norm is `c_j^d` in every dimension, including
+`d = 0`. For every positive period, aliasing included, the norm is at most
+`L^d`. That power is the least constant with this role: the period used in
+the comparison may grow with the level, and one fixed `N` is not claimed to
+attain it. At `d = 0` the least-constant conclusion is `1 ≤ B`. It does not
+force `B = 1`, although each individual zero-dimensional norm equals `1`.
+The free mass increases strictly to `L`, and the gap is at most
+`(4/63) 4^{-j}`. The condition `N ≥ S_j` is sufficient, not necessary.
+
+The part of the argument that is special to this kernel is the control of
+signs. Symmetry, support, and the signed sum `1` do not determine the
+absolute mass. The proof keeps a positive center whose consecutive
+differences have ratios in `[1/3, 3]`, and a negative first side whose
+absolute values have ratios in `[1/2, 5/2]`, including the taps created at
+the block boundaries. Those signs turn the block sums into linear
+recurrences, and the recurrences have the closed form above. Convolution,
+folding, and tensorization then transfer the mass to the operator norm.
+Those three steps are standard.
+
+Levels `1`, `2`, and `3` remain available as direct evaluations:
+`(299/256)^d` for `N ≥ 19`, `(9663/8192)^d` for `N ≥ 43`, and
+`(309991/262144)^d` for `N ≥ 91`. They agree with `c_1`, `c_2`, and `c_3`.
+At `j = 0` the formula is `(9/8)^d` for `N ≥ 7`.
+
+If a summary satisfies a supplied Lipschitz bound `L` in one seminorm and
+that seminorm compares with a second seminorm by `sqrt(mu)`, the summary of
+the level-one smoothed signals obeys the factor `L * (9/8)^d * sqrt(mu)`.
+The difference of the squared summary norms obeys the corresponding product
+bound. Both statements take the summary hypotheses as assumptions. They do
+not prove bottleneck stability or landscape non-expansiveness.
+
+## What is standard, what is specific, what follows
+
+The general convolution norm, the folding inequality, and the tensor power
+are standard finite-dimensional facts. They are proved in full so that the
+cascade theorem does not depend on an external formalization, and they are
+not offered as the contribution.
+
+The specific work is the sign analysis that produces `c_j` for every level
+and the least uniform constant `L^d`. The finite levels, the gap, the
+increase, the limit, and the zero-dimensional identity are consequences of
+that analysis. Twenty-two declarations are selected because that is the
+Comparator interface. They are parts of one development.
+
+Whether this is enough for a Palomar registration is an editorial question.
+The [related-work note](docs/RELATED_WORK.md) records that the closest
+papers were not available in full, so novelty is not claimed. The elementary
+improvement on `(9/8)^{(j+1)d}` does not answer that question.
+
+## Supporting identities
 
 Let `G` be a finite abelian group and let
 
@@ -34,76 +113,20 @@ colliding coefficients**. This gives the exact periodized kernel. Its l1
 mass never exceeds the original stencil's l1 mass; injective offsets give
 equality. Injectivity is sufficient, not necessary.
 
-For the centered db2 level-one taps
+Applied to `k_0` on `(Z/NZ)^d`, the same identity gives
+`||P|| = (9/8)^d` whenever `N >= 7`. A unit-norm signal attains this value.
+The zero-dimensional case is the identity on a singleton. These are the
+`j = 0` case of the theorem above, not a separate contribution.
 
-\[
-k_0=\tfrac1{32}[-1,0,9,16,9,0,-1]
-\]
+## How the pieces fit the manuscript
 
-and the separable convolution `P` on `(Z/NZ)^d`, the main specialization is
-
-\[
-N\ge7 \quad\Longrightarrow\quad
-\|P\|_{\infty\to\infty}=(9/8)^d.
-\]
-
-A unit-norm signal attains this value. Consequently,
-`||P f - P g|| <= (9/8)^d ||f-g||` for all real grid signals.
-The zero-dimensional case is included and is the identity on a singleton.
-The seven-tap kernel is also identified with one half of the autocorrelation
-of the explicitly defined orthonormal db2 low-pass filter.
-
-The same operator-norm theorem evaluates the first three undecimated cascade
-levels. Each kernel is the integer five-tap recurrence that starts from `k_0`.
-When the period is at least the support length, the centered offsets do not
-collide, so the free l1 mass is the periodic operator norm:
-
-- level 1, `N >= 19`: `(299/256)^d`
-- level 2, `N >= 43`: `(9663/8192)^d`
-- level 3, `N >= 91`: `(309991/262144)^d`
-
-At dimension 2 the squares are `89401/65536`, `93373569/67108864` and
-`96094420081/68719476736`. Those are the exact values behind the rounded
-entries `1.364151`, `1.391375` and `1.398358` of manuscript equation (10).
-
-The same identity is now proved for every level. Write
-
-```
-c_j = 1651/1395 - (4/63) 4^{-j} + (1/180) 16^{-j} - (1/1736) 32^{-j}.
-```
-
-If `N` is at least the support `S_j = 6 * 2^{j+1} - 5`, the periodic operator
-norm is `c_j^d` in every dimension, including `d = 0`. For every positive
-period, including periods that alias, the norm is at most `(1651/1395)^d`.
-That power is the least constant with this uniform role: the period may grow
-with the level, and one fixed `N` is not claimed to attain it. The free mass
-increases strictly to `1651/1395`, and the gap is at most `(4/63) 4^{-j}`.
-`N >= S_j` is sufficient, not necessary. At dimension zero the norm is 1 for
-every positive period. The inequality covers `N = 1`; a separate theorem that
-the positive-dimensional period-one norm equals 1 is not selected.
-
-If a summary satisfies a supplied Lipschitz bound `L` in one seminorm and that
-seminorm compares with a second seminorm by `sqrt(mu)`, the summary of the
-smoothed signals obeys the factor `L * (9/8)^d * sqrt(mu)`. No smaller constant
-bounds the smoothing operator itself. The difference of the squared summary
-norms obeys the corresponding product bound. These steps are the manuscript's
-Theorem A and Corollary 4.2 with the stability ingredients left as hypotheses.
-
-## Why this is the proposed research-facing statement
-
-The intended specialist audience is researchers in wavelet preprocessing,
-finite-grid stability certification, and topological signal analysis. The
-point of the artifact is to make the implementation-dependent constant
-precise, dimension-dependent, attained, and sensitive to periodization.
-A coefficient calculation alone cannot certify that constant for an operator.
-
-The general convolution norm formula and tensor-product calculation are
-standard facts, not claimed as new mathematics. The proposed contribution
-is a formally auditable realization of the specific operator statement in
-Proposition 3.4 of the [source manuscript](docs/manuscript-source.pdf), supported
-by reusable finite-stencil periodization lemmas. Whether this specialization
-meets Palomar's research-interest threshold remains an editorial question.
-No claim of novelty or guaranteed registration is made.
+Proposition 3.4 of the [source manuscript](docs/manuscript-source.pdf) is the
+level-one case `j = 0`: the norm `(9/8)^d` for `N ≥ 7`, attained by a sign
+signal. Equation (10) of that manuscript prints rounded two-dimensional
+values at the next three levels. Those values are the squares of `c_1`,
+`c_2`, and `c_3`. The closed form for every level, the uniform constant, and
+the rate are later than the manuscript. They are explained in
+[docs/CASCADE_THEOREM.md](docs/CASCADE_THEOREM.md).
 
 ## Exact selected surface
 
@@ -127,7 +150,7 @@ all proof scripts; it does not import `Challenge`.
 | `TWSPeriodic.cascade_level1_opNorm` | `(299/256)^d` for every `N >= 19` |
 | `TWSPeriodic.cascade_level2_opNorm` | `(9663/8192)^d` for every `N >= 43` |
 | `TWSPeriodic.cascade_level3_opNorm` | `(309991/262144)^d` for every `N >= 91` |
-| `TWSPeriodic.cascade_l1_formula` | Free mass `c_j` for every level, when `N >= S_j` |
+| `TWSPeriodic.cascade_l1_formula` | Periodized mass equals `c_j` when `N >= S_j`. The free mass equals `c_j` with no period hypothesis |
 | `TWSPeriodic.cascade_opNorm_formula` | Operator norm `c_j^d` for every level, when `N >= S_j` |
 | `TWSPeriodic.cascade_opNorm_uniform` | At most `(1651/1395)^d` for every `N >= 1` |
 | `TWSPeriodic.cascade_l1_gap` | `0 < 1651/1395 - c_j <= (4/63) 4^{-j}` |
@@ -175,14 +198,18 @@ If you instead develop these new proofs in `tws-repro` and make this repository
 only a wrapper, restore `repository.substantive_formalization` and pin the
 **new** underlying revision. Do not reuse an old revision that lacks the proofs.
 
-## What this correction changes in the proofs
+## Earlier API correction
 
-The selected statements are unchanged. Two scripts in `Solution.lean` were
-adjusted to the pinned Mathlib API:
+On 2026-10-17, before the cascade formula was added, two scripts in
+`Solution.lean` were adjusted to the pinned Mathlib API. The statements
+selected at that moment were not changed by those two edits.
 
 - `ContinuousLinearMap.unit_le_opNorm` takes the witness vector explicitly.
 - `sub_right_cancel` is not in this Mathlib revision. Injectivity of the seven
   centered offsets cancels the shared shift with `sub_add_cancel`.
+
+The cascade statements were added after that correction. The current selected
+list is the table above.
 
 ## Reproduce and audit
 
@@ -216,23 +243,37 @@ logs. It does not submit or register anything.
 
 ## Submit after audit
 
-1. Replace the old tree using `AUDITORIA_ES.md`; remove the obsolete files.
-2. Resolve compilation/Comparator failures, review the mathematical statements,
-   and update `docs/VERIFICATION.md` with actual evidence.
-3. Check attribution, author consent as applicable, and the truthful metadata.
-4. Publish this directory as the root of a public GitHub repository. Palomar
-   reads `comparator.json` from that root. Keep the predecessor commit
-   `f15103f97a300cfa243991956fa2d89e9c9ab6a7` reachable in
-   `jelincovil/tws-palomar`; this snapshot cites it. Obtain the full SHA with
-   `git rev-parse HEAD`.
-5. Submit that repository, that exact SHA, and `comparator.json` at
-   <https://submit.palomar-registry.org/>. Leave the project path blank.
-   For a retry of an unregistered, unsuccessful submission, leave the existing
-   Palomar ID empty.
-6. Read the new automated review before deciding to register.
+The submission procedure below follows
+<https://palomar-registry.org/how-to-submit> as read on 2026-10-18. This
+package does not open the form and does not submit.
 
-Registration and any later public publication are actions for the maintainer.
-This package neither performs them nor asserts that the review will pass.
+1. Audit the mathematical note, the related-work conclusion, and
+   `docs/VERIFICATION.md`. Push only the snapshot you want reviewed.
+2. Palomar fetches one immutable commit. In this repository root run
+   `git rev-parse HEAD` and copy the full 40-character SHA. Uncommitted
+   files and a branch name are not the submission.
+3. Open <https://submit.palomar-registry.org/> in a browser. Enter
+   `https://github.com/jelincovil/tws-palomar` and that SHA. The project
+   lives at the repository root, so leave the project path, the Comparator
+   path, and the metadata path blank. `comparator.json` is already at the
+   root.
+4. The previous mechanical review did not offer registration, so there is
+   no Palomar ID to attach. Leave that field blank. Enter an existing ID
+   only when registering a new version of a result that already has one.
+5. The form's write-access check is for the maintainer. The current
+   instructions say that machines should not drive the form.
+6. Read the new automated review before deciding to register. Mechanical
+   success is not registration, and registration is a separate action.
+
+Keep the predecessor commit
+`f15103f97a300cfa243991956fa2d89e9c9ab6a7` reachable in
+`jelincovil/tws-palomar`; this snapshot cites it. Registration and any
+later public publication remain actions for the maintainer. This package
+does not assert that the review will pass. The Challenge module is within
+the hard limit of 1000 lines and 100 KiB. The submission guide says that
+about 300 lines is the surface Palomar would rather review. The current
+Challenge is 329 lines and 14384 bytes, so it is inside the hard limit and
+longer than that preference.
 
 ## Licence
 

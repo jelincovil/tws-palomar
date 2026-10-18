@@ -4,13 +4,23 @@ New files and new proof development: Apache License 2.0, see LICENSE.
 Prepared with OpenAI GPT-6 Astra at the request of Jaime Enrique Lincovil Curivil.
 The human authors of this formalization are Jaime Enrique Lincovil Curivil,
 César Daniel Reinoso Reinoso and Niels Pacheco-Barrios.
-A local Lean kernel check succeeded on 2026-10-17. On that machine,
-`lake comparator --inadvisably-no-sandbox` also accepted the selected
-statements; that replay disabled the sandbox. The sandboxed script
-`scripts/verify-comparator.sh` later succeeded on GitHub Actions run
-39040759159 for commit e6698f352a4362e01ed84e4e6ece13d0cf431d6d.
-Palomar verification run 39042287485 accepted that same commit.
-Registration was not offered. See docs/VERIFICATION.md.
+A local Lean kernel check succeeded on 2026-10-17, and again on 2026-10-18
+for the closed form. On that machine,
+`lake comparator --inadvisably-no-sandbox` accepted the statements then
+selected; those replays disabled the sandbox. The sandboxed script
+`scripts/verify-comparator.sh` succeeded on GitHub Actions run
+39040759159 for commit e6698f352a4362e01ed84e4e6ece13d0cf431d6d
+(fourteen statements) and on run 39093434816 for commit
+7295c00346b8295d4857a3b2f24a6ad0c037d256 (twenty-two statements, including
+the closed form). Palomar verification run 39042287485 accepted only the
+earlier commit. Registration was not offered. See docs/VERIFICATION.md.
+The closed-form scripts and the 2026-10-18 documentary revision were
+drafted with xAI Grok in the Grok Build CLI, at the same person's request.
+The documentary session is Grok 4.7. No model name is recorded for the
+earlier Grok drafting session. A later revision changes only comments.
+That tree was rebuilt on Darwin on 2026-10-18 and accepted by an
+unsandboxed Comparator replay. It has no Actions run of its own. The
+Linux sandbox of that revision waits on a push. See docs/VERIFICATION.md.
 
 The db2 coefficient and autocorrelation algebra is adapted from:
 https://github.com/jelincovil/tws-palomar/tree/f15103f97a300cfa243991956fa2d89e9c9ab6a7

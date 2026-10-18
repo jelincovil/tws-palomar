@@ -1,6 +1,48 @@
 # Verification status
 
-Recorded on 2026-10-17. This is not a release certificate or a Palomar result.
+This is not a release certificate or a Palomar registration. A successful
+Comparator run accepts the proofs of one commit. It does not review the
+mathematical interest of a later commit, and it does not register anything.
+
+## Chronology
+
+The counts below are the counts at the time of each check. The current
+selection has twenty-two statements. Calling an earlier check a check of
+those twenty-two would be false.
+
+1. **Darwin, no sandbox, 2026-10-17.** `lake build`, `#print axioms`, and
+   `lake comparator --inadvisably-no-sandbox` on the fourteen statements then
+   selected. `bwrap` was absent, so `scripts/verify-comparator.sh` was not
+   the command. The log warns that a sandbox-disabled run is not the Palomar
+   isolation check.
+2. **Linux, with sandbox, on `e6698f3`.** GitHub Actions run
+   [39040759159](https://github.com/jelincovil/tws-palomar/actions/runs/39040759159)
+   executed `scripts/verify-all.sh` on Ubuntu for
+   `e6698f352a4362e01ed84e4e6ece13d0cf431d6d` and printed
+   `Your solution is okay!`.
+3. **Palomar mechanical review of that same commit.** Verification run
+   `39042287485` reported success at 2026-10-17T14:51:48Z. The automated
+   editorial review of 2026-10-17T18:57:26Z did not offer registration.
+   Neither Palomar step saw the closed form, which was not in the tree.
+4. **Closed form, 2026-10-18.** Commit
+   `7295c00346b8295d4857a3b2f24a6ad0c037d256` adds the eight cascade-formula
+   statements. An unsandboxed Darwin replay accepted all twenty-two.
+   GitHub Actions run
+   [39093434816](https://github.com/jelincovil/tws-palomar/actions/runs/39093434816)
+   ran the sandboxed script on that commit and printed
+   `Your solution is okay!`. The docs-only child
+   `b9fd1a87127c80bd4099c8f509abfa201fef8ea1` was sandboxed again as run
+   [39093722987](https://github.com/jelincovil/tws-palomar/actions/runs/39093722987),
+   with the same mechanical result. Those runs are not a Palomar review of
+   the closed form.
+
+The table that follows is the 2026-10-17 record. It is kept so that the
+earlier claims stay attached to the commit they actually concern.
+
+## Record of 2026-10-17
+
+This table describes the fourteen-statement tree. It is not a description
+of the current twenty-two statements.
 
 | Check | Result actually obtained |
 |---|---|
@@ -16,8 +58,8 @@ Recorded on 2026-10-17. This is not a release certificate or a Palomar result.
 | Zero-dimensional singleton case | Passed exact check |
 | 80 seeded generic signed stencils with collisions | Passed exact checks |
 | Shell syntax of both verification scripts | Passed `bash -n` in the preparation environment |
-| Lean elaboration / `lake build` | Passed locally. Toolchain `leanprover/lean4:v4.35.0-rc2`, commit `11acb17ec6b07a8f9e9173e6845197929540936b`, arm64-apple-darwin. Mathlib `065356127b1dc0016f66b7283ce0ce2c4055aa55`. `Challenge` still warns on its fourteen deliberate `sorry` holes. |
-| `#print axioms` on the fourteen selected theorems | Passed. Each depends only on `propext`, `Classical.choice` and `Quot.sound`. |
+| Lean elaboration / `lake build` | Passed locally on 2026-10-17. Toolchain `leanprover/lean4:v4.35.0-rc2`, commit `11acb17ec6b07a8f9e9173e6845197929540936b`, arm64-apple-darwin. Mathlib `065356127b1dc0016f66b7283ce0ce2c4055aa55`. `Challenge` warned on its fourteen deliberate `sorry` holes. The current Challenge has twenty-two such holes, one per selected statement. |
+| `#print axioms` on the fourteen selected theorems of that date | Passed. Each depends only on `propext`, `Classical.choice` and `Quot.sound`. The twenty-two-statement audit is in the closed-form section below. |
 | Comparator and independent kernels | Passed locally without the sandbox. `lake comparator --inadvisably-no-sandbox` on Darwin, with the toolchain's `nanoda_bin` and `con-ron`, accepted all fourteen selected theorems, including the four propagation statements and `cascade_level1_opNorm`, `cascade_level2_opNorm`, `cascade_level3_opNorm`. con-ron accepted 15562 declarations. `bwrap` is absent, so `scripts/verify-comparator.sh` itself was not the command that ran. The log warns that a sandbox-disabled run is not the Palomar isolation check. |
 | GitHub Actions workflow | Passed on commit `e6698f352a4362e01ed84e4e6ece13d0cf431d6d`. Run [39040759159](https://github.com/jelincovil/tws-palomar/actions/runs/39040759159), job `verify`, on `ubuntu-latest`. It installed bubblewrap and ran `scripts/verify-all.sh`, including `scripts/verify-comparator.sh`. The log records acceptance by con-ron, nanoda and the Lean kernel, then `Your solution is okay!`. |
 | Human mathematical review | The Palomar editorial review was automated. No person is recorded as having read it. |
@@ -76,7 +118,8 @@ Checked on 2026-10-18 on arm64-apple-darwin, Lean v4.35.0-rc2
 `065356127b1dc0016f66b7283ce0ce2c4055aa55`. `lake update` was not run.
 
 `lake build` completed (`BUILD_EXIT:0`, 3095 jobs). `scripts/preflight.py`
-accepted 22 selected statements. Challenge is 329 lines and 14307 bytes.
+accepted 22 selected statements. On that tree Challenge was 329 lines and
+14307 bytes.
 `scripts/check_exact_cases.py` passed; those finite checks do not prove the
 universal statements. `lake env lean AxiomAudit.lean` reported only
 `propext`, `Classical.choice` and `Quot.sound` for all twenty-two theorems,
@@ -102,3 +145,37 @@ for commit `7295c00346b8295d4857a3b2f24a6ad0c037d256`. The log contains
 `PASS: static packaging checks; 22 selected statements` and
 `Your solution is okay!`. That run is the sandboxed Comparator check of the
 closed-form statements. It does not decide Palomar registration.
+
+## Comment revision, rechecked locally on 2026-10-18
+
+After `b9fd1a8`, two docstrings and one Challenge comment were corrected.
+`cascade_uniform_constant_least` no longer says that both sides equal 1 at
+dimension zero. `cascade_l1_formula` now says that its statement is the
+periodized mass, and that the free mass does not depend on `N`. The proof
+terms are those of `7295c00`. The file blobs are not.
+
+On arm64-apple-darwin, Lean `v4.35.0-rc2`
+(`11acb17ec6b07a8f9e9173e6845197929540936b`), Mathlib
+`065356127b1dc0016f66b7283ce0ce2c4055aa55`:
+
+- `scripts/preflight.py` printed
+  `PASS: static packaging checks; 22 selected statements; Challenge 329 lines / 14384 bytes.`
+- `scripts/check_exact_cases.py` passed. Those finite checks do not prove the
+  universal statements.
+- `lake build` completed (`BUILD_EXIT:0`, 3095 jobs). Challenge warned on its
+  twenty-two deliberate `sorry` holes.
+- `lake env lean AxiomAudit.lean` reported only `propext`, `Classical.choice`
+  and `Quot.sound` for all twenty-two selected theorems (`AXIOM_EXIT:0`).
+- The Darwin Comparator command was
+  `lake comparator --config <temp> --inadvisably-no-sandbox`.
+  The log begins `WARNING: Sandbox disabled, this run is not trustworthy.`
+  con-ron accepted 16500 declarations, nanoda and the Lean kernel accepted
+  the solution, and the log ends `Your solution is okay!` with
+  `COMPARATOR_EXIT:0`. `bwrap` is absent, so `scripts/verify-comparator.sh`
+  was not the command. `external_kernels` was injected only into a temporary
+  config and is not in the committed `comparator.json`.
+
+No GitHub Actions run covers this comment revision. Runs 39093434816 and
+39093722987 remain the sandboxed checks of `7295c00` and `b9fd1a8`. A Linux
+sandbox of the new commit requires a push. This revision does not push, and
+it does not submit to Palomar.

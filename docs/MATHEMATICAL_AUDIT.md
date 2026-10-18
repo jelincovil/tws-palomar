@@ -114,9 +114,12 @@ different project.
 - The new code does not import or rebrand the earlier empty-diagram skeleton.
 - The filter-to-kernel identification is included, but a particular
   floating-point implementation is not verified.
-- All arguments here are standard finite-dimensional analysis. The proposed
-  interest is the exact audited specialization and its implementation-facing
-  constant; the editorial threshold remains a separate question.
+- The convolution, folding, and tensor arguments in sections 2--4 are
+  standard finite-dimensional analysis. The cascade identity in section 8
+  depends on the sign analysis written out in `docs/CASCADE_THEOREM.md`.
+  That improvement over the product bound `(9/8)^{(j+1)d}` is not, by
+  itself, a priority claim. The editorial threshold remains a separate
+  question, and `docs/RELATED_WORK.md` leaves originality unresolved.
 - This mathematical proof account does not establish that the supplied Lean
   scripts elaborate. That check is recorded separately in `docs/VERIFICATION.md`.
 
@@ -153,9 +156,13 @@ folding does not cancel and the periodic operator norm is `c_j^d`. For every
 `N >= 1`, the folded norm is at most `L^d`; aliasing can only decrease the
 l1 mass. `L^d` is the least constant that works for all levels and all
 positive periods simultaneously. The witnessing periods may grow with `j`.
-The sequence `c_j` is strictly increasing and converges to `L`, with
-`0 < L - c_j <= (4/63) 4^{-j}`. At dimension zero the norm is 1. The
-condition `N >= S_j` is sufficient, not necessary. The conditional
-propagation in section 6 is unchanged and still takes bottleneck stability
-and landscape non-expansiveness as hypotheses. This account does not claim
-that the formula is absent from the wavelet literature.
+The free mass `c_j` is strictly increasing and converges to `L`, with
+`0 < L - c_j <= (4/63) 4^{-j}`. The free mass does not depend on `N`.
+At dimension zero every operator norm equals 1. The least-constant
+statement at dimension zero concludes `1 ≤ B` and does not conclude
+`B = 1`. The condition `N >= S_j` is sufficient, not necessary.
+The conditional propagation in section 6 still takes bottleneck stability
+and landscape non-expansiveness as hypotheses. The full argument, with the
+Lean names of the lemmas that carry it, is `docs/CASCADE_THEOREM.md`.
+`docs/RELATED_WORK.md` records the literature comparison and does not
+claim that the formula is absent from the wavelet literature.

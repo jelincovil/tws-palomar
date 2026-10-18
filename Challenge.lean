@@ -264,9 +264,9 @@ theorem cascade_level3_opNorm (N d : ℕ) [NeZero N] (hN : 91 ≤ N) :
     ‖cascadeOperator 3 N d‖ = ((309991 : ℝ) / 262144) ^ d := by
   sorry
 
-/-- Exact ℓ¹ mass of cascade level `j` on every period at least the support.
-`N ≥ S_j` prevents cancellation from aliasing. The same formula is the free
-mass `c_j`. -/
+/-- Exact ℓ¹ mass of the periodized kernel when `N` is at least the support.
+That hypothesis is a sufficient no-collision condition. The free mass, which
+does not depend on `N`, equals the same expression. -/
 theorem cascade_l1_formula (j N : ℕ) [NeZero N] (hN : cascadeSupport j ≤ N) :
     (∑ x : ZMod N, |cascadeKernel j N x|) =
       (1651 : ℝ) / 1395 - ((4 : ℝ) / 63) * ((1 : ℝ) / 4) ^ j
@@ -313,7 +313,7 @@ theorem cascade_l1_tendsto :
 
 /-- `1651/1395` raised to `d` is the least constant that bounds every level
 and every positive period at once. A fixed period is not claimed to attain it.
-At `d = 0` both sides are 1. -/
+At `d = 0` the conclusion is `1 ≤ B`. It does not force `B = 1`. -/
 theorem cascade_uniform_constant_least (d : ℕ) {B : ℝ}
     (hB : ∀ j N : ℕ, (hN : NeZero N) → ‖cascadeOperator j N d‖ ≤ B) :
     ((1651 : ℝ) / 1395) ^ d ≤ B := by
