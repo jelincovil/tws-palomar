@@ -1,0 +1,11 @@
+# extension verification — 2026-10-18T20:05:56-03:00
+repository_root=/Users/enriquec/Developer/wavelets_topology_health/tws-persistence-stability-final/proyecto_tws_palomar/tws_registro_palomar
+extension_dir=/Users/enriquec/Developer/wavelets_topology_health/tws-persistence-stability-final/proyecto_tws_palomar/tws_registro_palomar/extension
+out_dir=/Users/enriquec/Developer/wavelets_topology_health/tws-persistence-stability-final/proyecto_tws_palomar/tws_registro_palomar/extension/verification/repro
+lean=Lean (version 4.35.0-rc2, arm64-apple-darwin24.6.0, commit 11acb17ec6b07a8f9e9173e6845197929540936b, Release)
+lake=Lake version 5.0.0-src+11acb17 (Lean version 4.35.0-rc2)
+toolchain=leanprover/lean4:v4.35.0-rc2
+git_head=f7ead245505027db76eb432e3da3ab32eab4696d
+git_branch=extension/db2-threshold
+git_dirty_files=6
+mathlib_pin=065356127b1dc0016f66b7283ce0ce2c4055aa55

@@ -1,0 +1,1 @@
+PASS: 92 audited names; axioms used: 82 x [Classical.choice, Quot.sound, propext]; 9 x [Quot.sound, propext]; 1 x [propext]

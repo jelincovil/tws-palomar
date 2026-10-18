@@ -1,0 +1,51 @@
+name: Lean extension audit
+
+# Independent workflow for the db2 threshold extension.
+# It does not modify or replace .github/workflows/ci.yml, which audits the base package.
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  extension:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Check out the revision under test
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+
+      - name: Confirm the revision contains the extension
+        run: test -f extension/lakefile.toml
+
+      - name: Install the pinned Lean toolchain
+        uses: leanprover/lean-action@38fbc41a8c28c4cbaec22d7f7de508ec2e7c0dd9
+        with:
+          build: false
+
+      - name: Fetch the pinned Mathlib cache
+        run: lake exe cache get
+
+      # Same script a human runs locally: builds Solution from source, builds the five
+      # extension modules, runs the axiom audit through its checker, runs the rational
+      # checks and verifies the protected base files against their historical manifest.
+      - name: Build, audit and check the extension
+        run: bash extension/scripts/verify_extension.sh
+
+      - name: Retain verification logs
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: extension-verification-${{ github.sha }}
+          path: verification-logs/
+          if-no-files-found: error

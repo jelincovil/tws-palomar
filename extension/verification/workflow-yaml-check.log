@@ -1,0 +1,22 @@
+# Validación del workflow .github/workflows/extension-ci.yml — 2026-10-18T20:09:27-03:00
+
+YAML parse: OK
+name: Lean extension audit
+triggers: ['pull_request', 'push', 'workflow_dispatch']
+permissions: {'contents': 'read'}
+concurrency: {'group': '${{ github.workflow }}-${{ github.ref }}', 'cancel-in-progress': True}
+runs-on: ubuntu-latest timeout-minutes: 60
+ step: Check out the revision under test -> actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+ step: Confirm the revision contains the extension -> test -f extension/lakefile.toml
+ step: Install the pinned Lean toolchain -> leanprover/lean-action@38fbc41a8c28c4cbaec22d7f7de508ec2e7c0dd9
+ step: Fetch the pinned Mathlib cache -> lake exe cache get
+ step: Build, audit and check the extension -> bash extension/scripts/verify_extension.sh
+ step: Retain verification logs -> actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+artifact if:always: True
+
+# Pins de acciones comparados con ci.yml
+3d3c42e5aac5ba805825da76410c181273ba90b1 ci.yml=1 extension-ci.yml=1
+38fbc41a8c28c4cbaec22d7f7de508ec2e7c0dd9 ci.yml=1 extension-ci.yml=1
+043fb46d1a93c77aae656e7c1c64a875d1fc6a0a ci.yml=1 extension-ci.yml=1
+
+# actionlint: no instalado (validación estructural con PyYAML; expresiones GitHub no evaluadas)

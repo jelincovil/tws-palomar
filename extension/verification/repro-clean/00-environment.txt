@@ -1,0 +1,9 @@
+# extension verification — 2026-10-18T20:07:57-03:00
+repository_root=/var/folders/j_/fjsyt32d20b85cvy1mp7ty6h0000gn/T/tmp.ZyNg6f5cnI
+extension_dir=/var/folders/j_/fjsyt32d20b85cvy1mp7ty6h0000gn/T/tmp.ZyNg6f5cnI/extension
+out_dir=/var/folders/j_/fjsyt32d20b85cvy1mp7ty6h0000gn/T/tmp.ZyNg6f5cnI/logs
+lean=Lean (version 4.35.0-rc2, arm64-apple-darwin24.6.0, commit 11acb17ec6b07a8f9e9173e6845197929540936b, Release)
+lake=Lake version 5.0.0-src+11acb17 (Lean version 4.35.0-rc2)
+toolchain=leanprover/lean4:v4.35.0-rc2
+git_head=not-a-git-checkout
+mathlib_pin=065356127b1dc0016f66b7283ce0ce2c4055aa55

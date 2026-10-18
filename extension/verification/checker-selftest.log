@@ -1,0 +1,6 @@
+ok   valid output accepted (exit 0, expected 0)
+ok   empty output rejected (exit 1, expected 1)
+ok   truncated output rejected (exit 1, expected 1)
+ok   non-permitted axiom rejected (exit 1, expected 1)
+ok   unrequested name rejected (exit 1, expected 1)
+PASS: checker self-test
