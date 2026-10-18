@@ -66,9 +66,14 @@ El SHA antiguo no contiene el desarrollo nuevo y no sirve para representarlo.
 2. Revisa el uso real del kernel en tu implementación numérica: normalización,
    nivel uno, periodicidad y ausencia de decimación. No se demuestra aquí que
    una biblioteca Python ejecute exactamente este operador. Los niveles 1, 2
-   y 3 de la cascada sin decimar sí son enunciados seleccionados: `299/256`,
-   `9663/8192` y `309991/262144`, para periodos al menos 19, 43 y 91. No hay
-   forma cerrada para todo nivel.
+   y 3 de la cascada sin decimar siguen seleccionados: `299/256`,
+   `9663/8192` y `309991/262144`, para periodos al menos 19, 43 y 91.
+   También hay forma cerrada para todo nivel: si `N` alcanza el soporte,
+   la norma es `c_j^d`, con
+   `c_j = 1651/1395 - (4/63)4^{-j} + (1/180)16^{-j} - (1/1736)32^{-j}`.
+   Para todo periodo positivo la norma es a lo más `(1651/1395)^d`, y esa
+   potencia es la menor cota común. La condición sobre el soporte es
+   suficiente, no necesaria. No se afirma que un periodo fijo alcance el límite.
 3. Revisa Solution.lean, en especial el testigo de signos y la inyectividad
    de los siete desplazamientos para N >= 7.
 4. Ejecuta los comandos del README en el orden indicado. Corrige los posibles

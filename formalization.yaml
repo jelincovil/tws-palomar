@@ -9,14 +9,21 @@ project:
     bound with injective-offset equality, separable tensorization, and the level-one db2 value (9/8)^d
     on every periodic grid of side N >= 7. The same theorem gives the exact undecimated cascade norms
     (299/256)^d for N >= 19, (9663/8192)^d for N >= 43 and (309991/262144)^d for N >= 91.
-    These three values are finite kernel evaluations, not a closed form for every level.
+    These three values agree with the closed form proved for every level. For every
+    j and every N at least the support, the norm is c_j^d with
+    c_j = 1651/1395 - (4/63)4^{-j} + (1/180)16^{-j} - (1/1736)32^{-j}.
+    For every positive period, aliasing included, the norm is at most (1651/1395)^d,
+    and that power is the least such common bound. The free mass increases strictly
+    and the gap is at most (4/63)4^{-j}. Dimension zero is exactly 1. N >= support
+    is sufficient, not claimed necessary. A fixed period is not claimed to attain the limit.
     A unit sign signal attains the level-one smoothing norm.
     The orthonormal db2 filter and its half-autocorrelation are explicitly connected. A conditional
     propagation then carries a supplied summary Lipschitz bound and a supplied seminorm comparison
     through the level-one operator, giving the factor L*(9/8)^d*sqrt(mu). The db2 norm is proved to be the
     least such operator constant, and the squared-summary difference obeys the corresponding
     product bound. Bottleneck stability, persistence diagrams and landscape non-expansiveness are
-    hypotheses, not theorems. All fourteen selected statements elaborate under Lean v4.35.0-rc2.
+    hypotheses, not theorems. Twenty-two statements are selected. The earlier fourteen
+    elaborated under Lean v4.35.0-rc2.
     A local Comparator replay on Darwin, without bubblewrap, accepted the extended list on
     2026-10-17. GitHub Actions run 39040759159 later ran the sandboxed Comparator script
     on commit e6698f352a4362e01ed84e4e6ece13d0cf431d6d, and Palomar verification run
@@ -50,7 +57,7 @@ sources:
     formalizes the level-one periodic operator-norm claim, the exact free-kernel norms at
     undecimated cascade levels 1, 2 and 3, and the conditional propagation of a supplied
     summary bound. It does not formalize bottleneck stability, persistence diagrams,
-    landscape non-expansiveness, cascade levels j > 3, or a closed form for every level.
+    landscape non-expansiveness. The cascade operator norm is formalized at every level.
     There is no assigned arXiv identifier in this package. The manuscript describes an
     earlier, weaker Lean development.
 - title: TWS predecessor formalization in tws-repro
@@ -86,18 +93,19 @@ related_formalizations:
 status:
   scope: Complete candidate proof scripts for a finite real convolution operator, its exact
     sup norm, folding of signed stencils, separable products, level-one db2 on N >= 7, and
-    the exact undecimated cascade norms at levels 1, 2 and 3 for periods at least 19, 43 and 91.
-    No custom axioms or proof holes occur in Solution.lean. The fourteen selected theorems
-    elaborate under Lean v4.35.0-rc2; their observed axiom dependencies are propext, Classical.choice
-    and Quot.sound. Four of them propagate a supplied summary bound through the level-one
-    operator. A Darwin Comparator replay without bubblewrap accepted all fourteen.
+    the exact undecimated cascade norms at levels 1, 2 and 3, and the closed form for every
+    level. No custom axioms or proof holes occur in Solution.lean. Twenty-two theorems are
+    selected. The earlier Darwin Comparator replay without bubblewrap accepted the fourteen
+    statements of that date.
     GitHub Actions run 39040759159 then ran the sandboxed script successfully, and
     Palomar verification run 39042287485 accepted commit
     e6698f352a4362e01ed84e4e6ece13d0cf431d6d. Registration was not offered. Only the
     compared statements in Challenge.lean contain deliberate sorry holes. Supplied Lipschitz
     hypotheses are not proofs of bottleneck stability or of landscape non-expansiveness.
-    Levels j > 3 and a general cascade closed form are not proved. Standard facts are not
-    claimed as new mathematics.
+    The closed form, the uniform bound and the least constant are selected statements.
+    Standard facts are not claimed as new mathematics. The period-one operator for
+    positive dimension is covered by the uniform inequality; a separate identity that
+    its norm equals 1 is not selected.
   sorry_count: 0
   sorry_in_definitions: 0
   axioms:
@@ -141,9 +149,10 @@ fidelity:
     finite Pi norms and ContinuousLinearMap operator norms, supports arbitrary dimension d including
     zero, assumes a nonzero period, and does not certify any external implementation.
     Operator-norm attainment does not imply attainment of a composed landscape bound. The general
-    norm and tensor identities are standard. No closed form for every cascade level is claimed.
+    norm and tensor identities are standard. The cascade closed form is now a selected
+    statement. It is not claimed to be new relative to the wavelet literature.
 review:
-  status: Mechanical verification passed on 2026-10-17; registration was not offered
+  status: Local Darwin checks of the closed form passed on 2026-10-18; the Linux sandbox for this revision is outstanding. Registration was not offered for the earlier commit.
   reviewers: []
   notes: Static checks, exact finite-instance checks, `lake build`, `#print axioms` and the
     Darwin Comparator replay are recorded in docs/VERIFICATION.md. Each of the fourteen selected
@@ -152,7 +161,10 @@ review:
     on that machine. GitHub Actions run 39040759159 then ran the sandboxed script on commit
     e6698f352a4362e01ed84e4e6ece13d0cf431d6d and succeeded. Palomar verification run 39042287485
     accepted that commit. The automated editorial review identified problems and did not offer
-    registration.
+    registration. On 2026-10-18 an unsandboxed Darwin Comparator replay accepted
+    all twenty-two selected statements, including the eight cascade-formula
+    theorems. That replay used `--inadvisably-no-sandbox`. It is not the Linux
+    sandbox check. The earlier runs do not cover those eight statements.
 alignment:
   namespace: TWSPeriodic
   statements:
@@ -251,8 +263,7 @@ alignment:
       For N >= 19 the centered offsets are injective, so the periodic operator norm is
       (299/256)^d in every dimension, including d = 0. The two-dimensional square is
       89401/65536. This replaces the rounded second entry of manuscript equation (10).
-      It is not a closed form for every level. Partial means the Linux sandbox run is
-      still outstanding.
+      The general closed form is a separate selected statement.
   - source: Exact undecimated db2 cascade norm at level two, for N >= 43
     lean: TWSPeriodic.cascade_level2_opNorm
     module: Challenge
@@ -270,8 +281,65 @@ alignment:
       Darwin Comparator replay. Finite evaluation of the ninety-one-tap kernel. The l1
       mass is 309991/262144, so the periodic operator norm is (309991/262144)^d for
       N >= 91. The two-dimensional square is 96094420081/68719476736. Partial means the
-      Linux sandbox run is still outstanding. Levels j > 3 and a general closed form
-      are not proved.
+      Linux sandbox run of that earlier commit was completed later; see review.notes.
+      The general closed form is a separate selected statement.
+  - source: Exact free and periodic l1 mass of every undecimated db2 cascade level
+    lean: TWSPeriodic.cascade_l1_formula
+    module: Challenge
+    status: partial
+    note: For every level j and every period N at least the support, the folded kernel
+      has l1 mass c_j = 1651/1395 - (4/63)4^{-j} + (1/180)16^{-j} - (1/1736)32^{-j}.
+      N >= support is sufficient to avoid cancellation. It is not claimed necessary.
+      Partial means the Linux sandbox for this revision is still outstanding.
+  - source: Exact operator norm of every cascade level without aliasing
+    lean: TWSPeriodic.cascade_opNorm_formula
+    module: Challenge
+    status: partial
+    note: For every j, every dimension d including zero, and every N at least the
+      support, the separable convolution norm equals c_j^d. Partial means the Linux
+      sandbox for this revision is still outstanding.
+  - source: Uniform cascade bound for every positive period
+    lean: TWSPeriodic.cascade_opNorm_uniform
+    module: Challenge
+    status: partial
+    note: For every j, every d, and every N >= 1, aliasing included, the operator
+      norm is at most (1651/1395)^d. At d = 0 the right-hand side is 1. N = 1 is
+      included in this inequality. Partial means the Linux sandbox for this revision
+      is still outstanding.
+  - source: Explicit gap between the free cascade mass and 1651/1395
+    lean: TWSPeriodic.cascade_l1_gap
+    module: Challenge
+    status: partial
+    note: The free mass is strictly below 1651/1395 and the difference is at most
+      (4/63)4^{-j}. Partial means the Linux sandbox for this revision is still outstanding.
+  - source: Strict increase of the free cascade mass
+    lean: TWSPeriodic.cascade_l1_succ_lt
+    module: Challenge
+    status: partial
+    note: The free l1 mass at level j is strictly smaller than the mass at level j+1.
+      This is not a claim that c_j^0 increases. Partial means the Linux sandbox for
+      this revision is still outstanding.
+  - source: Convergence of the free cascade mass
+    lean: TWSPeriodic.cascade_l1_tendsto
+    module: Challenge
+    status: partial
+    note: The free l1 mass converges to 1651/1395. Partial means the Linux sandbox
+      for this revision is still outstanding.
+  - source: Least uniform constant of the whole cascade
+    lean: TWSPeriodic.cascade_uniform_constant_least
+    module: Challenge
+    status: partial
+    note: Any real B that bounds the operator at every level and every positive period
+      is at least (1651/1395)^d. The period may grow with the level. A single fixed
+      period is not claimed to attain the constant. At d = 0 both sides are 1.
+      Partial means the Linux sandbox for this revision is still outstanding.
+  - source: Dimension zero of every cascade operator
+    lean: TWSPeriodic.cascade_opNorm_d_zero
+    module: Challenge
+    status: partial
+    note: For every level and every positive period, the zero-dimensional operator
+      norm is exactly 1. Partial means the Linux sandbox for this revision is still
+      outstanding.
 acknowledgements: Lean and Mathlib; the source manuscript authors; the MIT-licensed tws-repro
   predecessor; PalomarTemplate at 2891de4c48955af824969a263d31b25e7a9a1406. The new operator
   development is located in this submitted project, not supplied by a thin-wrapper import.

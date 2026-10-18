@@ -7,6 +7,8 @@ public import Mathlib.Algebra.Order.BigOperators.Ring.Finset
 public import Mathlib.Analysis.Real.Sqrt
 public import Mathlib.Data.ZMod.Basic
 public import Mathlib.Tactic
+public import Mathlib.Analysis.SpecificLimits.Basic
+public import Mathlib.Topology.Algebra.Monoid
 
 @[expose] public section
 
@@ -260,6 +262,67 @@ theorem cascade_level2_opNorm (N d : ℕ) [NeZero N] (hN : 43 ≤ N) :
 `96094420081/68719476736`. -/
 theorem cascade_level3_opNorm (N d : ℕ) [NeZero N] (hN : 91 ≤ N) :
     ‖cascadeOperator 3 N d‖ = ((309991 : ℝ) / 262144) ^ d := by
+  sorry
+
+/-- Exact ℓ¹ mass of cascade level `j` on every period at least the support.
+`N ≥ S_j` prevents cancellation from aliasing. The same formula is the free
+mass `c_j`. -/
+theorem cascade_l1_formula (j N : ℕ) [NeZero N] (hN : cascadeSupport j ≤ N) :
+    (∑ x : ZMod N, |cascadeKernel j N x|) =
+      (1651 : ℝ) / 1395 - ((4 : ℝ) / 63) * ((1 : ℝ) / 4) ^ j
+        + ((1 : ℝ) / 180) * ((1 : ℝ) / 16) ^ j
+        - ((1 : ℝ) / 1736) * ((1 : ℝ) / 32) ^ j := by
+  sorry
+
+/-- Exact operator norm of every cascade level when the period is at least the
+support: `‖C_{j,N,d}‖ = c_j^d`, including `d = 0`. -/
+theorem cascade_opNorm_formula (j N d : ℕ) [NeZero N]
+    (hN : cascadeSupport j ≤ N) :
+    ‖cascadeOperator j N d‖ =
+      ((1651 : ℝ) / 1395 - ((4 : ℝ) / 63) * ((1 : ℝ) / 4) ^ j
+        + ((1 : ℝ) / 180) * ((1 : ℝ) / 16) ^ j
+        - ((1 : ℝ) / 1736) * ((1 : ℝ) / 32) ^ j) ^ d := by
+  sorry
+
+/-- Uniform bound for every positive period, including periods shorter than
+the support. Aliasing cannot increase the norm. `L = 1651/1395`. At `d = 0`
+the right-hand side is 1. This includes `N = 1`. -/
+theorem cascade_opNorm_uniform (j N d : ℕ) [NeZero N] :
+    ‖cascadeOperator j N d‖ ≤ ((1651 : ℝ) / 1395) ^ d := by
+  sorry
+
+/-- Explicit rate: the free mass stays strictly below `1651/1395` and the gap
+is at most `(4/63) 4^{-j}`. -/
+theorem cascade_l1_gap (j : ℕ) :
+    0 < (1651 : ℝ) / 1395 - (∑ i : Fin (cascadeSupport j), |cascadeTap j i|) ∧
+      (1651 : ℝ) / 1395 - (∑ i : Fin (cascadeSupport j), |cascadeTap j i|)
+        ≤ ((4 : ℝ) / 63) * ((1 : ℝ) / 4) ^ j := by
+  sorry
+
+/-- The free ℓ¹ mass is strictly increasing in the level. -/
+theorem cascade_l1_succ_lt (j : ℕ) :
+    (∑ i : Fin (cascadeSupport j), |cascadeTap j i|) <
+      ∑ i : Fin (cascadeSupport (j + 1)), |cascadeTap (j + 1) i| := by
+  sorry
+
+/-- The free ℓ¹ mass converges to `1651/1395`. -/
+theorem cascade_l1_tendsto :
+    Filter.Tendsto (fun j : ℕ => ∑ i : Fin (cascadeSupport j), |cascadeTap j i|)
+      Filter.atTop (nhds ((1651 : ℝ) / 1395)) := by
+  sorry
+
+/-- `1651/1395` raised to `d` is the least constant that bounds every level
+and every positive period at once. A fixed period is not claimed to attain it.
+At `d = 0` both sides are 1. -/
+theorem cascade_uniform_constant_least (d : ℕ) {B : ℝ}
+    (hB : ∀ j N : ℕ, (hN : NeZero N) → ‖cascadeOperator j N d‖ ≤ B) :
+    ((1651 : ℝ) / 1395) ^ d ≤ B := by
+  sorry
+
+/-- Dimension zero is exactly the identity, for every level and every positive
+period, including periods that alias. -/
+theorem cascade_opNorm_d_zero (j N : ℕ) [NeZero N] :
+    ‖cascadeOperator j N 0‖ = 1 := by
   sorry
 
 end

@@ -65,7 +65,22 @@ collide, so the free l1 mass is the periodic operator norm:
 At dimension 2 the squares are `89401/65536`, `93373569/67108864` and
 `96094420081/68719476736`. Those are the exact values behind the rounded
 entries `1.364151`, `1.391375` and `1.398358` of manuscript equation (10).
-There is no proved closed form for every level.
+
+The same identity is now proved for every level. Write
+
+```
+c_j = 1651/1395 - (4/63) 4^{-j} + (1/180) 16^{-j} - (1/1736) 32^{-j}.
+```
+
+If `N` is at least the support `S_j = 6 * 2^{j+1} - 5`, the periodic operator
+norm is `c_j^d` in every dimension, including `d = 0`. For every positive
+period, including periods that alias, the norm is at most `(1651/1395)^d`.
+That power is the least constant with this uniform role: the period may grow
+with the level, and one fixed `N` is not claimed to attain it. The free mass
+increases strictly to `1651/1395`, and the gap is at most `(4/63) 4^{-j}`.
+`N >= S_j` is sufficient, not necessary. At dimension zero the norm is 1 for
+every positive period. The inequality covers `N = 1`; a separate theorem that
+the positive-dimensional period-one norm equals 1 is not selected.
 
 If a summary satisfies a supplied Lipschitz bound `L` in one seminorm and that
 seminorm compares with a second seminorm by `sqrt(mu)`, the summary of the
@@ -112,8 +127,16 @@ all proof scripts; it does not import `Challenge`.
 | `TWSPeriodic.cascade_level1_opNorm` | `(299/256)^d` for every `N >= 19` |
 | `TWSPeriodic.cascade_level2_opNorm` | `(9663/8192)^d` for every `N >= 43` |
 | `TWSPeriodic.cascade_level3_opNorm` | `(309991/262144)^d` for every `N >= 91` |
+| `TWSPeriodic.cascade_l1_formula` | Free mass `c_j` for every level, when `N >= S_j` |
+| `TWSPeriodic.cascade_opNorm_formula` | Operator norm `c_j^d` for every level, when `N >= S_j` |
+| `TWSPeriodic.cascade_opNorm_uniform` | At most `(1651/1395)^d` for every `N >= 1` |
+| `TWSPeriodic.cascade_l1_gap` | `0 < 1651/1395 - c_j <= (4/63) 4^{-j}` |
+| `TWSPeriodic.cascade_l1_succ_lt` | The free mass is strictly increasing |
+| `TWSPeriodic.cascade_l1_tendsto` | The free mass converges to `1651/1395` |
+| `TWSPeriodic.cascade_uniform_constant_least` | `(1651/1395)^d` is the least common bound |
+| `TWSPeriodic.cascade_opNorm_d_zero` | Dimension zero is exactly 1 |
 
-These are related parts of one result, not fourteen independent research contributions.
+These are related parts of one result, not twenty-two independent research contributions.
 The small-period kernel is defined by genuine folding, even though the db2
 specialization is only asserted for `N >= 7`.
 
@@ -125,10 +148,10 @@ specialization is only asserted for `N >= 7`.
 - Attainment concerns the smoothing operator alone. A downstream nonlinear
   summary need not attain the composed bound.
 - The theorem concerns the explicitly defined mathematical convolution.
-  Cascade levels 1, 2 and 3 are certified for periods at least 19, 43 and 91.
-  It does not certify Python/PyWavelets code, floating-point arithmetic, other
-  padding modes, a closed form for every wavelet level, or arbitrary wavelet
-  filters.
+  Cascade levels 1, 2 and 3 remain certified, and the closed form covers every
+  level. `N >= S_j` is a sufficient no-collision condition. The uniform bound
+  allows aliasing. It does not certify Python/PyWavelets code, floating-point
+  arithmetic, other padding modes, or arbitrary wavelet filters.
 - `N >= 7` is a transparent sufficient no-collision condition, not a claim
   that seven is the smallest period giving equality.
 - The supplied manuscript is an unchanged source snapshot. Its old Lean

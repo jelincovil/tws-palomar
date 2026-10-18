@@ -15,7 +15,15 @@
     "TWSPeriodic.db2_squared_summary_stability",
     "TWSPeriodic.cascade_level1_opNorm",
     "TWSPeriodic.cascade_level2_opNorm",
-    "TWSPeriodic.cascade_level3_opNorm"
+    "TWSPeriodic.cascade_level3_opNorm",
+    "TWSPeriodic.cascade_l1_formula",
+    "TWSPeriodic.cascade_opNorm_formula",
+    "TWSPeriodic.cascade_opNorm_uniform",
+    "TWSPeriodic.cascade_l1_gap",
+    "TWSPeriodic.cascade_l1_succ_lt",
+    "TWSPeriodic.cascade_l1_tendsto",
+    "TWSPeriodic.cascade_uniform_constant_least",
+    "TWSPeriodic.cascade_opNorm_d_zero"
   ],
   "definition_names": [],
   "permitted_axioms": [

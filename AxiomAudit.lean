@@ -16,3 +16,11 @@ import Solution
 #print axioms TWSPeriodic.cascade_level1_opNorm
 #print axioms TWSPeriodic.cascade_level2_opNorm
 #print axioms TWSPeriodic.cascade_level3_opNorm
+#print axioms TWSPeriodic.cascade_l1_formula
+#print axioms TWSPeriodic.cascade_opNorm_formula
+#print axioms TWSPeriodic.cascade_opNorm_uniform
+#print axioms TWSPeriodic.cascade_l1_gap
+#print axioms TWSPeriodic.cascade_l1_succ_lt
+#print axioms TWSPeriodic.cascade_l1_tendsto
+#print axioms TWSPeriodic.cascade_uniform_constant_least
+#print axioms TWSPeriodic.cascade_opNorm_d_zero

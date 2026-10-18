@@ -141,6 +141,21 @@ At dimension 2 the squares are `89401/65536`, `93373569/67108864` and
 `96094420081/68719476736`. Manuscript equation (10) prints the rounded
 decimals `1.364151`, `1.391375` and `1.398358`.
 
-No closed form for every level is proved. The conditional propagation in
-section 6 is unchanged and still takes bottleneck stability and landscape
-non-expansiveness as hypotheses.
+The same recurrence has a closed form at every level. Let
+`L = 1651/1395` and
+
+```
+c_j = L - (4/63) 4^{-j} + (1/180) 16^{-j} - (1/1736) 32^{-j}.
+```
+
+The free kernel has l1 mass `c_j`. Whenever `N >= S_j = 6 * 2^{j+1} - 5`,
+folding does not cancel and the periodic operator norm is `c_j^d`. For every
+`N >= 1`, the folded norm is at most `L^d`; aliasing can only decrease the
+l1 mass. `L^d` is the least constant that works for all levels and all
+positive periods simultaneously. The witnessing periods may grow with `j`.
+The sequence `c_j` is strictly increasing and converges to `L`, with
+`0 < L - c_j <= (4/63) 4^{-j}`. At dimension zero the norm is 1. The
+condition `N >= S_j` is sufficient, not necessary. The conditional
+propagation in section 6 is unchanged and still takes bottleneck stability
+and landscape non-expansiveness as hypotheses. This account does not claim
+that the formula is absent from the wavelet literature.

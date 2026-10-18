@@ -51,8 +51,9 @@ the absolute values of the integer five-tap recurrence and invokes the existing
 folding and tensor theorems. The decided sums are 1196, 38652 and 1239964, at
 scales 1024, 32768 and 1048576, which reduce to `299/256`, `9663/8192` and
 `309991/262144`. The thresholds are `N >= 19`, `N >= 43` and `N >= 91`.
-No closed form for every level was stated or proved. The unsandboxed Darwin
+No closed form for every level was stated in that revision. The unsandboxed Darwin
 replay above accepted these three statements together with the previous eleven.
+The closed form was added later; its checks are in the next section.
 
 ## Environment limits that remain
 
@@ -66,4 +67,33 @@ replay is recorded separately from the later sandboxed runs.
 GitHub Actions run 39040759159 executed `scripts/verify-all.sh` on Ubuntu for
 commit `e6698f352a4362e01ed84e4e6ece13d0cf431d6d`. Palomar verification run
 39042287485 then accepted that commit. The automated editorial review did not
-offer registration.
+offer registration. Neither run covers the closed-form statements below.
+
+## Closed form for every cascade level
+
+Checked on 2026-10-18 on arm64-apple-darwin, Lean v4.35.0-rc2
+(`11acb17ec6b07a8f9e9173e6845197929540936b`). Mathlib stayed at
+`065356127b1dc0016f66b7283ce0ce2c4055aa55`. `lake update` was not run.
+
+`lake build` completed (`BUILD_EXIT:0`, 3095 jobs). `scripts/preflight.py`
+accepted 22 selected statements. Challenge is 329 lines and 14307 bytes.
+`scripts/check_exact_cases.py` passed; those finite checks do not prove the
+universal statements. `lake env lean AxiomAudit.lean` reported only
+`propext`, `Classical.choice` and `Quot.sound` for all twenty-two theorems,
+including `cascade_l1_formula`, `cascade_opNorm_formula`,
+`cascade_opNorm_uniform`, `cascade_l1_gap`, `cascade_l1_succ_lt`,
+`cascade_l1_tendsto`, `cascade_uniform_constant_least` and
+`cascade_opNorm_d_zero`.
+
+The Darwin Comparator replay was
+
+```
+lake comparator --config <temp> --inadvisably-no-sandbox
+```
+
+The log begins `WARNING: Sandbox disabled, this run is not trustworthy.`
+con-ron accepted 16500 declarations, and nanoda and the Lean kernel accepted
+the solution. The replay ended `Your solution is okay!` with
+`COMPARATOR_EXIT:0`. `bwrap` is absent, so `scripts/verify-comparator.sh` was
+not the command that ran. This is not a Linux sandbox check. The sandbox for
+this revision is outstanding until GitHub Actions runs `scripts/verify-all.sh`.

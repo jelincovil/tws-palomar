@@ -70,9 +70,11 @@ requires bubblewrap. At that step this tree had no git commit;
 
 On the same date, three selected statements were added:
 `cascade_level1_opNorm`, `cascade_level2_opNorm` and `cascade_level3_opNorm`.
-They are finite evaluations of the undecimated recurrence, not a closed form
-for every level. `lake build` and `#print axioms` include them. An unsandboxed
-Darwin Comparator replay accepted all fourteen selected statements.
+They are finite evaluations of the undecimated recurrence. A later revision
+adds the closed form for every level; see `docs/VERIFICATION.md`. `lake build`
+and `#print axioms` of that earlier revision include the three finite levels.
+An unsandboxed Darwin Comparator replay accepted all fourteen selected
+statements of that date.
 `scripts/verify-comparator.sh` still did not run, because bubblewrap is absent.
 This directory is the repository root to publish. Palomar should receive the
 full SHA of that public commit, with `comparator.json` at the root.
