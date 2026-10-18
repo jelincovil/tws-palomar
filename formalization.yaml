@@ -152,7 +152,7 @@ fidelity:
     norm and tensor identities are standard. The cascade closed form is now a selected
     statement. It is not claimed to be new relative to the wavelet literature.
 review:
-  status: Local Darwin checks of the closed form passed on 2026-10-18; the Linux sandbox for this revision is outstanding. Registration was not offered for the earlier commit.
+  status: Local Darwin checks and GitHub Actions run 39093434816 passed on 2026-10-18 for the closed form. Registration was not offered for the earlier commit, and this revision has not been submitted.
   reviewers: []
   notes: Static checks, exact finite-instance checks, `lake build`, `#print axioms` and the
     Darwin Comparator replay are recorded in docs/VERIFICATION.md. Each of the fourteen selected
@@ -163,8 +163,10 @@ review:
     accepted that commit. The automated editorial review identified problems and did not offer
     registration. On 2026-10-18 an unsandboxed Darwin Comparator replay accepted
     all twenty-two selected statements, including the eight cascade-formula
-    theorems. That replay used `--inadvisably-no-sandbox`. It is not the Linux
-    sandbox check. The earlier runs do not cover those eight statements.
+    theorems. That replay used `--inadvisably-no-sandbox`. GitHub Actions run
+    39093434816 then ran the sandboxed script on commit
+    7295c00346b8295d4857a3b2f24a6ad0c037d256 and succeeded. The earlier runs do
+    not cover those eight statements. This revision has not been submitted.
 alignment:
   namespace: TWSPeriodic
   statements:
@@ -290,41 +292,40 @@ alignment:
     note: For every level j and every period N at least the support, the folded kernel
       has l1 mass c_j = 1651/1395 - (4/63)4^{-j} + (1/180)16^{-j} - (1/1736)32^{-j}.
       N >= support is sufficient to avoid cancellation. It is not claimed necessary.
-      Partial means the Linux sandbox for this revision is still outstanding.
+      GitHub Actions run 39093434816 sandboxed these statements on 2026-10-18.
   - source: Exact operator norm of every cascade level without aliasing
     lean: TWSPeriodic.cascade_opNorm_formula
     module: Challenge
     status: partial
     note: For every j, every dimension d including zero, and every N at least the
-      support, the separable convolution norm equals c_j^d. Partial means the Linux
-      sandbox for this revision is still outstanding.
+      support, the separable convolution norm equals c_j^d. GitHub Actions run
+      39093434816 sandboxed this statement on 2026-10-18.
   - source: Uniform cascade bound for every positive period
     lean: TWSPeriodic.cascade_opNorm_uniform
     module: Challenge
     status: partial
     note: For every j, every d, and every N >= 1, aliasing included, the operator
       norm is at most (1651/1395)^d. At d = 0 the right-hand side is 1. N = 1 is
-      included in this inequality. Partial means the Linux sandbox for this revision
-      is still outstanding.
+      included in this inequality. GitHub Actions run 39093434816 sandboxed this
+      statement on 2026-10-18.
   - source: Explicit gap between the free cascade mass and 1651/1395
     lean: TWSPeriodic.cascade_l1_gap
     module: Challenge
     status: partial
     note: The free mass is strictly below 1651/1395 and the difference is at most
-      (4/63)4^{-j}. Partial means the Linux sandbox for this revision is still outstanding.
+      (4/63)4^{-j}. GitHub Actions run 39093434816 sandboxed these statements on 2026-10-18.
   - source: Strict increase of the free cascade mass
     lean: TWSPeriodic.cascade_l1_succ_lt
     module: Challenge
     status: partial
     note: The free l1 mass at level j is strictly smaller than the mass at level j+1.
-      This is not a claim that c_j^0 increases. Partial means the Linux sandbox for
-      this revision is still outstanding.
+      This is not a claim that c_j^0 increases. GitHub Actions run 39093434816
+      sandboxed this statement on 2026-10-18.
   - source: Convergence of the free cascade mass
     lean: TWSPeriodic.cascade_l1_tendsto
     module: Challenge
     status: partial
-    note: The free l1 mass converges to 1651/1395. Partial means the Linux sandbox
-      for this revision is still outstanding.
+    note: The free l1 mass converges to 1651/1395. GitHub Actions run 39093434816 sandboxed this statement on 2026-10-18.
   - source: Least uniform constant of the whole cascade
     lean: TWSPeriodic.cascade_uniform_constant_least
     module: Challenge
@@ -332,14 +333,14 @@ alignment:
     note: Any real B that bounds the operator at every level and every positive period
       is at least (1651/1395)^d. The period may grow with the level. A single fixed
       period is not claimed to attain the constant. At d = 0 both sides are 1.
-      Partial means the Linux sandbox for this revision is still outstanding.
+      GitHub Actions run 39093434816 sandboxed these statements on 2026-10-18.
   - source: Dimension zero of every cascade operator
     lean: TWSPeriodic.cascade_opNorm_d_zero
     module: Challenge
     status: partial
     note: For every level and every positive period, the zero-dimensional operator
-      norm is exactly 1. Partial means the Linux sandbox for this revision is still
-      outstanding.
+      norm is exactly 1. GitHub Actions run 39093434816 sandboxed this statement
+      on 2026-10-18.
 acknowledgements: Lean and Mathlib; the source manuscript authors; the MIT-licensed tws-repro
   predecessor; PalomarTemplate at 2891de4c48955af824969a263d31b25e7a9a1406. The new operator
   development is located in this submitted project, not supplied by a thin-wrapper import.

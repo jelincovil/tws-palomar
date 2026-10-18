@@ -95,5 +95,10 @@ The log begins `WARNING: Sandbox disabled, this run is not trustworthy.`
 con-ron accepted 16500 declarations, and nanoda and the Lean kernel accepted
 the solution. The replay ended `Your solution is okay!` with
 `COMPARATOR_EXIT:0`. `bwrap` is absent, so `scripts/verify-comparator.sh` was
-not the command that ran. This is not a Linux sandbox check. The sandbox for
-this revision is outstanding until GitHub Actions runs `scripts/verify-all.sh`.
+not the command that ran. This is not a Linux sandbox check.
+
+GitHub Actions run 39093434816 then executed `scripts/verify-all.sh` on Ubuntu
+for commit `7295c00346b8295d4857a3b2f24a6ad0c037d256`. The log contains
+`PASS: static packaging checks; 22 selected statements` and
+`Your solution is okay!`. That run is the sandboxed Comparator check of the
+closed-form statements. It does not decide Palomar registration.
