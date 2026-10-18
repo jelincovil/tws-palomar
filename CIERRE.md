@@ -78,7 +78,18 @@ contenido nuevo, sin modificaciones a archivos versionados de la base.
 
 ## Estado CI
 
-`NO_EJECUTADA`. No se ha hecho push, por lo que no hay ejecución de GitHub Actions que reportar.
+`PASS` — run [39173766127](https://github.com/jelincovil/tws-palomar/actions/runs/39173766127)
+sobre `8988874`, workflow «Lean and Palomar candidate audit», 3m 0s, todos los pasos en verde
+(preflight estático, casos exactos, toolchain, caché, `lake build`, `AxiomAudit`, Comparator).
+
+Un primer run (`39173660959`) falló en `scripts/preflight.py` porque
+`extension/AxiomCheck.lean` no empezaba con `module`; se corrigió en `8988874`.
+
+**Alcance del CI.** El workflow verifica la **base**: preflight estático, `lake build` de
+`Challenge`/`Solution`, `AxiomAudit` y Comparator. **No compila `extension/`**; la verificación
+de la extensión es local (G2, G4, G5). Añadir un job para la extensión exige modificar
+`.github/workflows/ci.yml`, archivo protegido por G0: se entrega como propuesta revisable, no
+aplicada.
 
 ## Estado Palomar extensión
 
