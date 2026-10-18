@@ -1,48 +1,8 @@
-# Diff de la rama extension/db2-threshold sobre 44f4bb7 — 2026-10-18T20:10:44-03:00
+# Diff de la rama extension/db2-threshold sobre 44f4bb7 — 2026-10-18T20:34:31-03:00
 # Generado desde el índice; no incluye este archivo ni inventario.txt.
 
- .github/workflows/extension-ci.yml                 |  51 ++++++
- CIERRE.md                                          | 185 +++++++++++++--------
- extension/scripts/axiom_check.py                   | 132 +++++++++++++++
- extension/scripts/test_axiom_check.py              |  65 ++++++++
- extension/scripts/verify_extension.sh              |  72 ++++++++
- extension/verification/checker-selftest.log        |   6 +
- .../verification/repro-clean/00-environment.txt    |   9 +
- .../verification/repro-clean/01-solution-build.log | 104 ++++++++++++
- .../repro-clean/02-extension-build.log             | 109 ++++++++++++
- extension/verification/repro-clean/03-axioms.log   |  92 ++++++++++
- .../verification/repro-clean/04-axioms-check.log   |   1 +
- .../verification/repro-clean/05-exact-checks.log   |   1 +
- .../verification/repro-clean/06-integrity.log      |   1 +
- extension/verification/repro/00-environment.txt    |  11 ++
- extension/verification/repro/01-solution-build.log | 104 ++++++++++++
- .../verification/repro/02-extension-build.log      | 104 ++++++++++++
- extension/verification/repro/03-axioms.log         |  92 ++++++++++
- extension/verification/repro/04-axioms-check.log   |   1 +
- extension/verification/repro/05-exact-checks.log   |   1 +
- extension/verification/repro/06-integrity.log      |   1 +
- extension/verification/workflow-yaml-check.log     |  22 +++
- 21 files changed, 1097 insertions(+), 67 deletions(-)
+ CIERRE.md | 14 +++++++++-----
+ 1 file changed, 9 insertions(+), 5 deletions(-)
 
 ## name-status
-A	.github/workflows/extension-ci.yml
 M	CIERRE.md
-A	extension/scripts/axiom_check.py
-A	extension/scripts/test_axiom_check.py
-A	extension/scripts/verify_extension.sh
-A	extension/verification/checker-selftest.log
-A	extension/verification/repro-clean/00-environment.txt
-A	extension/verification/repro-clean/01-solution-build.log
-A	extension/verification/repro-clean/02-extension-build.log
-A	extension/verification/repro-clean/03-axioms.log
-A	extension/verification/repro-clean/04-axioms-check.log
-A	extension/verification/repro-clean/05-exact-checks.log
-A	extension/verification/repro-clean/06-integrity.log
-A	extension/verification/repro/00-environment.txt
-A	extension/verification/repro/01-solution-build.log
-A	extension/verification/repro/02-extension-build.log
-A	extension/verification/repro/03-axioms.log
-A	extension/verification/repro/04-axioms-check.log
-A	extension/verification/repro/05-exact-checks.log
-A	extension/verification/repro/06-integrity.log
-A	extension/verification/workflow-yaml-check.log

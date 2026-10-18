@@ -80,8 +80,9 @@ históricos de compilación no se reescriben; esta nota queda como aclaración f
    no se regenera y que los 30 archivos protegidos siguen intactos.
 9. **Workflow de extensión.** El expediente anterior decía que se entregaba «como propuesta
    revisable, no aplicada», pero el archivo no existía. Ahora existe
-   `.github/workflows/extension-ci.yml`, verificado estructuralmente y con sus comandos
-   ejecutados en local; `.github/workflows/ci.yml` permanece intacto.
+   `.github/workflows/extension-ci.yml`, verificado estructuralmente, ejecutado en local y
+   ejecutado en GitHub (run `39176786511` sobre `ea50a10`); `.github/workflows/ci.yml`
+   permanece intacto.
 10. **Auditoría ejecutable.** Se añadió `extension/scripts/axiom_check.py`, que falla ante
     errores de Lean, salida vacía o incompleta, nombres no solicitados o axiomas fuera de
     `{propext, Classical.choice, Quot.sound}`; su autotest cubre los cuatro casos.
@@ -106,11 +107,14 @@ de la base y **no se regenera**: es el snapshot histórico tomado antes de integ
 |---|---|---|
 | Extensión, verificación local | **PASS** | Compilación de 5 módulos, auditoría de 92 nombres, casos racionales e integridad; ejecutado dos veces: en el árbol de trabajo (`verification/repro/`) y en una copia temporal completa desde fuente (`verification/repro-clean/`). Solo se reutilizó la caché de Mathlib. |
 | CI de la base (histórico) | **PASS** | Runs [39173766127](https://github.com/jelincovil/tws-palomar/actions/runs/39173766127) sobre `8988874` y [39174026246](https://github.com/jelincovil/tws-palomar/actions/runs/39174026246) sobre `f7ead24`, workflow `ci.yml`. Alcance: base (preflight, `lake build` de `Challenge`/`Solution`, `AxiomAudit`, Comparator). **No cubre `extension/`.** |
-| CI de extensión (nuevo) | **CONFIGURADO; EJECUCIÓN REMOTA PENDIENTE** | `.github/workflows/extension-ci.yml`: compila `Solution` desde la raíz, compila los cinco módulos, ejecuta `AxiomCheck.lean` y su comprobador, los casos racionales y la integridad. YAML validado y comandos ejecutados en local; **no se ha ejecutado en GitHub**. |
+| CI de extensión (nuevo) | **PASS** | Run [39176786511](https://github.com/jelincovil/tws-palomar/actions/runs/39176786511) sobre `ea50a10`, workflow `extension-ci.yml`, 2m 21s. Compila `Solution` desde la raíz, compila los cinco módulos, ejecuta `AxiomCheck.lean` con su comprobador, los casos racionales y la integridad, en un runner limpio; artifact `extension-verification-ea50a10…` con los siete registros. |
 | Palomar extensión | **NO_SOMETIDA** | No se sometió la extensión a revisión Palomar. |
 
-**No se declara `PASS` remoto de la extensión.** La verificación de la extensión es local; el
-resultado del workflow nuevo solo podrá afirmarse cuando exista un run real en GitHub.
+El `PASS` remoto de la extensión corresponde al run `39176786511` sobre `ea50a10`, la revisión
+que contiene el código y el workflow. El commit posterior a este expediente solo actualiza
+documentación y vuelve a disparar el mismo workflow; no cambia el código verificado ni el
+resultado anterior. La verificación local (`verification/repro/`, `verification/repro-clean/`)
+se conserva como evidencia independiente del runner.
 
 ## Estado Palomar extensión
 
