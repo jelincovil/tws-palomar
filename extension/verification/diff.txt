@@ -1,0 +1,62 @@
+# Diff de la rama extension/db2-threshold sobre 44f4bb7
+# (generado antes de añadir este mismo archivo al índice)
+
+ CIERRE.md                                          | 113 ++++++++
+ extension/AxiomCheck.lean                          | 127 +++++++++
+ extension/INTEGRATION.md                           | 128 +++++++++
+ extension/NONPERIODIC_INTEGRATION.md               |  69 +++++
+ extension/NONPERIODIC_SPEC.md                      | 157 +++++++++++
+ extension/NONPERIODIC_VERIFICATION.txt             | 130 +++++++++
+ extension/NOTA_TOOLCHAIN.md                        |  34 +++
+ extension/THRESHOLD_CERTIFICATE_SPEC.md            | 188 +++++++++++++
+ .../ThresholdExtension/ConstantPreservation.lean   | 198 +++++++++++++
+ .../Db2ThresholdCertificate.lean                   | 139 +++++++++
+ .../ThresholdExtension/EndpointReplication.lean    | 229 +++++++++++++++
+ .../NonperiodicDb2Certificate.lean                 | 255 +++++++++++++++++
+ .../ThresholdExtension/ThresholdCertificate.lean   | 186 ++++++++++++
+ extension/VERIFICATION.txt                         | 182 ++++++++++++
+ extension/lake-manifest.json                       | 103 +++++++
+ extension/lakefile.toml                            |  29 ++
+ extension/lean-toolchain                           |   1 +
+ extension/scripts/exact_checks.py                  |  33 +++
+ extension/scripts/integrity.py                     |  16 ++
+ extension/verification/axioms-1.log                |  93 ++++++
+ extension/verification/build-1.log                 | 120 ++++++++
+ extension/verification/build-2.log                 | 107 +++++++
+ extension/verification/clean-build.log             | 313 +++++++++++++++++++++
+ extension/verification/entorno.txt                 |  23 ++
+ extension/verification/integridad-despues.txt      |   1 +
+ extension/verification/integrity-before.json       |  32 +++
+ extension/verification/inventario.txt              |  32 +++
+ extension/verification/scan.txt                    |  19 ++
+ 28 files changed, 3057 insertions(+)
+
+## name-status
+A	CIERRE.md
+A	extension/AxiomCheck.lean
+A	extension/INTEGRATION.md
+A	extension/NONPERIODIC_INTEGRATION.md
+A	extension/NONPERIODIC_SPEC.md
+A	extension/NONPERIODIC_VERIFICATION.txt
+A	extension/NOTA_TOOLCHAIN.md
+A	extension/THRESHOLD_CERTIFICATE_SPEC.md
+A	extension/ThresholdExtension/ConstantPreservation.lean
+A	extension/ThresholdExtension/Db2ThresholdCertificate.lean
+A	extension/ThresholdExtension/EndpointReplication.lean
+A	extension/ThresholdExtension/NonperiodicDb2Certificate.lean
+A	extension/ThresholdExtension/ThresholdCertificate.lean
+A	extension/VERIFICATION.txt
+A	extension/lake-manifest.json
+A	extension/lakefile.toml
+A	extension/lean-toolchain
+A	extension/scripts/exact_checks.py
+A	extension/scripts/integrity.py
+A	extension/verification/axioms-1.log
+A	extension/verification/build-1.log
+A	extension/verification/build-2.log
+A	extension/verification/clean-build.log
+A	extension/verification/entorno.txt
+A	extension/verification/integridad-despues.txt
+A	extension/verification/integrity-before.json
+A	extension/verification/inventario.txt
+A	extension/verification/scan.txt

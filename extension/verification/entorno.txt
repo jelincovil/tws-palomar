@@ -1,0 +1,23 @@
+# Entorno (G0/G1) — 2026-10-18T19:31:38-03:00
+
+## Git
+HEAD: 44f4bb79abddf1a4d0a8a3da9a07068c633ed2ab
+Rama: main
+Status (tracked):
+
+## Herramientas
+lean: /Users/enriquec/.elan/bin/lean
+Lean (version 4.35.0-rc2, arm64-apple-darwin24.6.0, commit 11acb17ec6b07a8f9e9173e6845197929540936b, Release)
+lake: /Users/enriquec/.elan/bin/lake
+Lake version 5.0.0-src+11acb17 (Lean version 4.35.0-rc2)
+
+## Toolchain y pin
+lean-toolchain: leanprover/lean4:v4.35.0-rc2
+mathlib rev (manifest): 065356127b1dc0016f66b7283ce0ce2c4055aa55
+mathlib checkout: 065356127b1dc0016f66b7283ce0ce2c4055aa55
+
+## Sistema
+ProductName:		macOS
+ProductVersion:		15.7.9
+BuildVersion:		24G830
+arm64

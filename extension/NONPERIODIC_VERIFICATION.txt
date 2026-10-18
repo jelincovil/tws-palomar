@@ -1,0 +1,130 @@
+NONPERIODIC VERIFICATION REPORT — endpoint-replicated db2 cascade extension
+==========================================================================
+
+Everything below was run locally in this session. No network access was used.
+No dependency cache was deleted, and no command that downloads anything was run.
+This is a local compilation. It is NOT a Palomar result or a remote CI result.
+
+1. ENVIRONMENT
+--------------
+TC = the installed elan toolchain directory for leanprover/lean4:v4.35.0-rc2
+(this is the only toolchain installed).
+
+The binaries were invoked explicitly by putting TC/bin first on PATH:
+    export PATH=TC/bin:$PATH
+The elan proxy was not used. Its self-update check fails without network, and the
+root file `lean-toolchain` names v4.28.0, which is not installed. That file was not modified.
+
+  TC/bin/lean --version : Lean (version 4.35.0-rc2, x86_64-unknown-linux-gnu,
+                          commit 11acb17ec6b07a8f9e9173e6845197929540936b, Release)
+  TC/bin/lake --version : Lake version 5.0.0-src+11acb17 (Lean version 4.35.0-rc2)
+  Mathlib (git rev-parse HEAD in .lake/packages/mathlib):
+                          065356127b1dc0016f66b7283ce0ce2c4055aa55
+
+2. BASELINE INTEGRITY
+---------------------
+  sha256sum Solution.lean
+    c3231f1ec14500297abc90accbd38cbacbdfe6d6ec35d7b020e708e15ebd287c  Solution.lean
+    This equals the approved hash.
+  `git diff --stat HEAD -- Solution.lean lakefile.toml lake-manifest.json lean-toolchain
+   lean-toolchain.txt CASCADE_THEOREM.md extension/ThresholdExtension/ThresholdCertificate.lean
+   extension/ThresholdExtension/Db2ThresholdCertificate.lean`  -> empty (no changes)
+  Challenge.lean is not imported, and it is not present.
+
+3. COMMANDS, EXIT CODES, WHAT WAS REBUILT
+-----------------------------------------
+(a) In the baseline root: lake build Solution
+    -> exit 0, "Build completed successfully (3093 jobs)".
+       Solution.lean was elaborated ("Built Solution (14s)"), because the session started
+       with no Solution olean. There were 0 errors. The 7 unused-variable warnings and the
+       "Try this" infos all come from the unchanged baseline file.
+(b) In extension/: lake build   (the existing two modules, before any change)
+    -> exit 0. ThresholdCertificate and Db2ThresholdCertificate were built.
+(c) extension/lakefile.toml: the two new modules were added to `roots`.
+    This is the only change to an existing file.
+(d) In extension/: lake env lean ThresholdExtension/EndpointReplication.lean
+    and lake env lean ThresholdExtension/NonperiodicDb2Certificate.lean
+    -> both exit 0, with no errors and no warnings (development iterations).
+(e) In extension/: lake build -v
+    -> exit 0, "Build completed successfully (8937 jobs)".
+(f) To force recompilation of the new modules, their build outputs were deleted:
+      find .lake/build \( -path "*ThresholdExtension/EndpointReplication*" -o
+                          -path "*ThresholdExtension/NonperiodicDb2Certificate*" \) -delete
+    Only extension-local outputs of the two new modules were removed. No dependency
+    caches were touched. Then, in extension/:
+      lake build
+    -> exit 0:
+       ✔ [8935/8937] Built ThresholdExtension.EndpointReplication (2.7s)
+       ✔ [8936/8937] Built ThresholdExtension.NonperiodicDb2Certificate (8.0s)
+       Build completed successfully (8937 jobs).
+    Mathlib, Solution and the two earlier extension modules were replayed from their
+    existing oleans. Both new modules compiled with no warnings.
+(g) Source scan: rg -n "sorry|admit|axiom |implemented_by" ThresholdExtension/
+    -> no matches (exit 1 = nothing found).
+(h) Axiom audit: in extension/, lake env lean /tmp/NonperiodicAxiomCheck.lean -> exit 0.
+    The file contains `import ThresholdExtension.NonperiodicDb2Certificate` followed by one
+    `#print axioms ThresholdCert.Nonperiodic.<name>` line for every theorem declared in the
+    two new modules (42 theorems). The output is reproduced verbatim below.
+
+4. #print axioms OUTPUT (verbatim)
+----------------------------------
+'ThresholdCert.Nonperiodic.clamp_val' depends on axioms: [propext, Quot.sound]
+'ThresholdCert.Nonperiodic.clamp_of_neg' depends on axioms: [propext, Quot.sound]
+'ThresholdCert.Nonperiodic.clamp_of_mem' depends on axioms: [propext, Quot.sound]
+'ThresholdCert.Nonperiodic.clamp_of_ge' depends on axioms: [propext, Quot.sound]
+'ThresholdCert.Nonperiodic.clamp_natCast' depends on axioms: [propext, Quot.sound]
+'ThresholdCert.Nonperiodic.padLen_pos' depends on axioms: [propext, Quot.sound]
+'ThresholdCert.Nonperiodic.cascadeSupport_le_padLen' depends on axioms: [propext, Quot.sound]
+'ThresholdCert.Nonperiodic.directOp_apply' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.padOp_apply' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.restrictOp_apply' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.val_natCast_padLen' depends on axioms: [propext, Quot.sound]
+'ThresholdCert.Nonperiodic.restrict_pad' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.padOp_norm_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.restrictOp_norm_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.convolution_foldKernel' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.cascadeOperator_one_apply' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.pad_at_tap' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.directOp_eq_restrict_cascade_pad' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.directOp_eq_comp' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.directOp_norm_le_periodic' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.directOp_norm_le_C' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.directOp_norm_le_L' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.directOp_perturbation_C' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.directOp_perturbation_L' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.directOp_coord_perturbation_C' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.directOp_coord_perturbation_L' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.above_sound_C' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.notAbove_sound_C' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.symmDiff_subset_band_C' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.above_sound_L' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.notAbove_sound_L' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.symmDiff_subset_band_L' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.directOp_n_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.cascadeTap_zero_values' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.directOp_zero_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.check_direct_j0_n2' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.check_periodic_j0_n2' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.check_direct_j0_n3' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.check_periodic_j0_n3' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.check_direct_j1_n2' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.check_periodic_j1_n2' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.unpadded_periodic_differs' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+Summary: every theorem depends only on propext, Classical.choice and Quot.sound
+(some only on propext and Quot.sound). There is no sorryAx and no new axiom.
+
+Key theorems:
+  identification       directOp_eq_restrict_cascade_pad, directOp_eq_comp
+  norm bounds          directOp_norm_le_C, directOp_norm_le_L
+  perturbation         directOp_perturbation_C / _L
+  threshold soundness  above_sound_C / _L, notAbove_sound_C / _L
+  band containment     symmDiff_subset_band_C / _L
+
+5. WHAT IS NOT VERIFIED
+-----------------------
+* Nothing was compiled under Lean v4.28.0, which is not installed.
+* No Palomar or remote CI run took place.
+* The exactness or optimality of either norm bound for the nonperiodic operator is not
+  claimed and not proved.
+* The tap sum ∑ cascadeTap j = 1 is proved only for j = 0.

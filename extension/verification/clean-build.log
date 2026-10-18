@@ -1,0 +1,313 @@
+# Recompilación limpia G5 — 2026-10-18T19:41:01-03:00
+Directorio: /var/folders/j_/fjsyt32d20b85cvy1mp7ty6h0000gn/T/tmp.Ud4aCP8CyX
+Reutilizado: .lake/packages (Mathlib 0653561) desde /Users/enriquec/Developer/wavelets_topology_health/tws-persistence-stability-final/proyecto_tws_palomar/tws_registro_palomar/.lake/packages
+Recompilado: Solution.lean y los 5 módulos de extension/ desde fuente
+
+## lake build Solution
+⚠ [3092/3093] Built Solution (15s)
+info: Solution.lean:736:2: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+info: Solution.lean:912:2: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+info: Solution.lean:931:2: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+info: Solution.lean:1163:2: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+info: Solution.lean:1171:2: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+info: Solution.lean:1176:2: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+info: Solution.lean:1194:2: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+warning: Solution.lean:1260:5: Variable name `hq` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hq
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Solution.lean:1262:5: Variable name `hδ` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hδ
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Solution.lean:1271:19: Variable name `hδ` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hδ
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Solution.lean:1271:32: Variable name `hd` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hd
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Solution.lean:1744:28: Variable name `hq` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hq
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Solution.lean:1776:5: Variable name `hb` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hb
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Solution.lean:1776:18: Variable name `hc` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hc
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+info: Solution.lean:1970:2: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+info: Solution.lean:2326:36: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+info: Solution.lean:2911:4: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+Build completed successfully (3093 jobs).
+SOLUTION_EXIT=0
+
+## extension lake build
+⚠ [8933/8938] Replayed Solution
+info: Solution.lean:736:2: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+info: Solution.lean:912:2: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+info: Solution.lean:931:2: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+info: Solution.lean:1163:2: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+info: Solution.lean:1171:2: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+info: Solution.lean:1176:2: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+info: Solution.lean:1194:2: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+warning: Solution.lean:1260:5: Variable name `hq` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hq
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Solution.lean:1262:5: Variable name `hδ` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hδ
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Solution.lean:1271:19: Variable name `hδ` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hδ
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Solution.lean:1271:32: Variable name `hd` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hd
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Solution.lean:1744:28: Variable name `hq` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hq
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Solution.lean:1776:5: Variable name `hb` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hb
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Solution.lean:1776:18: Variable name `hc` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hc
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+info: Solution.lean:1970:2: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+info: Solution.lean:2326:36: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+info: Solution.lean:2911:4: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+Build completed successfully (8938 jobs).
+EXT_EXIT=0
+
+## extension AxiomCheck
+'ThresholdCert.CertifiedAbove' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.CertifiedNotAbove' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Uncertified' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.superlevel' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.uncertaintyBand' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.coord_perturbation' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.certifiedAbove_sound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.certifiedNotAbove_sound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.trichotomy' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.trichotomy_of_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.diff_subsets' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.symmDiff_subset_band' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.uncertaintyBand_eq_empty_of_mul_eq_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.superlevel_eq_of_mul_eq_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.raw_above_sound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.raw_notAbove_sound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.nonstrict_above_unsound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.open_band_fails' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.uncertified_not_wrong' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.smoothed_cert_not_raw_cert' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Db2.cascadeL' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Db2.cascadeC' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Db2.cascade1_opNorm_le_L' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Db2.cascade1_opNorm_eq_C' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Db2.cascadeC_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Db2.cascadeC_le_L' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Db2.coord_perturbation_uniform' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Db2.certifiedAbove_sound_uniform' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Db2.certifiedNotAbove_sound_uniform' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Db2.symmDiff_subset_band_uniform' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Db2.superlevel_eq_uniform_of_eps_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Db2.coord_perturbation_exact' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Db2.certifiedAbove_sound_exact' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Db2.certifiedNotAbove_sound_exact' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Db2.symmDiff_subset_band_exact' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Db2.band_exact_subset_uniform' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.clamp' depends on axioms: [propext, Quot.sound]
+'ThresholdCert.Nonperiodic.clamp_val' depends on axioms: [propext, Quot.sound]
+'ThresholdCert.Nonperiodic.clamp_of_neg' depends on axioms: [propext, Quot.sound]
+'ThresholdCert.Nonperiodic.clamp_of_mem' depends on axioms: [propext, Quot.sound]
+'ThresholdCert.Nonperiodic.clamp_of_ge' depends on axioms: [propext, Quot.sound]
+'ThresholdCert.Nonperiodic.clamp_natCast' depends on axioms: [propext, Quot.sound]
+'ThresholdCert.Nonperiodic.padLen' depends on axioms: [propext]
+'ThresholdCert.Nonperiodic.padLen_pos' depends on axioms: [propext, Quot.sound]
+'ThresholdCert.Nonperiodic.cascadeSupport_le_padLen' depends on axioms: [propext, Quot.sound]
+'ThresholdCert.Nonperiodic.directOp' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.directOp_apply' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.padOp' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.padOp_apply' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.restrictOp' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.restrictOp_apply' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.val_natCast_padLen' depends on axioms: [propext, Quot.sound]
+'ThresholdCert.Nonperiodic.restrict_pad' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.padOp_norm_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.restrictOp_norm_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.convolution_foldKernel' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.cascadeOperator_one_apply' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.pad_at_tap' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.directOp_eq_restrict_cascade_pad' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.directOp_eq_comp' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.directOp_norm_le_periodic' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.directOp_norm_le_C' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.directOp_norm_le_L' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.directOp_perturbation_C' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.directOp_perturbation_L' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.directOp_coord_perturbation_C' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.directOp_coord_perturbation_L' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.above_sound_C' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.notAbove_sound_C' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.symmDiff_subset_band_C' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.above_sound_L' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.notAbove_sound_L' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.symmDiff_subset_band_L' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.directOp_n_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.cascadeTap_zero_values' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.directOp_zero_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.stepSignal2' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.spikeSignal3' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.check_direct_j0_n2' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.check_periodic_j0_n2' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.check_direct_j0_n3' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.check_periodic_j0_n3' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.check_direct_j1_n2' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.check_periodic_j1_n2' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.wrapSignal2' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.unpadded_periodic_differs' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.cascadeInt_sum' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.cascadeTap_sum_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.directOp_const' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Nonperiodic.directOp_one_eq_id' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TWSPeriodic.cascade_opNorm_uniform' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TWSPeriodic.cascade_opNorm_formula' depends on axioms: [propext, Classical.choice, Quot.sound]
+AXIOM_EXIT=0

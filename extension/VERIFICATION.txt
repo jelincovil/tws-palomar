@@ -1,0 +1,182 @@
+VERIFICATION REPORT — threshold certificate extension
+========================================================
+
+Everything below was actually run in this session unless it is marked NOT EXECUTED.
+Paths are relative to the baseline checkout root. "TC" stands for the installed elan
+toolchain directory for leanprover/lean4:v4.35.0-rc2, whose bin/ was put first on PATH.
+
+1. ENVIRONMENT
+--------------
+Lean:     Lean (version 4.35.0-rc2, x86_64-unknown-linux-gnu,
+          commit 11acb17ec6b07a8f9e9173e6845197929540936b, Release)
+Lake:     Lake version 5.0.0-src+11acb17 (Lean version 4.35.0-rc2)
+Mathlib:  065356127b1dc0016f66b7283ce0ce2c4055aa55
+          (git rev-parse HEAD in .lake/packages/mathlib)
+Mathlib's own lean-toolchain at that revision: leanprover/lean4:v4.35.0-rc2
+
+Installed toolchains: only leanprover/lean4:v4.35.0-rc2. elan could not download
+anything because the network failed with "SSL connect error ... Connection reset by peer".
+
+2. COMPATIBILITY WITH THE ATTACHED BASELINE
+-------------------------------------------
+Mathlib revision:
+  - Matches. The baseline lakefile.toml and lake-manifest.json pin 065356127b1d...,
+    which is exactly the checkout used here.
+  - All transitive dependency revisions in the generated extension/lake-manifest.json
+    equal those in the baseline lake-manifest.json (checked with a script).
+
+Lean version:
+  - The baseline file lean-toolchain says leanprover/lean4:v4.28.0, but the Lean used
+    here is v4.35.0-rc2. Lean v4.28.0 is not installed and could not be downloaded.
+  - Evidence that v4.35.0-rc2 is the toolchain this dependency set was resolved with:
+      * the pinned Mathlib revision declares v4.35.0-rc2 in its own lean-toolchain;
+      * the baseline lake-manifest.json resolves the Cli package at inputRev "v4.35.0-rc2".
+  - The project also contains a file lean-toolchain.txt with the content
+    leanprover/lean4:v4.35.0-rc2. I cannot tell which of lean-toolchain and
+    lean-toolchain.txt is the user's "lean-toolchain" attachment.
+  - Conclusion: everything is VERIFIED UNDER Lean v4.35.0-rc2 + Mathlib 065356127b1d.
+    It is NOT VERIFIED under Lean v4.28.0.
+
+Baseline files were not modified. `git diff --stat HEAD -- Solution.lean lakefile.toml
+lake-manifest.json lean-toolchain lean-toolchain.txt CASCADE_THEOREM.md` printed nothing.
+SHA-256 of the files as used:
+  c3231f1ec14500297abc90accbd38cbacbdfe6d6ec35d7b020e708e15ebd287c  Solution.lean
+  54a835d8b737315457df44fddfc6b38b124980c5e2162d3f9ab61ad67b9a89bb  lakefile.toml
+  8d58892f63daf9e6c6e20f285f51f65269037f754250ca80601990ce1e25cfaf  lake-manifest.json
+  db7bb24b756d745bbde83fe92718b51bd3625dae3701ba0f598d0eedcd3f3028  lean-toolchain
+  8dc8d6f560141069d9073e370611716ef77ada0da8ffa37e2149f44b2e63ac7a  lean-toolchain.txt
+  678188d9eeae8f8e1feb112f854590b61331671ec2b90133dadb558854b68bec  CASCADE_THEOREM.md
+
+3. COMMANDS EXECUTED AND RESULTS
+--------------------------------
+(a) lean --version / lake --version through the elan proxy
+    -> no version printed. elan failed its self-update check with the network error,
+       so the toolchain binaries were invoked directly from then on.
+(b) TC/bin/lean --version ; TC/bin/lake --version
+    -> versions as in section 1.
+(c) In .lake/packages/mathlib: git rev-parse HEAD ; cat lean-toolchain
+    -> 065356127b1dc0016f66b7283ce0ce2c4055aa55 ; leanprover/lean4:v4.35.0-rc2
+(d) Baseline root: PATH=TC/bin:$PATH lake build Solution   (log line: "⚠ [3092/3093] Built Solution (14s)")
+    -> "Build completed successfully (3093 jobs)."
+       Solution.lean was elaborated in this run, producing .lake/build/lib/lean/Solution.olean.
+       0 errors. 7 unused-variable linter warnings and 10 "Try this" info messages,
+       all inside Solution.lean, which is baseline code and was left untouched.
+(e) extension/: lake build   (first run)
+    -> Lake created extension/lake-manifest.json and wrote extension/lean-toolchain
+       (v4.35.0-rc2). It asked for a restart and built nothing.
+       extension/lean-toolchain was deleted afterwards.
+(f) extension/: lake build   (second run, before the final edits)
+    -> success. There were deprecation warnings (Set.mem_setOf_eq) and haveI-style
+       warnings, which were then fixed in the sources.
+(g) extension/: lake build   (after the fixes)
+    -> "Build completed successfully (8935 jobs)". Both modules built with no warnings:
+         ✔ Built ThresholdExtension.ThresholdCertificate
+         ✔ Built ThresholdExtension.Db2ThresholdCertificate
+(h) extension/: rm -rf .lake && lake build -v   (fresh build of the extension)
+    -> exit status 0, "Build completed successfully (8935 jobs)".
+       Both extension modules were recompiled from source. The compiler's LEAN_PATH
+       included the baseline's .lake/build/lib/lean, which is where `Solution` is
+       resolved from.
+(i) extension/: lake env lean AxiomCheck.lean
+    -> exit status 0. Output is in section 4.
+(j) grep -rn "sorry\|admit\|axiom \|implemented_by" extension/ThresholdExtension/
+    -> no matches.
+(k) Dependency-revision comparison of the two manifests (Python script) -> True.
+
+NOT EXECUTED:
+  - any build with Lean v4.28.0 (not available);
+  - `lake build` with the baseline's default targets (Challenge.lean was not supplied);
+  - `lake build AxiomAudit` for the baseline (AxiomAudit.lean was not supplied);
+  - the Palomar comparator, and any CI of the upstream repository;
+  - `lake exe cache get` (no network).
+
+4. #print axioms OUTPUT (every new public theorem, plus the two baseline theorems used)
+----------------------------------------------------------------------------------------
+Contents of extension/AxiomCheck.lean:
+import ThresholdExtension.Db2ThresholdCertificate
+
+#print axioms ThresholdCert.coord_perturbation
+#print axioms ThresholdCert.certifiedAbove_sound
+#print axioms ThresholdCert.certifiedNotAbove_sound
+#print axioms ThresholdCert.trichotomy
+#print axioms ThresholdCert.trichotomy_of_bounds
+#print axioms ThresholdCert.diff_subsets
+#print axioms ThresholdCert.symmDiff_subset_band
+#print axioms ThresholdCert.uncertaintyBand_eq_empty_of_mul_eq_zero
+#print axioms ThresholdCert.superlevel_eq_of_mul_eq_zero
+#print axioms ThresholdCert.raw_above_sound
+#print axioms ThresholdCert.raw_notAbove_sound
+#print axioms ThresholdCert.nonstrict_above_unsound
+#print axioms ThresholdCert.open_band_fails
+#print axioms ThresholdCert.uncertified_not_wrong
+#print axioms ThresholdCert.smoothed_cert_not_raw_cert
+#print axioms ThresholdCert.Db2.cascade1_opNorm_le_L
+#print axioms ThresholdCert.Db2.cascade1_opNorm_eq_C
+#print axioms ThresholdCert.Db2.cascadeC_nonneg
+#print axioms ThresholdCert.Db2.cascadeC_le_L
+#print axioms ThresholdCert.Db2.coord_perturbation_uniform
+#print axioms ThresholdCert.Db2.certifiedAbove_sound_uniform
+#print axioms ThresholdCert.Db2.certifiedNotAbove_sound_uniform
+#print axioms ThresholdCert.Db2.symmDiff_subset_band_uniform
+#print axioms ThresholdCert.Db2.superlevel_eq_uniform_of_eps_zero
+#print axioms ThresholdCert.Db2.coord_perturbation_exact
+#print axioms ThresholdCert.Db2.certifiedAbove_sound_exact
+#print axioms ThresholdCert.Db2.certifiedNotAbove_sound_exact
+#print axioms ThresholdCert.Db2.symmDiff_subset_band_exact
+#print axioms ThresholdCert.Db2.band_exact_subset_uniform
+#print axioms TWSPeriodic.cascade_opNorm_uniform
+#print axioms TWSPeriodic.cascade_opNorm_formula
+
+Output of `lake env lean AxiomCheck.lean`:
+'ThresholdCert.coord_perturbation' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.certifiedAbove_sound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.certifiedNotAbove_sound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.trichotomy' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.trichotomy_of_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.diff_subsets' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.symmDiff_subset_band' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.uncertaintyBand_eq_empty_of_mul_eq_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.superlevel_eq_of_mul_eq_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.raw_above_sound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.raw_notAbove_sound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.nonstrict_above_unsound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.open_band_fails' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.uncertified_not_wrong' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.smoothed_cert_not_raw_cert' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Db2.cascade1_opNorm_le_L' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Db2.cascade1_opNorm_eq_C' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Db2.cascadeC_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Db2.cascadeC_le_L' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Db2.coord_perturbation_uniform' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Db2.certifiedAbove_sound_uniform' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Db2.certifiedNotAbove_sound_uniform' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Db2.symmDiff_subset_band_uniform' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Db2.superlevel_eq_uniform_of_eps_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Db2.coord_perturbation_exact' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Db2.certifiedAbove_sound_exact' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Db2.certifiedNotAbove_sound_exact' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Db2.symmDiff_subset_band_exact' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ThresholdCert.Db2.band_exact_subset_uniform' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TWSPeriodic.cascade_opNorm_uniform' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TWSPeriodic.cascade_opNorm_formula' depends on axioms: [propext, Classical.choice, Quot.sound]
+exit=0
+
+Only the standard axioms propext, Classical.choice and Quot.sound occur. There is no
+sorryAx and no custom axiom. The bridge theorems depend on the real baseline theorems
+TWSPeriodic.cascade_opNorm_uniform and TWSPeriodic.cascade_opNorm_formula, which use the
+same three axioms.
+
+5. WHAT IS PROVED AND WHAT IS INFORMAL
+--------------------------------------
+Proved in Lean (under the environment in section 1):
+  - all 6 core abstract results;
+  - the refined directional bands (diff_subsets);
+  - the bias extension (raw_above_sound, raw_notAbove_sound);
+  - the 4 counterexamples;
+  - the db2 bridge at the uniform level (B = 1651/1395, any N with NeZero N) and at the
+    exact level (B = c_j, cascadeSupport j <= N), including 0 <= c_j and c_j <= 1651/1395.
+
+Informal only (not formalized):
+  - strictness c_j < 1651/1395;
+  - the row-wise completeness discussion;
+  - the "forgetting B" counterexample from the previous session.

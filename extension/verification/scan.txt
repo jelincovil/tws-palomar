@@ -1,0 +1,19 @@
+# Barrido semántico — 2026-10-18T19:40:56-03:00
+
+## Patrones prohibidos en fuentes finales
+--- sorry ---
+AxiomCheck.lean:16:Quot.sound}`, or no axioms at all. Any `sorryAx` is a failure.
+--- admit ---
+(sin coincidencias)
+--- axiom  ---
+(sin coincidencias)
+--- implemented_by ---
+(sin coincidencias)
+--- native_decide ---
+(sin coincidencias)
+--- ofReduceBool ---
+(sin coincidencias)
+--- extern  ---
+(sin coincidencias)
+--- unsafe  ---
+(sin coincidencias)
