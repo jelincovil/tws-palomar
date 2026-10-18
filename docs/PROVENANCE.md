@@ -84,6 +84,9 @@ The sandboxed check of the proof commit is GitHub Actions run 39093434816.
 A later revision changes only comments in `Challenge.lean` and
 `Solution.lean`. Its local Darwin recheck, without sandbox, is recorded in
 `docs/VERIFICATION.md`. That recheck is not run 39093434816 or 39093722987.
+Commit `1121b6d5d00ab04be218fea36a4eb36d5990f287` was sandboxed by GitHub
+Actions run 39096555323. A commit that only records that run is not the
+run itself.
 This directory is the repository root. Palomar should receive the full SHA
 of the commit the maintainer chooses to submit, with `comparator.json` at
 the root. This file does not name that SHA in advance of the commit.

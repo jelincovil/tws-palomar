@@ -19,8 +19,11 @@ drafted with xAI Grok in the Grok Build CLI, at the same person's request.
 The documentary session is Grok 4.7. No model name is recorded for the
 earlier Grok drafting session. A later revision changes only comments.
 That tree was rebuilt on Darwin on 2026-10-18 and accepted by an
-unsandboxed Comparator replay. It has no Actions run of its own. The
-Linux sandbox of that revision waits on a push. See docs/VERIFICATION.md.
+unsandboxed Comparator replay. GitHub Actions run 39096555323 then
+sandboxed commit 1121b6d5d00ab04be218fea36a4eb36d5990f287 with
+bubblewrap and printed "Your solution is okay!". That run is not a
+registration, and it does not cover a later docs-only commit.
+See docs/VERIFICATION.md.
 
 The db2 coefficient and autocorrelation algebra is adapted from:
 https://github.com/jelincovil/tws-palomar/tree/f15103f97a300cfa243991956fa2d89e9c9ab6a7

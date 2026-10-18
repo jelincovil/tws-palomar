@@ -1,10 +1,10 @@
 # Final review of the db2 cascade candidate
 
-This note is the maintainer's audit record for the local revision that
-follows commit `b9fd1a87127c80bd4099c8f509abfa201fef8ea1`. It is not a
-Palomar registration and it does not name its own commit: the SHA of the
-commit that contains this file is `git rev-parse HEAD` after that commit,
-and that SHA has not been pushed.
+This note is the maintainer's audit record for the revision that follows
+commit `b9fd1a87127c80bd4099c8f509abfa201fef8ea1`. It is not a Palomar
+registration. The review commit is
+`1121b6d5d00ab04be218fea36a4eb36d5990f287`. A later commit may record the
+Linux check of that SHA; that later commit is not the checked one.
 
 ## Base and final state
 
@@ -12,10 +12,8 @@ and that SHA has not been pushed.
   `main`, equal to `origin/main` at the start of the review.
 - Mathematical parent: `7295c00346b8295d4857a3b2f24a6ad0c037d256`, whose
   proof terms are unchanged. The only Lean edits are comments.
-- The working tree is the candidate. It is a local commit on `main` when
-  this review is committed. It is not on GitHub. Palomar cannot fetch it
-  until it is pushed. This revision does not push and does not open
-  `https://submit.palomar-registry.org/`.
+- That review commit was pushed to `origin/main`. Palomar has not been
+  opened and nothing has been submitted.
 
 ## Files and why they changed
 
@@ -105,18 +103,21 @@ Mathlib `065356127b1dc0016f66b7283ce0ce2c4055aa55`.
 command. `external_kernels` was written only into a temporary config.
 
 These local commands do not inherit an Actions run id. The sandboxed
-checks that still apply to the proof terms are:
+checks are:
 
 - Actions `39093434816` on `7295c00`;
-- Actions `39093722987` on `b9fd1a8`, which did not contain this review.
+- Actions `39093722987` on `b9fd1a8`, which did not contain this review;
+- Actions `39096555323` on `1121b6d5d00ab04be218fea36a4eb36d5990f287`.
+  Ubuntu installed bubblewrap and ran `scripts/verify-all.sh`. The log
+  contains `PASS: static packaging checks; 22 selected statements;
+  Challenge 329 lines / 14384 bytes` and `Your solution is okay!`.
 
 Palomar run `39042287485` accepted only `e6698f3` and did not offer
-registration. It did not see the closed form.
+registration. It did not see the closed form. Run 39096555323 is not a
+Palomar review either.
 
 ## What is still pending
 
-- A Linux bubblewrap run of the commit that contains this review. It needs
-  a push, which was not authorized.
 - The full-text comparison named under the bibliographic conclusion.
 - The maintainer's reading of the cascade note before any submission.
 - Palomar's editorial decision, which is not made by a successful kernel
@@ -130,16 +131,17 @@ is not proved and is not selected. The uniform inequality includes `N = 1`.
 The repository is coherent enough for the maintainer's audit: the selected
 statements match the note, the note matches the lemmas, and the
 uncertainties are written down. A new submission is a later decision.
-Before that submission the commit must be pushed, and the Linux sandbox
-should be the one that runs on that same commit. Nothing here promises
-that Palomar will offer registration.
+The Linux sandbox of `1121b6d` is Actions run 39096555323. A submission
+must name the commit that was actually fetched, not an earlier one.
+Nothing here promises that Palomar will offer registration.
 
 ## Four separate questions
 
 1. **Formal correctness and verification.** The proof terms compiled and
    passed the local unsandboxed Comparator and the axiom audit. The
    sandboxed evidence for those terms is the Actions runs on `7295c00` and
-   `b9fd1a8`. The comment revision itself has no Linux run yet.
+   `b9fd1a8`. The comment revision `1121b6d` has its own Linux run,
+   Actions `39096555323`. A later recording commit is not that run.
 2. **Correspondence with the mathematical exposition.**
    `docs/CASCADE_THEOREM.md` follows the lemmas that close the mass, the
    norm, the uniform bound, the least constant, and the convergence. The

@@ -107,9 +107,11 @@ El SHA antiguo no contiene el desarrollo nuevo y no sirve para representarlo.
 - La elaboración local ya cerró los dos errores de API encontrados. Eso no
   sustituye el criterio editorial de Palomar.
 - La revisión de comentarios se recompiló en Darwin el 2026-10-18, sin
-  sandbox, y Comparator aceptó la solución. Esa corrida no es Linux y no
-  tiene identificador de Actions. El sandbox de Linux del commit nuevo queda
-  pendiente de un push. Esta copia no hace push ni remite a Palomar.
+  sandbox, y Comparator aceptó la solución. Esa corrida no es Linux.
+  Después, Actions run 39096555323 ejecutó el script con bubblewrap sobre
+  el commit 1121b6d5d00ab04be218fea36a4eb36d5990f287 y aceptó la solución.
+  Esa corrida no cubre un commit posterior que solo la registra, y no es
+  un registro de Palomar.
 - El script oficial con bubblewrap se ejecutó para el commit de catorce
   enunciados e6698f352a4362e01ed84e4e6ece13d0cf431d6d (Actions 39040759159)
   y para el commit de la forma cerrada

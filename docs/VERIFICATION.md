@@ -35,6 +35,14 @@ those twenty-two would be false.
    [39093722987](https://github.com/jelincovil/tws-palomar/actions/runs/39093722987),
    with the same mechanical result. Those runs are not a Palomar review of
    the closed form.
+5. **Comment revision, Linux sandbox.** Commit
+   `1121b6d5d00ab04be218fea36a4eb36d5990f287` was pushed and sandboxed by
+   GitHub Actions run
+   [39096555323](https://github.com/jelincovil/tws-palomar/actions/runs/39096555323).
+   The log records bubblewrap, `PASS: static packaging checks; 22 selected
+   statements; Challenge 329 lines / 14384 bytes`, and `Your solution is
+   okay!`. That run is not a Palomar review. A later commit that only
+   records this fact is not run 39096555323.
 
 The table that follows is the 2026-10-17 record. It is kept so that the
 earlier claims stay attached to the commit they actually concern.
@@ -175,7 +183,13 @@ On arm64-apple-darwin, Lean `v4.35.0-rc2`
   was not the command. `external_kernels` was injected only into a temporary
   config and is not in the committed `comparator.json`.
 
-No GitHub Actions run covers this comment revision. Runs 39093434816 and
-39093722987 remain the sandboxed checks of `7295c00` and `b9fd1a8`. A Linux
-sandbox of the new commit requires a push. This revision does not push, and
-it does not submit to Palomar.
+GitHub Actions run
+[39096555323](https://github.com/jelincovil/tws-palomar/actions/runs/39096555323)
+then executed `scripts/verify-all.sh` on Ubuntu for commit
+`1121b6d5d00ab04be218fea36a4eb36d5990f287`. Bubblewrap was installed on
+that runner. The log contains `PASS: static packaging checks; 22 selected
+statements; Challenge 329 lines / 14384 bytes` and `Your solution is okay!`.
+Runs 39093434816 and 39093722987 remain the sandboxed checks of `7295c00`
+and `b9fd1a8`. Run 39096555323 is the sandboxed check of `1121b6d`. It does
+not cover a later commit that only records this paragraph, and it does not
+decide Palomar registration.

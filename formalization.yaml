@@ -219,11 +219,13 @@ review:
     reported only propext, Classical.choice and Quot.sound for all twenty-two
     theorems, and an unsandboxed Comparator replay printed the sandbox warning and
     accepted the solution (con-ron, 16500 declarations). bwrap is absent, so
-    scripts/verify-comparator.sh was not that command. No Actions run id belongs to
-    the comment revision. The proof terms are those of 7295c00; the sandboxed
-    evidence for those terms remains 39093434816 and 39093722987. A Linux sandbox
-    of the comment revision itself waits on a push, which this revision does not
-    perform. This revision has not been submitted. Mechanical success is not
+    scripts/verify-comparator.sh was not that command. The proof terms are those
+    of 7295c00. Commit 1121b6d5d00ab04be218fea36a4eb36d5990f287, which contains
+    those comments, was pushed and sandboxed by GitHub Actions run 39096555323.
+    That log records bubblewrap, the static pass for 22 statements, and
+    Your solution is okay! Runs 39093434816 and 39093722987 remain the checks
+    of 7295c00 and b9fd1a8. Run 39096555323 does not cover a later commit that
+    only records it. Nothing here has been submitted. Mechanical success is not
     registration.'
 alignment:
   namespace: TWSPeriodic
