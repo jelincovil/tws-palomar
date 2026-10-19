@@ -18,9 +18,11 @@ project:
     closed form is unresolved; see docs/RELATED_WORK.md. A conditional propagation
     then carries a supplied summary Lipschitz bound and a supplied seminorm comparison
     through the level-one operator. Bottleneck stability, persistence diagrams and
-    landscape non-expansiveness are hypotheses, not theorems. Twenty-two statements
-    are selected. They are parts of this development, not twenty-two independent
-    contributions. The exposition of the cascade argument is docs/CASCADE_THEOREM.md.'
+    landscape non-expansiveness are hypotheses, not theorems. Those conditional
+    statements are retained in the sources as auxiliaries and are not selected.
+    Nineteen statements are selected. They are parts of this development, not nineteen
+    independent contributions. The exposition of the cascade argument is
+    docs/CASCADE_THEOREM.md.'
   authors:
   - Jaime Enrique Lincovil Curivil
   - César Daniel Reinoso Reinoso
@@ -133,7 +135,7 @@ status:
     products, the level-one db2 norm on N >= 7, the exact cascade norms at levels
     1, 2 and 3, and the closed form for every level together with the uniform bound,
     its least constant, the free-mass gap, increase and limit, and dimension zero.
-    No custom axioms or proof holes occur in Solution.lean. Twenty-two theorems are
+    No custom axioms or proof holes occur in Solution.lean. Nineteen theorems are
     selected. Alignment status below describes correspondence with the informal
     statement, not whether a sandbox run has finished. The run chronology is in
     review.notes and docs/VERIFICATION.md. Supplied Lipschitz hypotheses are not
@@ -225,8 +227,11 @@ review:
     That log records bubblewrap, the static pass for 22 statements, and
     Your solution is okay! Runs 39093434816 and 39093722987 remain the checks
     of 7295c00 and b9fd1a8. Run 39096555323 does not cover a later commit that
-    only records it. Nothing here has been submitted. Mechanical success is not
-    registration.'
+    only records it. Nothing has been registered. A later submission of this line of
+    work passed mechanical verification, but its automated editorial review rejected
+    the research interest of the three conditional summary statements. The submission
+    identifier and the exact submitted SHA are not recorded; see
+    docs/PALOMAR_CANDIDACY.md. Mechanical success is not registration.'
 alignment:
   namespace: TWSPeriodic
   statements:
@@ -287,24 +292,6 @@ alignment:
     status: proved
     note: 'Linearity gives ||P f - P g|| <= (9/8)^d ||f - g|| for N >= 7. Proved as
       db2_lipschitz. Same check chronology as convolution_opNorm.'
-  - source: Theorem A, conditional propagation of a supplied summary bound
-    lean: TWSPeriodic.summary_bound_propagation
-    module: Challenge
-    status: partial
-    note: 'Algebraic composition is proved: a supplied Lipschitz bound L and a
-      supplied seminorm comparison sqrt(mu) produce the factor L * ||P|| * sqrt(mu).
-      Partial because the manuscript presents bottleneck stability and landscape
-      non-expansiveness as part of the result, and those two ingredients stay
-      hypotheses. The conditional statement itself has no sorry. Included in the
-      fourteen-statement checks of e6698f3 and in the twenty-two-statement checks
-      of 7295c00.'
-  - source: Theorem A specialized to the exact level-one db2 norm
-    lean: TWSPeriodic.db2_summary_stability
-    module: Challenge
-    status: partial
-    note: 'Replaces the supplied operator norm by (9/8)^d for N >= 7. Partial for
-      the same reason as summary_bound_propagation: the summary hypotheses remain
-      assumptions. Same check chronology as that statement.'
   - source: Lemma 3.2, least certified smoothing constant
     lean: TWSPeriodic.db2_opNorm_least
     module: Challenge
@@ -312,14 +299,6 @@ alignment:
     note: 'Any constant that bounds the level-one db2 operator is at least (9/8)^d.
       This is sharpness of the smoothing factor, not of a persistence summary.
       Proved as db2_opNorm_least. Same check chronology as convolution_opNorm.'
-  - source: Corollary 4.2, squared-summary difference
-    lean: TWSPeriodic.db2_squared_summary_stability
-    module: Challenge
-    status: partial
-    note: 'The reverse triangle inequality gives the product bound for squared
-      summary norms, under a supplied Lipschitz hypothesis that already includes
-      L * sqrt(mu). Partial because that hypothesis is not proved from a persistence
-      construction. Same check chronology as summary_bound_propagation.'
   - source: Exact undecimated db2 cascade norm at level one, for N >= 19
     lean: TWSPeriodic.cascade_level1_opNorm
     module: Challenge

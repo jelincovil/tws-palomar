@@ -52,7 +52,7 @@ Cada comando se ejecuta en el directorio indicado; la ruta relativa cambia con �
 
 | Directorio | Comando | Resultado |
 |---|---|---|
-| raíz | `python3 scripts/preflight.py` | `PASS`, 22 enunciados, `EXIT=0` |
+| raíz | `python3 scripts/preflight.py` | `PASS`, 22 enunciados en el cierre de la extensión (`EXIT=0`); la candidatura Palomar posterior selecciona 19 |
 | `extension/` | `lake build` | 5 módulos, `EXIT=0` |
 | `extension/` | `lake env lean AxiomCheck.lean` | `EXIT=0`, 92 líneas |
 | `extension/` | `python3 scripts/axiom_check.py verification/axioms-2.log` | `PASS: 92 audited names` |
@@ -129,6 +129,21 @@ del runner.
 ## Estado Palomar extensión
 
 `NO_SOMETIDA`. No se sometió la extensión a revisión Palomar.
+
+## Candidatura Palomar (rama `submission/cascade-focused`)
+
+La extensión de este expediente no forma parte de la candidatura Palomar: el comparador lee
+solo `Challenge` y `Solution`, y ningún teorema `ThresholdCert` está seleccionado. La
+candidatura se prepara en una rama aparte y reduce la selección de 22 a **19** declaraciones,
+retirando los tres resultados condicionales de estabilidad de resúmenes, que permanecen en
+`Solution.lean` como auxiliares no seleccionados. La contribución presentada es la fórmula
+general de la norma de la cascada bajo condición de soporte, la cota uniforme y la optimalidad
+de la constante uniforme, con las consecuencias ya demostradas.
+
+Estado: **preparada, no sometida** (`NO_SOMETIDA`). Detalle, motivo del rechazo anterior y
+trazabilidad: `docs/PALOMAR_CANDIDACY.md`. La transición de integridad de esa candidatura se
+registra en `extension/verification/candidacy-transition.json` y se comprueba con
+`integrity.py transition`.
 
 ## Limitaciones
 

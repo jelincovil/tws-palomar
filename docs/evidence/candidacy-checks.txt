@@ -1,0 +1,55 @@
+Candidacy verification record — 2026-10-19
+
+Branch: submission/cascade-focused, working tree on the closure
+59799c3c08c7b763c58a35e9af40a35ee5bfd1b5, before the candidacy commit.
+Host: macOS 15.7.9, arm64-apple-darwin24.6.0.
+Lean: 4.35.0-rc2 (commit 11acb17ec6b07a8f9e9173e6845197929540936b).
+Lake: 5.0.0-src+11acb17. Mathlib: 065356127b1dc0016f66b7283ce0ce2c4055aa55.
+
+Selection: 19 statements. comparator.json, the formalization.yaml alignment list and
+the Challenge theorems are the same set. The three conditional summary results remain
+in Solution.lean and are absent from Challenge.
+
+Commands, from the repository root unless stated otherwise:
+
+1. python3 scripts/preflight.py
+   PASS: static packaging checks; 19 selected statements; Challenge 281 lines / 12055 bytes.
+   exit 0
+
+2. lake build
+   Build completed successfully (3095 jobs). exit 0
+
+3. lake env lean AxiomAudit.lean
+   exit 0. 22 audited names: the 19 selected statements plus the three retained
+   auxiliaries. Every line reports only propext, Classical.choice, Quot.sound.
+   The audit therefore covers more than the selected surface.
+
+4. bash scripts/verify-comparator.sh
+   error: bwrap is required to run lake comparator. exit 1.
+   The sandboxed Comparator check is PENDING on this host.
+
+5. lake comparator --config <generated config> --inadvisably-no-sandbox
+   con-ron accepted 16492 declarations; nanoda and the Lean kernel accept the solution;
+   "Your solution is okay!"; exit 0.
+   This is a local replay WITHOUT the sandbox. It is not equivalent to the isolated
+   Palomar check and is not reported as such.
+
+6. bash extension/scripts/verify_extension.sh   (from the repository root)
+   Builds Solution, builds the five extension modules, runs the 92-name axiom audit
+   with its checker, runs the 20 rational cases, and runs the transition check.
+   Transition: PASS: 9 authorized changes, 21 protected files unchanged,
+   9 closure sources identical.
+   ALL CHECKS PASSED. exit 0.
+
+7. python3 extension/scripts/integrity.py transition . \
+     extension/verification/integrity-before.json \
+     extension/verification/candidacy-transition.json \
+     extension/verification/closure-sources.json
+   PASS: 9 authorized changes, 21 protected files unchanged, 9 closure sources identical.
+   exit 0
+
+Caches: the fixed Mathlib checkout and its compiled artifacts in .lake/packages were
+reused; Mathlib was not rebuilt. Rebuilt: Challenge (its source changed). Solution and the
+five extension modules were unchanged and their existing artifacts were replayed.
+Raw logs are in verification-logs/candidacy/ (ignored by Git); this file is the tracked
+summary.

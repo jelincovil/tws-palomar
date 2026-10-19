@@ -1,0 +1,62 @@
+{
+  "candidacy": "submission/cascade-focused",
+  "date": "2026-10-19",
+  "historical_revision": "44f4bb79abddf1a4d0a8a3da9a07068c633ed2ab",
+  "description": "Closed list of protected files authorized to change in this candidacy, anchored at the historical manifest taken before the extension was integrated.",
+  "authorized_changes": [
+    {
+      "path": "Challenge.lean",
+      "before_sha256": "b5e42dd4b8c84ab6613b071a6de3b6eb9e43709afe3ca7f274c5dee719162990",
+      "after_sha256": "28da545c646ae1e3a72b6277be06e48e2dac6502c8014baa15383eb5e3ed01f6",
+      "reason": "Remove exactly the three conditional summary statements from the selected surface; definitions and the other nineteen statements are unchanged."
+    },
+    {
+      "path": "comparator.json",
+      "before_sha256": "2b88e15df1bb9ff8ec27c144b1ed1e764a133eec12b4251f3487dff9c6d988a9",
+      "after_sha256": "d626cda1c15c6a2271127feae694fb2012e9abb81713b3132c84c633961c1149",
+      "reason": "Selection reduced from 22 to 19 declarations; modules and permitted axioms unchanged."
+    },
+    {
+      "path": "formalization.yaml",
+      "before_sha256": "d2e706d3f8f62f78d8f0a30ffd037b3dc24dfe0ae2000beadd0e86d89d2e3e00",
+      "after_sha256": "22249bee87465406ba524090c8fc226b9381771644f3f761939e69d8320bc032",
+      "reason": "Alignment, scope text and review note follow the 19-statement candidacy; historical run records preserved."
+    },
+    {
+      "path": "README.md",
+      "before_sha256": "75bf07bd012ba87c067c725b5ac7952fb49f0ee88cfd96242244446a1e9ebb77",
+      "after_sha256": "26e985f513c30c87f868500fd9670c7c4529cb4f3adb856780f66ef5f338c095",
+      "reason": "Public description follows the 19-statement selection; the three conditional results are marked auxiliary."
+    },
+    {
+      "path": "docs/FINAL_REVIEW.md",
+      "before_sha256": "05266d7086880bf434d37ca79755937e5b3de3d3e65957dca0ad6b93150acf22",
+      "after_sha256": "2026bba9aa58dc9e11649c581c756ed4933cb34c46749048f225c5649a2e2aec",
+      "reason": "Dated note added; the historical audit of 1121b6d is preserved unchanged."
+    },
+    {
+      "path": "docs/VERIFICATION.md",
+      "before_sha256": "6a6ad3406054b1629093aa90e6e84a8782a7e799ae1a5a76aae959e3c8b2b675",
+      "after_sha256": "0ac6bf7404d5ec939e668da325f2e26a929d2a6a32a92232e5d5103234fd5cdf",
+      "reason": "Current-state counts updated; the chronology of earlier checks is preserved."
+    },
+    {
+      "path": "docs/MATHEMATICAL_AUDIT.md",
+      "before_sha256": "8a4de8272468c35c8c7b30a3b303269bb744708868ba8da6f95d45fc51aa0a46",
+      "after_sha256": "d2fe77bac8856763181af89c6a2b916779157f3cbc97bce68f976a436f4089fe",
+      "reason": "The conditional propagation is marked as auxiliary and not selected."
+    },
+    {
+      "path": "docs/evidence/static-checks.txt",
+      "before_sha256": "47ccb86d1dbd60ae36d649f7b63e2ef67d9f6efcacddddf449463cdaac1c9760",
+      "after_sha256": "34c0203b0205db3c9c9eb50b56fd2e126b1d8b1f961f6713f982c8e80e633379",
+      "reason": "Regenerated static transcript for the 19-statement selection."
+    },
+    {
+      "path": "docs/evidence/SHA256SUMS.txt",
+      "before_sha256": "a2ed526f422b7b6fbbaf3528b7c187f9e86e3b3bd3ccf23d0401db0087eac7d0",
+      "after_sha256": "c0fd3854559600c8c7b6ebcf7bf294ab61c43adc762d2f16d91245c6daf07c30",
+      "reason": "Hashes refreshed for the authorized candidacy files and the new candidacy note."
+    }
+  ]
+}

@@ -1,5 +1,11 @@
 # Final review of the db2 cascade candidate
 
+> **Note (2026-10-19).** This is the historical audit of revision `1121b6d`,
+> with twenty-two selected statements. The current candidacy selects nineteen:
+> the three conditional summary results are retained in `Solution.lean` but are
+> not selected. The counts below are not rewritten; see
+> `docs/PALOMAR_CANDIDACY.md`.
+
 This note is the maintainer's audit record for the revision that follows
 commit `b9fd1a87127c80bd4099c8f509abfa201fef8ea1`. It is not a Palomar
 registration. The review commit is

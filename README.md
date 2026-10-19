@@ -65,12 +65,14 @@ Levels `1`, `2`, and `3` remain available as direct evaluations:
 `(309991/262144)^d` for `N ≥ 91`. They agree with `c_1`, `c_2`, and `c_3`.
 At `j = 0` the formula is `(9/8)^d` for `N ≥ 7`.
 
-If a summary satisfies a supplied Lipschitz bound `L` in one seminorm and
-that seminorm compares with a second seminorm by `sqrt(mu)`, the summary of
-the level-one smoothed signals obeys the factor `L * (9/8)^d * sqrt(mu)`.
-The difference of the squared summary norms obeys the corresponding product
-bound. Both statements take the summary hypotheses as assumptions. They do
-not prove bottleneck stability or landscape non-expansiveness.
+Two auxiliary statements, kept in `Solution.lean` but **not selected**, record a
+conditional propagation: if a summary satisfies a supplied Lipschitz bound `L` in
+one seminorm and that seminorm compares with a second seminorm by `sqrt(mu)`, the
+summary of the level-one smoothed signals obeys `L * (9/8)^d * sqrt(mu)`, and the
+difference of the squared summary norms obeys the corresponding product bound.
+Both take the summary hypotheses as assumptions and do not prove bottleneck
+stability or landscape non-expansiveness. They are not part of the contribution
+submitted here; see the [candidacy note](docs/PALOMAR_CANDIDACY.md).
 
 ## What is standard, what is specific, what follows
 
@@ -82,7 +84,7 @@ not offered as the contribution.
 The specific work is the sign analysis that produces `c_j` for every level
 and the least uniform constant `L^d`. The finite levels, the gap, the
 increase, the limit, and the zero-dimensional identity are consequences of
-that analysis. Twenty-two declarations are selected because that is the
+that analysis. Nineteen declarations are selected because that is the
 Comparator interface. They are parts of one development.
 
 Whether this is enough for a Palomar registration is an editorial question.
@@ -143,10 +145,7 @@ all proof scripts; it does not import `Challenge`.
 | `TWSPeriodic.db2_opNorm` | `(9/8)^d` for every `N >= 7` |
 | `TWSPeriodic.db2_attains` | A unit signal attaining the db2 operator norm |
 | `TWSPeriodic.db2_lipschitz` | Deterministic perturbation bound for that smoothing operator |
-| `TWSPeriodic.summary_bound_propagation` | Conditional Theorem A for an arbitrary continuous linear map |
-| `TWSPeriodic.db2_summary_stability` | The same propagation with the exact db2 factor |
 | `TWSPeriodic.db2_opNorm_least` | `(9/8)^d` is the least smoothing constant |
-| `TWSPeriodic.db2_squared_summary_stability` | Conditional squared-summary product bound |
 | `TWSPeriodic.cascade_level1_opNorm` | `(299/256)^d` for every `N >= 19` |
 | `TWSPeriodic.cascade_level2_opNorm` | `(9663/8192)^d` for every `N >= 43` |
 | `TWSPeriodic.cascade_level3_opNorm` | `(309991/262144)^d` for every `N >= 91` |
@@ -159,7 +158,7 @@ all proof scripts; it does not import `Challenge`.
 | `TWSPeriodic.cascade_uniform_constant_least` | `(1651/1395)^d` is the least common bound |
 | `TWSPeriodic.cascade_opNorm_d_zero` | Dimension zero is exactly 1 |
 
-These are related parts of one result, not twenty-two independent research contributions.
+These are related parts of one result, not nineteen independent research contributions.
 The small-period kernel is defined by genuine folding, even though the db2
 specialization is only asserted for `N >= 7`.
 

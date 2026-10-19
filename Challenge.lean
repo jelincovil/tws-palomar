@@ -184,60 +184,12 @@ theorem db2_lipschitz (N d : ℕ) [NeZero N] (hN : 7 ≤ N)
     ‖db2Operator N d f - db2Operator N d g‖ ≤ ((9 : ℝ) / 8) ^ d * ‖f - g‖ := by
   sorry
 
-/-- Theorem A as bound propagation. `landscape` is any summary of a smoothed
-field. `hΛ` is a supplied Lipschitz bound in an auxiliary seminorm `lInf`;
-`hEmb` is the supplied comparison of that seminorm with `lTwo`. Bottleneck
-stability and landscape non-expansiveness are not proved: either one may be
-used only to justify these hypotheses. -/
-theorem summary_bound_propagation
-    {E F : Type} [NormedAddCommGroup E] [NormedSpace ℝ E]
-    [NormedAddCommGroup F] [NormedSpace ℝ F]
-    {Λ : Type} [AddCommGroup Λ]
-    (P : E →L[ℝ] F) (landscape : F → Λ)
-    (lInf lTwo : Λ → ℝ) (L μ : ℝ)
-    (hL : 0 ≤ L) (hμ : 0 ≤ μ)
-    (hΛ : ∀ u v, lInf (landscape u - landscape v) ≤ L * ‖u - v‖)
-    (hEmb : ∀ w, lTwo w ≤ Real.sqrt μ * lInf w)
-    (f g : E) :
-    lTwo (landscape (P f) - landscape (P g))
-      ≤ L * ‖P‖ * Real.sqrt μ * ‖f - g‖ := by
-  sorry
-
-/-- Theorem A for level-one periodic db2: the supplied summary inherits the
-exact smoothing factor `(9/8)^d`. -/
-theorem db2_summary_stability
-    {Λ : Type} [AddCommGroup Λ]
-    (N d : ℕ) [NeZero N] (hN : 7 ≤ N)
-    (landscape : ((Fin d → ZMod N) → ℝ) → Λ)
-    (lInf lTwo : Λ → ℝ) (L μ : ℝ)
-    (hL : 0 ≤ L) (hμ : 0 ≤ μ)
-    (hΛ : ∀ u v, lInf (landscape u - landscape v) ≤ L * ‖u - v‖)
-    (hEmb : ∀ w, lTwo w ≤ Real.sqrt μ * lInf w)
-    (f g : (Fin d → ZMod N) → ℝ) :
-    lTwo (landscape (db2Operator N d f) - landscape (db2Operator N d g))
-      ≤ L * ((9 : ℝ) / 8) ^ d * Real.sqrt μ * ‖f - g‖ := by
-  sorry
-
 /-- The exact db2 norm is the least constant that bounds the smoothing
 operator. This is the sharp choice of `Cfp` in Lemma 3.2, not sharpness of a
 landscape. -/
 theorem db2_opNorm_least (N d : ℕ) [NeZero N] (hN : 7 ≤ N) {C : ℝ}
     (hC : ∀ f : (Fin d → ZMod N) → ℝ, ‖db2Operator N d f‖ ≤ C * ‖f‖) :
     ((9 : ℝ) / 8) ^ d ≤ C := by
-  sorry
-
-/-- Corollary 4.2 for a summary already measured in one norm. The hypothesis
-is the Lipschitz bound of that summary, including the factor `L * sqrt μ`. -/
-theorem db2_squared_summary_stability
-    {S : Type} [NormedAddCommGroup S]
-    (N d : ℕ) [NeZero N] (hN : 7 ≤ N)
-    (landscape : ((Fin d → ZMod N) → ℝ) → S)
-    (L μ : ℝ) (hL : 0 ≤ L) (hμ : 0 ≤ μ)
-    (hΛ : ∀ u v, ‖landscape u - landscape v‖ ≤ L * Real.sqrt μ * ‖u - v‖)
-    (f g : (Fin d → ZMod N) → ℝ) :
-    |‖landscape (db2Operator N d f)‖ ^ 2 - ‖landscape (db2Operator N d g)‖ ^ 2|
-      ≤ (L * ((9 : ℝ) / 8) ^ d * Real.sqrt μ * ‖f - g‖)
-        * (‖landscape (db2Operator N d f)‖ + ‖landscape (db2Operator N d g)‖) := by
   sorry
 
 /-- Exact operator norm of undecimated db2 cascade level one.

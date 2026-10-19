@@ -1,8 +1,40 @@
-# Diff de la rama extension/db2-threshold sobre 44f4bb7 — 2026-10-18T20:56:32-03:00
+# Cambios de la candidatura submission/cascade-focused sobre el cierre 59799c3 — 2026-10-18T22:07:12-03:00
 # Generado desde el índice; no incluye este archivo ni inventario.txt.
 
- CIERRE.md | 80 +++++++++++++++++++++++++++++++--------------------------------
- 1 file changed, 40 insertions(+), 40 deletions(-)
+ CIERRE.md                                        |  17 ++-
+ Challenge.lean                                   |  48 -------
+ README.md                                        |  21 ++-
+ comparator.json                                  |   3 -
+ docs/FINAL_REVIEW.md                             |   6 +
+ docs/MATHEMATICAL_AUDIT.md                       |   3 +-
+ docs/PALOMAR_CANDIDACY.md                        |  89 ++++++++++++
+ docs/VERIFICATION.md                             |  11 +-
+ docs/evidence/SHA256SUMS.txt                     |  17 +--
+ docs/evidence/candidacy-checks.txt               |  55 +++++++
+ docs/evidence/static-checks.txt                  |   2 +-
+ extension/scripts/integrity.py                   | 175 +++++++++++++++++++++--
+ extension/scripts/verify_extension.sh            |   8 +-
+ extension/verification/candidacy-transition.json |  62 ++++++++
+ extension/verification/closure-sources.json      |  15 ++
+ extension/verification/inventario.txt            |  12 +-
+ formalization.yaml                               |  43 ++----
+ 17 files changed, 456 insertions(+), 131 deletions(-)
 
 ## name-status
 M	CIERRE.md
+M	Challenge.lean
+M	README.md
+M	comparator.json
+M	docs/FINAL_REVIEW.md
+M	docs/MATHEMATICAL_AUDIT.md
+A	docs/PALOMAR_CANDIDACY.md
+M	docs/VERIFICATION.md
+M	docs/evidence/SHA256SUMS.txt
+A	docs/evidence/candidacy-checks.txt
+M	docs/evidence/static-checks.txt
+M	extension/scripts/integrity.py
+M	extension/scripts/verify_extension.sh
+A	extension/verification/candidacy-transition.json
+A	extension/verification/closure-sources.json
+M	extension/verification/inventario.txt
+M	formalization.yaml

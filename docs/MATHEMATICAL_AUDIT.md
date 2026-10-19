@@ -162,7 +162,8 @@ At dimension zero every operator norm equals 1. The least-constant
 statement at dimension zero concludes `1 ≤ B` and does not conclude
 `B = 1`. The condition `N >= S_j` is sufficient, not necessary.
 The conditional propagation in section 6 still takes bottleneck stability
-and landscape non-expansiveness as hypotheses. The full argument, with the
+and landscape non-expansiveness as hypotheses. Those statements are auxiliaries
+retained in `Solution.lean`; they are not selected in the current candidacy. The full argument, with the
 Lean names of the lemmas that carry it, is `docs/CASCADE_THEOREM.md`.
 `docs/RELATED_WORK.md` records the literature comparison and does not
 claim that the formula is absent from the wavelet literature.

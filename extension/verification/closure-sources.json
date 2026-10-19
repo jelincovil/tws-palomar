@@ -1,0 +1,15 @@
+{
+  "closure_revision": "59799c3c08c7b763c58a35e9af40a35ee5bfd1b5",
+  "description": "Mathematical sources and pinned configuration that must remain byte-identical to the extension closure. Checked by integrity.py transition.",
+  "files": {
+    "Solution.lean": "c3231f1ec14500297abc90accbd38cbacbdfe6d6ec35d7b020e708e15ebd287c",
+    "extension/ThresholdExtension/ConstantPreservation.lean": "4ae301a56c7c813b831ac7298c4354f2ae918ddaa5a01848e83a540f7c5dda38",
+    "extension/ThresholdExtension/Db2ThresholdCertificate.lean": "eddeb2699667dc5237c15a15fed50c69999e6fa77d4b76bdcb77cd77413fd945",
+    "extension/ThresholdExtension/EndpointReplication.lean": "3df1d21ed7676d6d66cc612c380671b52e69b46e36fde831685d0372d837c15e",
+    "extension/ThresholdExtension/NonperiodicDb2Certificate.lean": "c1a4b1e11eb9fef62280435934c9f5d04f146a126844152aafb74b54f2fe924f",
+    "extension/ThresholdExtension/ThresholdCertificate.lean": "adb55f559977fe25a4d9673a8af9c7def48391296936523b828ec2ed3a890faa",
+    "lean-toolchain": "8dc8d6f560141069d9073e370611716ef77ada0da8ffa37e2149f44b2e63ac7a",
+    "lakefile.toml": "54a835d8b737315457df44fddfc6b38b124980c5e2162d3f9ab61ad67b9a89bb",
+    "lake-manifest.json": "8d58892f63daf9e6c6e20f285f51f65269037f754250ca80601990ce1e25cfaf"
+  }
+}

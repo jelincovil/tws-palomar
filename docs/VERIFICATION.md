@@ -7,8 +7,11 @@ mathematical interest of a later commit, and it does not register anything.
 ## Chronology
 
 The counts below are the counts at the time of each check. The current
-selection has twenty-two statements. Calling an earlier check a check of
-those twenty-two would be false.
+selection has **nineteen** statements; the revisions described below had
+fourteen or twenty-two. Calling an earlier check a check of the current
+nineteen would be false. The three conditional summary results are retained
+in `Solution.lean` but are no longer selected; see
+`docs/PALOMAR_CANDIDACY.md`.
 
 1. **Darwin, no sandbox, 2026-10-17.** `lake build`, `#print axioms`, and
    `lake comparator --inadvisably-no-sandbox` on the fourteen statements then
@@ -50,7 +53,7 @@ earlier claims stay attached to the commit they actually concern.
 ## Record of 2026-10-17
 
 This table describes the fourteen-statement tree. It is not a description
-of the current twenty-two statements.
+of the current nineteen statements.
 
 | Check | Result actually obtained |
 |---|---|
@@ -66,7 +69,7 @@ of the current twenty-two statements.
 | Zero-dimensional singleton case | Passed exact check |
 | 80 seeded generic signed stencils with collisions | Passed exact checks |
 | Shell syntax of both verification scripts | Passed `bash -n` in the preparation environment |
-| Lean elaboration / `lake build` | Passed locally on 2026-10-17. Toolchain `leanprover/lean4:v4.35.0-rc2`, commit `11acb17ec6b07a8f9e9173e6845197929540936b`, arm64-apple-darwin. Mathlib `065356127b1dc0016f66b7283ce0ce2c4055aa55`. `Challenge` warned on its fourteen deliberate `sorry` holes. The current Challenge has twenty-two such holes, one per selected statement. |
+| Lean elaboration / `lake build` | Passed locally on 2026-10-17. Toolchain `leanprover/lean4:v4.35.0-rc2`, commit `11acb17ec6b07a8f9e9173e6845197929540936b`, arm64-apple-darwin. Mathlib `065356127b1dc0016f66b7283ce0ce2c4055aa55`. That build had fourteen deliberate `sorry` holes in `Challenge`; the closed-form revision had twenty-two, one per statement then selected. The current `Challenge` has nineteen. |
 | `#print axioms` on the fourteen selected theorems of that date | Passed. Each depends only on `propext`, `Classical.choice` and `Quot.sound`. The twenty-two-statement audit is in the closed-form section below. |
 | Comparator and independent kernels | Passed locally without the sandbox. `lake comparator --inadvisably-no-sandbox` on Darwin, with the toolchain's `nanoda_bin` and `con-ron`, accepted all fourteen selected theorems, including the four propagation statements and `cascade_level1_opNorm`, `cascade_level2_opNorm`, `cascade_level3_opNorm`. con-ron accepted 15562 declarations. `bwrap` is absent, so `scripts/verify-comparator.sh` itself was not the command that ran. The log warns that a sandbox-disabled run is not the Palomar isolation check. |
 | GitHub Actions workflow | Passed on commit `e6698f352a4362e01ed84e4e6ece13d0cf431d6d`. Run [39040759159](https://github.com/jelincovil/tws-palomar/actions/runs/39040759159), job `verify`, on `ubuntu-latest`. It installed bubblewrap and ran `scripts/verify-all.sh`, including `scripts/verify-comparator.sh`. The log records acceptance by con-ron, nanoda and the Lean kernel, then `Your solution is okay!`. |

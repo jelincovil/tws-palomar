@@ -1,2 +1,2 @@
-PASS: static packaging checks; 22 selected statements; Challenge 329 lines / 14384 bytes.
+PASS: static packaging checks; 19 selected statements; Challenge 281 lines / 12055 bytes.
 NOT CHECKED: Lean elaboration, proof correctness, transitive import closure, axiom dependencies, Comparator, or editorial eligibility.

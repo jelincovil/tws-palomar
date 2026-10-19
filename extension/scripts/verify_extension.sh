@@ -65,8 +65,10 @@ python3 "$extension_dir/scripts/axiom_check.py" "$out_dir/03-axioms.log" \
 printf '== [5/6] rational direct/padded checks\n'
 ( cd "$extension_dir" && python3 scripts/exact_checks.py ) 2>&1 | tee "$out_dir/05-exact-checks.log"
 
-printf '== [6/6] protected-base integrity\n'
-python3 "$extension_dir/scripts/integrity.py" check "$repo_root" \
-  "$extension_dir/verification/integrity-before.json" 2>&1 | tee "$out_dir/06-integrity.log"
+printf '== [6/6] protected-base integrity and candidacy transition\n'
+python3 "$extension_dir/scripts/integrity.py" transition "$repo_root" \
+  "$extension_dir/verification/integrity-before.json" \
+  "$extension_dir/verification/candidacy-transition.json" \
+  "$extension_dir/verification/closure-sources.json" 2>&1 | tee "$out_dir/06-integrity.log"
 
 printf 'ALL CHECKS PASSED\n'
